@@ -6,23 +6,23 @@
 <title>NOOK – Cuisine Nomade · Aubenas</title>
 <meta name="description" content="NOOK Cuisine Nomade – Restaurant à Aubenas. 8 rue de la Prévoté, 07200 Aubenas.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
   --ink:#0C0A07;
   --surface:#16120D;
   --surface2:#1E1810;
-  --spice:#C84B2F;
-  --spice-glow:rgba(200,75,47,0.18);
-  --gold:#E8B84B;
-  --gold-dim:rgba(232,184,75,0.55);
-  --gold-trace:rgba(232,184,75,0.1);
+  --spice:#F26419;
+  --spice-glow:rgba(242,100,25,0.2);
+  --gold:#F26419;
+  --gold-dim:rgba(242,100,25,0.65);
+  --gold-trace:rgba(242,100,25,0.14);
   --muted:rgba(240,230,200,0.42);
   --border:rgba(255,255,255,0.07);
   --border-strong:rgba(255,255,255,0.13);
   --text:#F0E8D0;
-  --serif:'Playfair Display',Georgia,serif;
+  --hand:'Caveat',cursive;
   --sans:'DM Sans',system-ui,sans-serif;
 }
 html,body{scroll-behavior:smooth;width:100%}
@@ -34,73 +34,56 @@ body{
   margin:0 auto;
   min-height:100vh;
   overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
 }
 
-/* ────────────────────────────
-   SPLASH
-──────────────────────────── */
+/* ── SPLASH ── */
 #splash{
   position:fixed;inset:0;z-index:9999;
   background:var(--ink);
   display:flex;flex-direction:column;
   align-items:center;justify-content:center;
-  gap:0;
-  transition:opacity 0.5s 0.1s cubic-bezier(.4,0,.2,1);
+  transition:opacity 0.5s cubic-bezier(.4,0,.2,1);
 }
 #splash.out{opacity:0;pointer-events:none}
 
-#splash-logo{
+#s-logo{
   width:190px;
   mix-blend-mode:screen;
   filter:saturate(1.3) brightness(1.1);
-  opacity:0;
-  transform:scale(0.85) translateY(6px);
-  transition:opacity 0.6s cubic-bezier(.4,0,.2,1),
-             transform 0.6s cubic-bezier(.4,0,.2,1);
+  opacity:0;transform:scale(0.85) translateY(6px);
+  transition:opacity 0.6s cubic-bezier(.4,0,.2,1), transform 0.6s cubic-bezier(.4,0,.2,1);
 }
-#splash-logo.in{opacity:1;transform:scale(1) translateY(0)}
+#s-logo.in{opacity:1;transform:scale(1) translateY(0)}
 
-#splash-tag{
-  font-family:var(--serif);font-style:italic;
-  font-size:.9rem;letter-spacing:.05em;
-  color:var(--gold-dim);margin-top:8px;
-  opacity:0;transform:translateY(6px);
-  transition:opacity 0.5s 0.25s cubic-bezier(.4,0,.2,1),
-             transform 0.5s 0.25s cubic-bezier(.4,0,.2,1);
+#s-rule{
+  width:0;height:1px;
+  background:#F26419;margin-top:20px;
+  transition:width 0.6s 0.3s cubic-bezier(.4,0,.2,1);
 }
-#splash-tag.in{opacity:1;transform:translateY(0)}
+#s-rule.in{width:56px}
 
-#splash-bar{
-  width:0;height:1.5px;margin-top:20px;
-  background:linear-gradient(to right, var(--spice), var(--gold));
-  border-radius:2px;
-  transition:width 0.6s 0.35s cubic-bezier(.4,0,.2,1);
+#s-city{
+  font-family:var(--sans);font-size:9px;
+  letter-spacing:.25em;text-transform:uppercase;
+  color:var(--gold-dim);margin-top:10px;
+  opacity:0;transform:translateY(4px);
+  transition:opacity 0.5s 0.45s cubic-bezier(.4,0,.2,1), transform 0.5s 0.45s cubic-bezier(.4,0,.2,1);
 }
-#splash-bar.in{width:72px}
+#s-city.in{opacity:1;transform:translateY(0)}
 
-/* ────────────────────────────
-   PAGE — initial hidden state
-──────────────────────────── */
-#page{
-  opacity:0;
-  transition:opacity 0.01s;
+/* ── PAGE ── */
+#page{opacity:0;transition:opacity .01s}
+#page.on{opacity:1}
+
+/* ── REVEAL ── */
+.r{
+  opacity:0;transform:translateY(20px);
+  transition:opacity .7s cubic-bezier(.4,0,.2,1), transform .7s cubic-bezier(.4,0,.2,1);
 }
-#page.visible{opacity:1}
+.r.on{opacity:1;transform:translateY(0)}
 
-/* ────────────────────────────
-   REVEAL BLOCKS (scroll)
-──────────────────────────── */
-.rb{
-  opacity:0;
-  transform:translateY(20px);
-  transition:opacity 0.6s cubic-bezier(.4,0,.2,1),
-             transform 0.6s cubic-bezier(.4,0,.2,1);
-}
-.rb.on{opacity:1;transform:translateY(0)}
-
-/* ────────────────────────────
-   HERO
-──────────────────────────── */
+/* ── HERO ── */
 .hero{
   position:relative;height:540px;
   overflow:hidden;background:#0C0A07;
@@ -113,19 +96,16 @@ body{
   transition:transform 1.6s cubic-bezier(.25,0,.1,1);
 }
 .hero-img.on{transform:scale(1)}
-
 .hero-overlay{
   position:absolute;inset:0;
   background:linear-gradient(160deg, rgba(12,10,7,0.25) 0%, rgba(12,10,7,0.0) 40%, rgba(12,10,7,0.94) 85%);
 }
 .hero-topbar{
   position:absolute;top:0;left:0;right:0;height:3px;
-  background:linear-gradient(to right, transparent, var(--gold) 30%, var(--gold) 70%, transparent);
-  opacity:0;
-  transition:opacity 0.8s 0.2s;
+  background:linear-gradient(to right, transparent, #F26419 30%, #F26419 70%, transparent);
+  opacity:0;transition:opacity 0.8s 0.2s;
 }
 .hero-topbar.on{opacity:0.65}
-
 .hero-content{
   position:absolute;bottom:0;left:0;right:0;
   padding:2rem 1.5rem 2.8rem;
@@ -137,21 +117,17 @@ body{
   filter:saturate(1.25) brightness(1.05);
   margin-bottom:6px;
   opacity:0;transform:translateY(12px);
-  transition:opacity 0.7s 0.1s cubic-bezier(.4,0,.2,1),
-             transform 0.7s 0.1s cubic-bezier(.4,0,.2,1);
+  transition:opacity 0.7s 0.1s cubic-bezier(.4,0,.2,1), transform 0.7s 0.1s cubic-bezier(.4,0,.2,1);
 }
 .hero-logo.on{opacity:1;transform:translateY(0)}
-
 .hero-tagline{
-  font-family:var(--serif);font-style:italic;
-  font-size:1rem;color:var(--gold-dim);
-  font-weight:400;letter-spacing:0.02em;margin-bottom:18px;
+  font-family:var(--hand);
+  font-size:1.4rem;color:var(--gold-dim);
+  font-weight:400;letter-spacing:0.01em;margin-bottom:18px;
   opacity:0;transform:translateY(8px);
-  transition:opacity 0.6s 0.25s cubic-bezier(.4,0,.2,1),
-             transform 0.6s 0.25s cubic-bezier(.4,0,.2,1);
+  transition:opacity 0.6s 0.25s cubic-bezier(.4,0,.2,1), transform 0.6s 0.25s cubic-bezier(.4,0,.2,1);
 }
 .hero-tagline.on{opacity:1;transform:translateY(0)}
-
 .hero-city{
   display:inline-flex;align-items:center;gap:6px;
   background:rgba(255,255,255,0.06);
@@ -161,40 +137,41 @@ body{
   letter-spacing:0.12em;text-transform:uppercase;
   color:rgba(240,230,200,0.7);
   opacity:0;transform:translateY(6px);
-  transition:opacity 0.5s 0.4s cubic-bezier(.4,0,.2,1),
-             transform 0.5s 0.4s cubic-bezier(.4,0,.2,1);
+  transition:opacity 0.5s 0.4s cubic-bezier(.4,0,.2,1), transform 0.5s 0.4s cubic-bezier(.4,0,.2,1);
 }
 .hero-city.on{opacity:1;transform:translateY(0)}
 
-/* ────────────────────────────
-   CTA STRIP
-──────────────────────────── */
+/* ── CTA STRIP ── */
 .cta-strip{
   display:grid;grid-template-columns:1fr 1fr 1fr;
-  border-bottom:1px solid var(--border);
-  background:var(--surface);
+  background:transparent;
+  padding:4px 0;
 }
 .cta-item{
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:7px;padding:18px 8px;text-decoration:none;
+  gap:8px;padding:20px 8px;text-decoration:none;
   color:var(--text);font-size:10px;font-weight:500;
   letter-spacing:0.12em;text-transform:uppercase;
-  border-right:1px solid var(--border);
-  transition:background 0.18s;
+  transition:opacity 0.18s;
 }
-.cta-item:last-child{border-right:none}
-.cta-item:active{background:rgba(255,255,255,0.04)}
+.cta-item:active{opacity:0.6}
 .cta-item.primary{color:var(--spice)}
 .cta-icon{
-  width:38px;height:38px;border-radius:50%;
+  width:42px;height:42px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
 }
 .cta-item.primary .cta-icon{background:var(--spice-glow)}
-.cta-item:not(.primary) .cta-icon{background:rgba(255,255,255,0.05)}
+.cta-item:not(.primary) .cta-icon{background:rgba(255,255,255,0.07)}
 
-/* ────────────────────────────
-   SECTIONS
-──────────────────────────── */
+/* ── FB EMBED ── */
+.fb-wrap{
+  border-radius:6px;overflow:hidden;
+  border:1px solid var(--border);
+  background:var(--surface);
+  width:100%;
+}
+
+/* ── SECTIONS ── */
 .section{padding:2rem 1.5rem;border-top:1px solid var(--border)}
 .label{
   font-size:10px;font-weight:500;
@@ -205,19 +182,24 @@ body{
 }
 .label::after{content:'';flex:1;height:1px;background:var(--gold-trace)}
 
-/* ABOUT */
-.about-pull{font-family:var(--serif);font-size:1.5rem;font-weight:700;line-height:1.28;color:var(--text);margin-bottom:.85rem}
+/* ── ABOUT ── */
+.about-pull{
+  font-family:var(--hand);
+  font-size:2rem;font-weight:600;line-height:1.2;
+  color:var(--text);margin-bottom:.85rem;
+  letter-spacing:0.01em;
+}
 .about-pull em{color:var(--spice);font-style:italic}
 .about-body{font-size:14px;line-height:1.75;color:var(--muted)}
 
-/* PHOTOS */
+/* ── PHOTOS ── */
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:5px}
 .grid-2 img{width:100%;height:158px;object-fit:cover;display:block}
 .grid-full{margin-top:5px}
 .grid-full img{width:100%;height:215px;object-fit:cover;display:block}
 .img-caption{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-top:9px;text-align:center}
 
-/* MENU CARD */
+/* ── MENU CARD ── */
 .menu-feature{
   display:flex;align-items:stretch;
   border:1px solid var(--border-strong);background:var(--surface);
@@ -230,10 +212,14 @@ body{
 .menu-accent{width:5px;flex-shrink:0;background:var(--spice)}
 .menu-body{padding:16px 18px;flex:1}
 .menu-label{font-size:10px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
-.menu-title{font-family:var(--serif);font-size:1.15rem;font-weight:700;color:var(--text);margin-bottom:6px}
+.menu-title{
+  font-family:var(--hand);
+  font-size:1.55rem;font-weight:600;color:var(--text);margin-bottom:6px;
+  letter-spacing:0.01em;
+}
 .menu-cta{font-size:12px;color:var(--spice);font-weight:500;display:flex;align-items:center;gap:5px}
 
-/* SOCIALS */
+/* ── SOCIALS ── */
 .social-row{display:flex;gap:8px;margin-top:4px}
 .social-btn{
   flex:1;display:flex;align-items:center;justify-content:center;gap:7px;
@@ -244,7 +230,7 @@ body{
 }
 .social-btn:hover{background:var(--surface2);border-color:rgba(255,255,255,0.2)}
 
-/* HORAIRES */
+/* ── HORAIRES ── */
 .hours-table{width:100%;border-collapse:collapse}
 .hours-table tr{border-bottom:1px solid var(--border)}
 .hours-table tr:last-child{border-bottom:none}
@@ -259,10 +245,10 @@ body{
   font-size:9px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;
   padding:2px 7px;border-radius:40px;
   margin-left:8px;vertical-align:middle;
-  border:1px solid rgba(232,184,75,0.25);
+  border:1px solid rgba(242,100,25,0.3);
 }
 
-/* ADRESSE */
+/* ── ADRESSE ── */
 .map-wrap{border-radius:3px;overflow:hidden;border:1px solid var(--border);margin-bottom:12px}
 .map-wrap iframe{display:block;width:100%;height:180px;border:none}
 .addr-row{
@@ -286,7 +272,7 @@ body{
 .btn-map:hover{opacity:0.85}
 .btn-map:active{opacity:0.65}
 
-/* FOOTER */
+/* ── FOOTER ── */
 .footer{padding:2.5rem 1.5rem 3rem;text-align:center;border-top:1px solid var(--border)}
 .footer-logo{width:110px;display:block;margin:0 auto 8px;mix-blend-mode:screen;filter:saturate(1.2) brightness(1.05);opacity:0.6}
 .footer-sub{font-size:10px;color:var(--muted);letter-spacing:0.2em;text-transform:uppercase}
@@ -298,12 +284,11 @@ body{
 
 <!-- SPLASH -->
 <div id="splash">
-  <img id="splash-logo" src="img/logo.png" alt="NOOK">
-  <div id="splash-tag">Cuisine Nomade · Aubenas</div>
-  <div id="splash-bar"></div>
+  <img id="s-logo" src="img/logo.png" alt="NOOK">
+  <div id="s-rule"></div>
+  <div id="s-city">Aubenas · Ardèche</div>
 </div>
 
-<!-- PAGE -->
 <div id="page">
 
   <!-- HERO -->
@@ -313,7 +298,7 @@ body{
     <div class="hero-topbar"></div>
     <div class="hero-content">
       <img class="hero-logo" src="img/logo.png" alt="NOOK">
-      <div class="hero-tagline">Saveurs du monde, cœur ardéchois</div>
+      <div class="hero-tagline">Saveurs du monde</div>
       <div class="hero-city">
         <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
         Aubenas · Ardèche
@@ -321,11 +306,11 @@ body{
     </div>
   </div>
 
-  <!-- CTA STRIP -->
-  <div class="cta-strip rb">
+  <!-- CTA -->
+  <div class="cta-strip r">
     <a class="cta-item primary" href="tel:+33475360910">
       <div class="cta-icon">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#C84B2F" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 012 1.18 2 2 0 013.99 0h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#F26419" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 012 1.18 2 2 0 013.99 0h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg>
       </div>
       Appeler
     </a>
@@ -344,14 +329,14 @@ body{
   </div>
 
   <!-- ABOUT -->
-  <div class="section rb" style="border-top:none">
+  <div class="section r" style="border-top:none">
     <div class="label">Le restaurant</div>
     <p class="about-pull">Une table qui <em>voyage</em> sans jamais quitter Aubenas.</p>
     <p class="about-body">Chaque jour un menu différent, une nouvelle escale. Des produits locaux, des épices lointaines, une cuisine franche et généreuse.</p>
   </div>
 
   <!-- PHOTOS -->
-  <div class="section rb" style="padding-top:0;border-top:none">
+  <div class="section r" style="padding-top:0;border-top:none">
     <div class="label">Nos plats</div>
     <div class="grid-2">
       <img src="img/curry.jpg" alt="Curry vert NOOK">
@@ -364,23 +349,24 @@ body{
   </div>
 
   <!-- MENU -->
-  <div class="section rb">
+  <div class="section r">
     <div class="label">Menu du jour</div>
-    <a class="menu-feature" href="https://www.facebook.com/people/NOOK-Restaurant/61575514529548/" target="_blank" rel="noopener">
-      <div class="menu-accent"></div>
-      <div class="menu-body">
-        <div class="menu-label">Mis à jour chaque matin</div>
-        <div class="menu-title">Carte du jour</div>
-        <div class="menu-cta">
-          Voir sur Facebook
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </div>
-      </div>
-    </a>
-    <div class="social-row">
+    <div class="fb-wrap">
+      <iframe
+        src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fpeople%2FNOOK-Restaurant%2F61575514529548%2F&tabs=timeline&width=380&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false"
+        width="380"
+        height="500"
+        style="border:none;overflow:hidden;display:block;width:100%;border-radius:6px;"
+        scrolling="no"
+        frameborder="0"
+        allowfullscreen="true"
+        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+      </iframe>
+    </div>
+    <div class="social-row" style="margin-top:12px">
       <a class="social-btn" href="https://www.facebook.com/people/NOOK-Restaurant/61575514529548/" target="_blank" rel="noopener">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="#5890FF"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
-        Facebook
+        Voir la page Facebook
       </a>
       <a class="social-btn" href="https://www.instagram.com/nook.aubenas/" target="_blank" rel="noopener">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E1306C" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="#E1306C" stroke="none"/></svg>
@@ -390,7 +376,7 @@ body{
   </div>
 
   <!-- HORAIRES -->
-  <div class="section rb">
+  <div class="section r">
     <div class="label">Horaires</div>
     <table class="hours-table">
       <tr id="row-lun"><td class="day">Lundi</td><td class="time">18h30 – 23h00</td></tr>
@@ -404,7 +390,7 @@ body{
   </div>
 
   <!-- ADRESSE -->
-  <div class="section rb">
+  <div class="section r">
     <div class="label">Nous trouver</div>
     <div class="map-wrap">
       <iframe loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"
@@ -413,7 +399,7 @@ body{
     </div>
     <div class="addr-row">
       <div class="addr-icon">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C84B2F" stroke-width="1.8"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#F26419" stroke-width="1.8"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
       </div>
       <div>
         <div class="addr-street">8 rue de la Prévoté</div>
@@ -427,17 +413,16 @@ body{
   </div>
 
   <!-- FOOTER -->
-  <div class="footer rb">
+  <div class="footer r">
     <img class="footer-logo" src="img/logo.png" alt="NOOK">
     <div class="footer-sub">Cuisine Nomade · Aubenas</div>
     <div class="footer-line"></div>
     <div class="footer-copy">© NOOK Restaurant · 8 rue de la Prévoté, 07200 Aubenas</div>
   </div>
 
-</div><!-- /page -->
+</div>
 
 <script>
-/* ── TODAY HIGHLIGHT ── */
 const days=['dim','lun','mar','mer','jeu','ven','sam'];
 const todayRow=document.getElementById('row-'+days[new Date().getDay()]);
 if(todayRow){
@@ -446,58 +431,41 @@ if(todayRow){
   if(d){const b=document.createElement('span');b.className='today-badge';b.textContent="Aujourd'hui";d.appendChild(b);}
 }
 
-/* ── SPLASH → PAGE ── */
-const splash     = document.getElementById('splash');
-const sLogo      = document.getElementById('splash-logo');
-const sTag       = document.getElementById('splash-tag');
-const sBar       = document.getElementById('splash-bar');
-const page       = document.getElementById('page');
-const heroImg    = document.querySelector('.hero-img');
-const heroLogo   = document.querySelector('.hero-logo');
-const heroTagl   = document.querySelector('.hero-tagline');
-const heroCity   = document.querySelector('.hero-city');
-const heroTopbar = document.querySelector('.hero-topbar');
+const splash=document.getElementById('splash');
+const sLogo=document.getElementById('s-logo');
+const sRule=document.getElementById('s-rule');
+const sCity=document.getElementById('s-city');
+const page=document.getElementById('page');
 
-// Step 1 — splash logo appears
-requestAnimationFrame(()=>{
-  requestAnimationFrame(()=>{
-    sLogo.classList.add('in');
-    sTag.classList.add('in');
-    sBar.classList.add('in');
-  });
-});
+requestAnimationFrame(()=>requestAnimationFrame(()=>{
+  sLogo.classList.add('in');
+  sRule.classList.add('in');
+  sCity.classList.add('in');
+}));
 
-// Step 2 — after 1.4s, fade out splash and reveal page
 setTimeout(()=>{
   splash.classList.add('out');
-  page.classList.add('visible');
-
-  // Trigger hero element animations with stagger
-  setTimeout(()=>{ heroImg.classList.add('on'); heroTopbar.classList.add('on'); }, 50);
-  setTimeout(()=>{ heroLogo.classList.add('on'); }, 100);
-  setTimeout(()=>{ heroTagl.classList.add('on'); }, 200);
-  setTimeout(()=>{ heroCity.classList.add('on'); }, 350);
-
-  // Reveal above-fold blocks immediately
-  document.querySelectorAll('.rb').forEach((el,i)=>{
-    const rect = el.getBoundingClientRect();
-    if(rect.top < window.innerHeight){
-      setTimeout(()=>el.classList.add('on'), 80 + i * 60);
-    }
+  page.classList.add('on');
+  const heroImg=document.querySelector('.hero-img');
+  const heroTopbar=document.querySelector('.hero-topbar');
+  const heroLogo=document.querySelector('.hero-logo');
+  const heroTagl=document.querySelector('.hero-tagline');
+  const heroCity=document.querySelector('.hero-city');
+  setTimeout(()=>{ heroImg.classList.add('on'); heroTopbar.classList.add('on'); },30);
+  setTimeout(()=>{ heroLogo.classList.add('on'); },100);
+  setTimeout(()=>{ heroTagl.classList.add('on'); },220);
+  setTimeout(()=>{ heroCity.classList.add('on'); },360);
+  document.querySelectorAll('.r').forEach((el,i)=>{
+    if(el.getBoundingClientRect().top < window.innerHeight)
+      setTimeout(()=>el.classList.add('on'),100+i*60);
   });
+  setTimeout(()=>splash.remove(),800);
+},1500);
 
-  // Remove splash from DOM after transition
-  setTimeout(()=>{ splash.remove(); }, 700);
-}, 1400);
-
-/* ── SCROLL REVEAL ── */
-const io = new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); }
-  });
-}, { threshold: 0.08 });
-
-document.querySelectorAll('.rb').forEach(el=>io.observe(el));
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } });
+},{threshold:0.07});
+document.querySelectorAll('.r').forEach(el=>io.observe(el));
 </script>
 </body>
 </html>
