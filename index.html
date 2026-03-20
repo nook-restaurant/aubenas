@@ -62,7 +62,7 @@ body{
 #s-rule.in{width:56px}
 
 #s-city{
-  font-family:var(--sans);font-size:14px;
+  font-family:var(--hand);font-size:22px;font-weight:600;
   letter-spacing:.25em;text-transform:uppercase;
   color:rgba(255,255,255,0.75);margin-top:10px;
   opacity:0;transform:translateY(4px);
@@ -333,7 +333,21 @@ body{
 
 /* ── LANDSCAPE ── */
 @media (orientation: landscape) and (max-height: 500px) {
-  .hero { height: 100svh; }
+  .hero {
+    height: 100svh;
+    min-height: 100svh;
+  }
+  .hero-img {
+    height: 100%;
+    object-position: 30% center;
+  }
+  .hero-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1.5rem 2rem 2rem;
+    justify-content: flex-end;
+  }
 }
 
 /* ── PARALLAX ── */
@@ -348,7 +362,7 @@ body{
 <div id="splash">
   <img id="s-logo" src="img/logo.png" alt="NOOK">
   <div id="s-rule"></div>
-  <div id="s-city">Aubenas · Ardèche</div>
+  <div id="s-city">Restaurant</div>
 </div>
 
 <div id="page">
