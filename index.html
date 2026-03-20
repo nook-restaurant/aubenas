@@ -30,7 +30,7 @@ body{
   font-family:var(--sans);
   background:var(--ink);
   color:var(--text);
-  max-width:430px;
+  max-width:680px;
   margin:0 auto;
   min-height:100vh;
   overflow-x:hidden;
@@ -329,6 +329,46 @@ body{
 .footer-sub{font-size:10px;color:var(--muted);letter-spacing:0.2em;text-transform:uppercase}
 .footer-line{width:28px;height:2px;background:var(--gold);opacity:0.3;margin:14px auto}
 .footer-copy{font-size:10px;color:rgba(0,0,0,0.25)}
+
+/* ── RESPONSIVE LANDSCAPE / TABLET ── */
+@media (min-width: 500px) {
+  .hero { height: 60vw; min-height: 400px; max-height: 620px; }
+  .hero-logo { width: 260px; }
+  .hero-tagline { font-size: 1.2rem; }
+  .cta-strip { max-width: 480px; margin: 0 auto; }
+  .section { padding: 2.5rem 2.5rem; }
+  .about-pull { font-size: 2.4rem; }
+  .grid-2 img { height: 200px; }
+  .grid-full img { height: 280px; }
+  .hours-table td { font-size: 15px; padding: 13px 4px; }
+  .addr-street { font-size: 16px; }
+  .map-wrap iframe { height: 220px; }
+}
+
+@media (min-width: 500px) and (orientation: landscape) {
+  .hero { height: 55vh; min-height: 320px; }
+  /* hero content split : logo gauche, tagline droite */
+  .hero-content {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 1.5rem 2.5rem 2rem;
+    text-align: left;
+  }
+  .hero-logo { width: 200px; margin-bottom: 0; }
+  .hero-tagline { font-size: 1rem; margin-bottom: 0; flex: 1; text-align: right; padding-left: 1rem; }
+  .hero-city { align-self: flex-end; }
+}
+
+@media (min-width: 600px) {
+  .cta-strip { border-radius: 0; }
+  .photo-block { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
+  .grid-full { margin-top: 0; }
+  .menu-feature { padding: 0; }
+  .footer { padding: 3rem 2.5rem 4rem; }
+  #splash #s-logo { width: 220px; }
+  #s-city { font-size: 16px; }
+}
 </style>
 </head>
 <body>
