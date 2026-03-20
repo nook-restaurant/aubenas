@@ -10,18 +10,18 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --ink:#0C0A07;
-  --surface:#16120D;
-  --surface2:#1E1810;
+  --ink:#F8F5EF;
+  --surface:#EEEBE3;
+  --surface2:#E4E0D6;
   --spice:#F26419;
-  --spice-glow:rgba(242,100,25,0.2);
+  --spice-glow:rgba(242,100,25,0.12);
   --gold:#F26419;
   --gold-dim:rgba(242,100,25,0.65);
   --gold-trace:rgba(242,100,25,0.14);
-  --muted:rgba(240,230,200,0.42);
-  --border:rgba(255,255,255,0.07);
-  --border-strong:rgba(255,255,255,0.13);
-  --text:#F0E8D0;
+  --muted:rgba(26,22,18,0.45);
+  --border:rgba(0,0,0,0.08);
+  --border-strong:rgba(0,0,0,0.14);
+  --text:#1A1612;
   --hand:'Caveat',cursive;
   --sans:'DM Sans',system-ui,sans-serif;
 }
@@ -40,7 +40,7 @@ body{
 /* ── SPLASH ── */
 #splash{
   position:fixed;inset:0;z-index:9999;
-  background:var(--ink);
+  background:#F26419;
   display:flex;flex-direction:column;
   align-items:center;justify-content:center;
   transition:opacity 0.5s cubic-bezier(.4,0,.2,1);
@@ -49,8 +49,8 @@ body{
 
 #s-logo{
   width:190px;
-  mix-blend-mode:screen;
-  filter:saturate(1.3) brightness(1.1);
+  mix-blend-mode:multiply;
+  filter:saturate(1.1) brightness(0.85);
   opacity:0;transform:scale(0.85) translateY(6px);
   transition:opacity 0.6s cubic-bezier(.4,0,.2,1), transform 0.6s cubic-bezier(.4,0,.2,1);
 }
@@ -58,7 +58,7 @@ body{
 
 #s-rule{
   width:0;height:1px;
-  background:#F26419;margin-top:20px;
+  background:rgba(255,255,255,0.6);margin-top:20px;
   transition:width 0.6s 0.3s cubic-bezier(.4,0,.2,1);
 }
 #s-rule.in{width:56px}
@@ -66,7 +66,7 @@ body{
 #s-city{
   font-family:var(--sans);font-size:9px;
   letter-spacing:.25em;text-transform:uppercase;
-  color:var(--gold-dim);margin-top:10px;
+  color:rgba(255,255,255,0.75);margin-top:10px;
   opacity:0;transform:translateY(4px);
   transition:opacity 0.5s 0.45s cubic-bezier(.4,0,.2,1), transform 0.5s 0.45s cubic-bezier(.4,0,.2,1);
 }
@@ -86,19 +86,19 @@ body{
 /* ── HERO ── */
 .hero{
   position:relative;height:540px;
-  overflow:hidden;background:#0C0A07;
+  overflow:hidden;background:#1A1612;
 }
 .hero-img{
   position:absolute;inset:0;
   width:100%;height:100%;object-fit:cover;
-  opacity:0.45;display:block;
+  opacity:0.55;display:block;
   transform:scale(1.07);
   transition:transform 1.6s cubic-bezier(.25,0,.1,1);
 }
 .hero-img.on{transform:scale(1)}
 .hero-overlay{
   position:absolute;inset:0;
-  background:linear-gradient(160deg, rgba(12,10,7,0.25) 0%, rgba(12,10,7,0.0) 40%, rgba(12,10,7,0.94) 85%);
+  background:linear-gradient(to bottom, rgba(248,245,239,0.1) 0%, rgba(248,245,239,0.0) 35%, rgba(248,245,239,0.95) 100%);
 }
 .hero-topbar{
   position:absolute;top:0;left:0;right:0;height:3px;
@@ -113,8 +113,8 @@ body{
 }
 .hero-logo{
   width:210px;display:block;
-  mix-blend-mode:screen;
-  filter:saturate(1.25) brightness(1.05);
+  mix-blend-mode:multiply;
+  filter:saturate(1.1) brightness(0.9);
   margin-bottom:6px;
   opacity:0;transform:translateY(12px);
   transition:opacity 0.7s 0.1s cubic-bezier(.4,0,.2,1), transform 0.7s 0.1s cubic-bezier(.4,0,.2,1);
@@ -161,7 +161,7 @@ body{
   display:flex;align-items:center;justify-content:center;
 }
 .cta-item.primary .cta-icon{background:var(--spice-glow)}
-.cta-item:not(.primary) .cta-icon{background:rgba(255,255,255,0.07)}
+.cta-item:not(.primary) .cta-icon{background:rgba(0,0,0,0.06)}
 
 /* ── FB FEED ── */
 .fb-loading{
@@ -258,7 +258,7 @@ body{
   text-decoration:none;color:inherit;margin-bottom:12px;
   transition:border-color 0.18s,background 0.18s;
 }
-.menu-feature:hover{border-color:rgba(255,255,255,0.22);background:var(--surface2)}
+.menu-feature:hover{border-color:rgba(0,0,0,0.22);background:var(--surface2)}
 .menu-feature:active{opacity:0.75}
 .menu-accent{width:5px;flex-shrink:0;background:var(--spice)}
 .menu-body{padding:16px 18px;flex:1}
@@ -279,7 +279,7 @@ body{
   font-size:12px;font-weight:500;color:var(--text);text-decoration:none;
   transition:border-color 0.18s,background 0.18s;
 }
-.social-btn:hover{background:var(--surface2);border-color:rgba(255,255,255,0.2)}
+.social-btn:hover{background:var(--surface2);border-color:rgba(0,0,0,0.2)}
 
 /* ── HORAIRES ── */
 .hours-table{width:100%;border-collapse:collapse}
@@ -288,7 +288,7 @@ body{
 .hours-table td{padding:11px 4px;font-size:14px}
 .hours-table .day{color:var(--muted);font-weight:400;width:52%}
 .hours-table .time{font-weight:500;color:var(--text);text-align:right}
-.hours-table .closed{color:rgba(255,255,255,0.18);font-style:italic;text-align:right}
+.hours-table .closed{color:rgba(0,0,0,0.2);font-style:italic;text-align:right}
 .today-row .day{color:var(--gold)!important}
 .today-row .time{color:var(--text)!important}
 .today-badge{
@@ -325,10 +325,10 @@ body{
 
 /* ── FOOTER ── */
 .footer{padding:2.5rem 1.5rem 3rem;text-align:center;border-top:1px solid var(--border)}
-.footer-logo{width:110px;display:block;margin:0 auto 8px;mix-blend-mode:screen;filter:saturate(1.2) brightness(1.05);opacity:0.6}
+.footer-logo{width:110px;display:block;margin:0 auto 8px;mix-blend-mode:multiply;filter:saturate(1.1) brightness(0.95);opacity:0.7}
 .footer-sub{font-size:10px;color:var(--muted);letter-spacing:0.2em;text-transform:uppercase}
 .footer-line{width:28px;height:2px;background:var(--gold);opacity:0.3;margin:14px auto}
-.footer-copy{font-size:10px;color:rgba(255,255,255,0.18)}
+.footer-copy{font-size:10px;color:rgba(0,0,0,0.25)}
 </style>
 </head>
 <body>
@@ -402,12 +402,17 @@ body{
   <!-- MENU -->
   <div class="section r">
     <div class="label">Menu du jour</div>
-    <div id="fb-feed">
-      <div class="fb-loading">
-        <div class="fb-spinner"></div>
-        <span>Chargement du menu…</span>
+    <a class="menu-feature" href="https://www.facebook.com/people/NOOK-Restaurant/61575514529548/" target="_blank" rel="noopener">
+      <div class="menu-accent"></div>
+      <div class="menu-body">
+        <div class="menu-label">Mis à jour chaque matin</div>
+        <div class="menu-title">Carte du jour</div>
+        <div class="menu-cta">
+          Voir sur Facebook
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
       </div>
-    </div>
+    </a>
     <div class="social-row" style="margin-top:12px">
       <a class="social-btn" href="https://www.facebook.com/people/NOOK-Restaurant/61575514529548/" target="_blank" rel="noopener">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="#5890FF"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
