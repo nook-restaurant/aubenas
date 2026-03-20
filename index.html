@@ -2,441 +2,502 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>NOOK – Cuisine Nomade · Aubenas</title>
 <meta name="description" content="NOOK Cuisine Nomade – Restaurant à Aubenas. 8 rue de la Prévoté, 07200 Aubenas.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --terra:#DF7B45;
-  --gold:#F5D780;
-  --black:#1a0404;
-  --surface:#2a0808;
-  --surface2:#350a0a;
-  --border:rgba(255,255,255,0.12);
-  --text:#ffffff;
-  --muted:rgba(255,255,255,0.5);
+  --ink:#0C0A07;
+  --surface:#16120D;
+  --surface2:#1E1810;
+  --spice:#C84B2F;
+  --spice-glow:rgba(200,75,47,0.18);
+  --gold:#E8B84B;
+  --gold-dim:rgba(232,184,75,0.55);
+  --gold-trace:rgba(232,184,75,0.1);
+  --muted:rgba(240,230,200,0.42);
+  --border:rgba(255,255,255,0.07);
+  --border-strong:rgba(255,255,255,0.13);
+  --text:#F0E8D0;
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'DM Sans',system-ui,sans-serif;
 }
-html,html,body{scroll-behavior:smooth;margin:0;padding:0;scroll-padding-top:0;}
+html,body{scroll-behavior:smooth;width:100%}
 body{
-  font-family:'Montserrat',sans-serif;
-  background:var(--black);
+  font-family:var(--sans);
+  background:var(--ink);
   color:var(--text);
-  max-width:480px;
+  max-width:430px;
   margin:0 auto;
   min-height:100vh;
   overflow-x:hidden;
-  width:100%;
 }
 
-/* ─── PAGE ─── */
-.page{
-  opacity:1;
-  padding-top:0;
-  margin-top:0;
-  display:block;
+/* ────────────────────────────
+   SPLASH
+──────────────────────────── */
+#splash{
+  position:fixed;inset:0;z-index:9999;
+  background:var(--ink);
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:0;
+  transition:opacity 0.5s 0.1s cubic-bezier(.4,0,.2,1);
 }
+#splash.out{opacity:0;pointer-events:none}
 
-  to{opacity:1}
+#splash-logo{
+  width:190px;
+  mix-blend-mode:screen;
+  filter:saturate(1.3) brightness(1.1);
+  opacity:0;
+  transform:scale(0.85) translateY(6px);
+  transition:opacity 0.6s cubic-bezier(.4,0,.2,1),
+             transform 0.6s cubic-bezier(.4,0,.2,1);
 }
+#splash-logo.in{opacity:1;transform:scale(1) translateY(0)}
 
-/* ─── HERO ─── */
+#splash-tag{
+  font-family:var(--serif);font-style:italic;
+  font-size:.9rem;letter-spacing:.05em;
+  color:var(--gold-dim);margin-top:8px;
+  opacity:0;transform:translateY(6px);
+  transition:opacity 0.5s 0.25s cubic-bezier(.4,0,.2,1),
+             transform 0.5s 0.25s cubic-bezier(.4,0,.2,1);
+}
+#splash-tag.in{opacity:1;transform:translateY(0)}
+
+#splash-bar{
+  width:0;height:1.5px;margin-top:20px;
+  background:linear-gradient(to right, var(--spice), var(--gold));
+  border-radius:2px;
+  transition:width 0.6s 0.35s cubic-bezier(.4,0,.2,1);
+}
+#splash-bar.in{width:72px}
+
+/* ────────────────────────────
+   PAGE — initial hidden state
+──────────────────────────── */
+#page{
+  opacity:0;
+  transition:opacity 0.01s;
+}
+#page.visible{opacity:1}
+
+/* ────────────────────────────
+   REVEAL BLOCKS (scroll)
+──────────────────────────── */
+.rb{
+  opacity:0;
+  transform:translateY(20px);
+  transition:opacity 0.6s cubic-bezier(.4,0,.2,1),
+             transform 0.6s cubic-bezier(.4,0,.2,1);
+}
+.rb.on{opacity:1;transform:translateY(0)}
+
+/* ────────────────────────────
+   HERO
+──────────────────────────── */
 .hero{
-  padding:0 0.75rem 1rem;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  text-align:center;
-  position:relative;
-  overflow:hidden;
+  position:relative;height:540px;
+  overflow:hidden;background:#0C0A07;
 }
-.hero::before{display:none}
+.hero-img{
+  position:absolute;inset:0;
+  width:100%;height:100%;object-fit:cover;
+  opacity:0.45;display:block;
+  transform:scale(1.07);
+  transition:transform 1.6s cubic-bezier(.25,0,.1,1);
+}
+.hero-img.on{transform:scale(1)}
+
+.hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(160deg, rgba(12,10,7,0.25) 0%, rgba(12,10,7,0.0) 40%, rgba(12,10,7,0.94) 85%);
+}
+.hero-topbar{
+  position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(to right, transparent, var(--gold) 30%, var(--gold) 70%, transparent);
+  opacity:0;
+  transition:opacity 0.8s 0.2s;
+}
+.hero-topbar.on{opacity:0.65}
+
+.hero-content{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:2rem 1.5rem 2.8rem;
+  display:flex;flex-direction:column;align-items:flex-start;
+}
 .hero-logo{
-  width:240px;
-  display:block;
-  margin:0 auto 16px auto;
+  width:210px;display:block;
+  mix-blend-mode:screen;
+  filter:saturate(1.25) brightness(1.05);
+  margin-bottom:6px;
+  opacity:0;transform:translateY(12px);
+  transition:opacity 0.7s 0.1s cubic-bezier(.4,0,.2,1),
+             transform 0.7s 0.1s cubic-bezier(.4,0,.2,1);
 }
+.hero-logo.on{opacity:1;transform:translateY(0)}
+
 .hero-tagline{
-  font-size:11px;
-  font-weight:400;
-  letter-spacing:0.2em;
-  text-transform:uppercase;
-  color:#fff8f0;
-  text-align:center;
-  width:100%;
-  display:block;
+  font-family:var(--serif);font-style:italic;
+  font-size:1rem;color:var(--gold-dim);
+  font-weight:400;letter-spacing:0.02em;margin-bottom:18px;
+  opacity:0;transform:translateY(8px);
+  transition:opacity 0.6s 0.25s cubic-bezier(.4,0,.2,1),
+             transform 0.6s 0.25s cubic-bezier(.4,0,.2,1);
 }
+.hero-tagline.on{opacity:1;transform:translateY(0)}
+
 .hero-city{
-  font-size:12px;
-  font-weight:300;
-  letter-spacing:0.12em;
-  text-transform:uppercase;
-  color:var(--muted);
-  margin-top:4px;
-  text-align:center;
-  width:100%;
-  display:block;
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.14);
+  border-radius:40px;padding:5px 13px 5px 9px;
+  font-size:10px;font-weight:500;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:rgba(240,230,200,0.7);
+  opacity:0;transform:translateY(6px);
+  transition:opacity 0.5s 0.4s cubic-bezier(.4,0,.2,1),
+             transform 0.5s 0.4s cubic-bezier(.4,0,.2,1);
 }
+.hero-city.on{opacity:1;transform:translateY(0)}
 
-/* ─── CTA ─── */
-.quick-cta{
-  display:grid;
-  grid-template-columns:1fr 1fr 1fr;
-  gap:8px;
-  padding:0.75rem 0.75rem 0;
-  margin-bottom:1rem;
+/* ────────────────────────────
+   CTA STRIP
+──────────────────────────── */
+.cta-strip{
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+  border-bottom:1px solid var(--border);
+  background:var(--surface);
 }
-.cta-btn{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  text-align:center;
-  gap:5px;
-  padding:13px 6px;
-  border-radius:10px;
-  text-decoration:none;
-  font-size:11px;
-  font-weight:600;
-  letter-spacing:0.08em;
-  text-transform:uppercase;
-  border:1px solid transparent;
-  transition:transform 0.2s, opacity 0.2s, background 0.2s, box-shadow 0.2s;
+.cta-item{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:7px;padding:18px 8px;text-decoration:none;
+  color:var(--text);font-size:10px;font-weight:500;
+  letter-spacing:0.12em;text-transform:uppercase;
+  border-right:1px solid var(--border);
+  transition:background 0.18s;
 }
-.cta-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.4)}
-.cta-btn:active{transform:scale(0.95);opacity:0.8}
-.cta-btn svg{width:22px;height:22px}
-.cta-call{background:#7A2200;color:#fff}
-.cta-call:hover{background:#6a1c00;box-shadow:0 6px 20px rgba(0,0,0,0.3)}
-.cta-map{
-  background:var(--surface2);
-  color:var(--text);
-  border-color:rgba(255,255,255,0.2);
-}
-.cta-map:hover{background:rgba(0,0,0,0.25);border-color:rgba(255,255,255,0.35);box-shadow:0 6px 20px rgba(0,0,0,0.4)}
-.cta-menu{
-  background:var(--surface2);
-  color:#fff8f0;
-  border-color:rgba(255,255,255,0.2);
-}
-.cta-menu:hover{background:rgba(0,0,0,0.25);border-color:rgba(255,255,255,0.35);box-shadow:0 6px 20px rgba(0,0,0,0.4)}
-
-/* ─── SECTIONS ─── */
-.section{
-  padding:1.5rem 0.75rem;
-  border-top:1px solid rgba(255,255,255,0.08);
-  margin-top:0.75rem;
-}
-
-.s-label{
-  font-size:11px;
-  font-weight:700;
-  letter-spacing:0.25em;
-  text-transform:uppercase;
-  color:#ffffff;
-  margin-bottom:1.1rem;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:10px;
-  text-align:center;
-}
-
-/* ─── PHOTOS ─── */
-.photo-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-}
-.photo-grid img{
-  width:100%;height:160px;
-  object-fit:cover;
-  border-radius:10px;
-  display:block;
-  border:1px solid rgba(255,255,255,0.03);
-}
-.photo-grid img.wide{
-  grid-column:1/-1;
-  height:210px;
-}
-
-/* ─── MENU CARD ─── */
-.menu-card{
-  background:rgba(0,0,0,0.12);
-  border:1px solid rgba(255,255,255,0.12);
-  border-radius:14px;
-  padding:1.1rem 1.25rem;
-  display:flex;align-items:center;justify-content:center;gap:14px;
-  text-decoration:none;
-  margin-bottom:14px;
-  transition:border-color 0.2s, background 0.2s, transform 0.2s;
-}
-.menu-card:hover{border-color:rgba(255,255,255,0.3);background:rgba(0,0,0,0.2);transform:translateY(-1px)}
-.menu-card:active{opacity:0.7;transform:scale(0.99)}
-.menu-icon{
-  width:42px;height:42px;
-  background:rgba(255,255,255,0.15);
-  border-radius:10px;
-  border:1px solid rgba(255,255,255,0.15);
+.cta-item:last-child{border-right:none}
+.cta-item:active{background:rgba(255,255,255,0.04)}
+.cta-item.primary{color:var(--spice)}
+.cta-icon{
+  width:38px;height:38px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;
 }
-.menu-title{
-  font-family:'Montserrat',sans-serif;
-  font-size:1.15rem;font-weight:400;
-  color:var(--text);
-}
-.menu-sub{font-size:11px;color:#fff8f0;margin-top:2px;opacity:0.7}
-.menu-arrow{margin-left:auto;flex-shrink:0;opacity:0.25}
+.cta-item.primary .cta-icon{background:var(--spice-glow)}
+.cta-item:not(.primary) .cta-icon{background:rgba(255,255,255,0.05)}
 
-.social-row{display:flex;gap:10px;margin-top:10px}
+/* ────────────────────────────
+   SECTIONS
+──────────────────────────── */
+.section{padding:2rem 1.5rem;border-top:1px solid var(--border)}
+.label{
+  font-size:10px;font-weight:500;
+  letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--gold);opacity:0.75;
+  margin-bottom:1.25rem;
+  display:flex;align-items:center;gap:12px;
+}
+.label::after{content:'';flex:1;height:1px;background:var(--gold-trace)}
+
+/* ABOUT */
+.about-pull{font-family:var(--serif);font-size:1.5rem;font-weight:700;line-height:1.28;color:var(--text);margin-bottom:.85rem}
+.about-pull em{color:var(--spice);font-style:italic}
+.about-body{font-size:14px;line-height:1.75;color:var(--muted)}
+
+/* PHOTOS */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:5px}
+.grid-2 img{width:100%;height:158px;object-fit:cover;display:block}
+.grid-full{margin-top:5px}
+.grid-full img{width:100%;height:215px;object-fit:cover;display:block}
+.img-caption{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-top:9px;text-align:center}
+
+/* MENU CARD */
+.menu-feature{
+  display:flex;align-items:stretch;
+  border:1px solid var(--border-strong);background:var(--surface);
+  border-radius:3px;overflow:hidden;
+  text-decoration:none;color:inherit;margin-bottom:12px;
+  transition:border-color 0.18s,background 0.18s;
+}
+.menu-feature:hover{border-color:rgba(255,255,255,0.22);background:var(--surface2)}
+.menu-feature:active{opacity:0.75}
+.menu-accent{width:5px;flex-shrink:0;background:var(--spice)}
+.menu-body{padding:16px 18px;flex:1}
+.menu-label{font-size:10px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+.menu-title{font-family:var(--serif);font-size:1.15rem;font-weight:700;color:var(--text);margin-bottom:6px}
+.menu-cta{font-size:12px;color:var(--spice);font-weight:500;display:flex;align-items:center;gap:5px}
+
+/* SOCIALS */
+.social-row{display:flex;gap:8px;margin-top:4px}
 .social-btn{
-  flex:1;
+  flex:1;display:flex;align-items:center;justify-content:center;gap:7px;
+  padding:12px;border-radius:3px;
+  border:1px solid var(--border-strong);background:var(--surface);
+  font-size:12px;font-weight:500;color:var(--text);text-decoration:none;
+  transition:border-color 0.18s,background 0.18s;
+}
+.social-btn:hover{background:var(--surface2);border-color:rgba(255,255,255,0.2)}
+
+/* HORAIRES */
+.hours-table{width:100%;border-collapse:collapse}
+.hours-table tr{border-bottom:1px solid var(--border)}
+.hours-table tr:last-child{border-bottom:none}
+.hours-table td{padding:11px 4px;font-size:14px}
+.hours-table .day{color:var(--muted);font-weight:400;width:52%}
+.hours-table .time{font-weight:500;color:var(--text);text-align:right}
+.hours-table .closed{color:rgba(255,255,255,0.18);font-style:italic;text-align:right}
+.today-row .day{color:var(--gold)!important}
+.today-row .time{color:var(--text)!important}
+.today-badge{
+  display:inline-block;background:var(--gold-trace);color:var(--gold);
+  font-size:9px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;
+  padding:2px 7px;border-radius:40px;
+  margin-left:8px;vertical-align:middle;
+  border:1px solid rgba(232,184,75,0.25);
+}
+
+/* ADRESSE */
+.map-wrap{border-radius:3px;overflow:hidden;border:1px solid var(--border);margin-bottom:12px}
+.map-wrap iframe{display:block;width:100%;height:180px;border:none}
+.addr-row{
+  display:flex;align-items:center;gap:12px;
+  padding:14px 16px;
+  border:1px solid var(--border-strong);border-radius:3px;
+  background:var(--surface);margin-bottom:10px;
+}
+.addr-icon{width:36px;height:36px;flex-shrink:0;background:var(--spice-glow);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.addr-street{font-size:14px;font-weight:500;color:var(--text)}
+.addr-city{font-size:12px;color:var(--muted)}
+.btn-map{
   display:flex;align-items:center;justify-content:center;gap:8px;
-  padding:13px;border-radius:10px;
-  background:rgba(0,0,0,0.12);
-  border:1px solid rgba(255,255,255,0.12);
-  font-size:14px;font-weight:400;
-  color:var(--text);text-decoration:none;
-  transition:border-color 0.2s, background 0.2s, transform 0.2s;
+  width:100%;padding:15px;
+  background:var(--spice);color:#fff;
+  border-radius:3px;
+  font-family:var(--sans);font-size:12px;font-weight:500;
+  letter-spacing:0.12em;text-transform:uppercase;
+  text-decoration:none;transition:opacity 0.18s;
 }
-.social-btn:hover{background:rgba(0,0,0,0.25);border-color:rgba(255,255,255,0.3);transform:translateY(-1px)}
-.social-btn:active{opacity:0.7;transform:scale(0.98)}
+.btn-map:hover{opacity:0.85}
+.btn-map:active{opacity:0.65}
 
-/* ─── HORAIRES ─── */
-.hours-wrap{
-  background:rgba(0,0,0,0.12);
-  border:1px solid rgba(255,255,255,0.12);
-  border-radius:14px;
-  overflow:hidden;
-}
-.hour-row{
-  display:flex;justify-content:center;gap:24px;align-items:center;
-  padding:14px 14px;
-  border-bottom:1px solid rgba(255,255,255,0.06);
-  font-size:15px;
-}
-.hour-row:last-child{border-bottom:none}
-.hour-day{color:rgba(255,248,240,0.6);font-weight:300;min-width:90px;text-align:right}
-.hour-time{color:#fff8f0;font-weight:400;letter-spacing:0.03em}
-.hour-closed{color:rgba(255,248,240,0.35);font-style:italic;min-width:90px;text-align:left}
-
-/* ─── ADRESSE ─── */
-.map-embed{
-  width:100%;height:170px;
-  border-radius:12px;border:none;
-  display:block;margin-bottom:10px;
-  border:1px solid var(--border);
-}
-.addr-block{
-  background:rgba(0,0,0,0.12);
-  border:1px solid rgba(255,255,255,0.12);
-  border-radius:12px;
-  padding:12px 14px;
-  display:flex;align-items:center;justify-content:center;gap:12px;
-  margin-bottom:10px;
-}
-.addr-main{font-size:15px;font-weight:500;color:var(--text)}
-.addr-sub{font-size:13px;color:var(--muted)}
-.btn-directions{
-  display:flex;align-items:center;justify-content:center;gap:8px;
-  width:100%;padding:14px;
-  border-radius:10px;
-  background:var(--surface2);
-  border:1px solid rgba(245,215,128,0.15);
-  color:#fff8f0;
-  font-family:'Montserrat',sans-serif;
-  font-size:14px;font-weight:600;
-  letter-spacing:0.08em;
-  text-decoration:none;
-  text-transform:uppercase;
-  transition:border-color 0.2s, background 0.2s, transform 0.2s, box-shadow 0.2s;
-}
-.btn-directions:hover{background:rgba(0,0,0,0.3);border-color:rgba(255,255,255,0.35);transform:translateY(-1px);box-shadow:0 6px 18px rgba(0,0,0,0.4)}
-.btn-directions:active{opacity:0.7;transform:scale(0.98)}
-
-/* ─── FOOTER ─── */
-.footer{
-  text-align:center;
-  padding:2.5rem 1rem 3rem;
-  font-size:10px;
-  color:rgba(255,248,240,0.35);
-  letter-spacing:0.15em;
-  text-transform:uppercase;
-}
-
-/* ─── BANDES LAOTIENNES ─── */
-.lao-strip {
-  position: fixed;
-  top: 0;
-  height: 100vh;
-  width: 52px;
-  pointer-events: none;
-  z-index: 0;
-  overflow: hidden;
-}
-.lao-strip.left { left: 0; }
-.lao-strip.right { right: 0; }
-/* Fade top and bottom */
-.lao-strip::before,
-.lao-strip::after {
-  content: '';
-  position: absolute;
-  left: 0; right: 0;
-  height: 120px;
-  z-index: 2;
-  pointer-events: none;
-}
-.lao-strip::before {
-  top: 0;
-  background: linear-gradient(to bottom, #1a0404 0%, transparent 100%);
-}
-.lao-strip::after {
-  bottom: 0;
-  background: linear-gradient(to top, #1a0404 0%, transparent 100%);
-}
-.lao-strip-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0;
-  padding-top: 0;
-}
-.lao-strip-inner span {
-  font-family: serif;
-  font-size: 52px;
-  font-weight: 900;
-  color: #E8C832;
-  opacity: 0.22;
-  line-height: 1.1;
-  writing-mode: vertical-lr;
-  text-orientation: upright;
-  letter-spacing: -4px;
-  user-select: none;
-}
-
-.intro-overlay, .page {
-  position: relative;
-  z-index: 1;
-}
-
+/* FOOTER */
+.footer{padding:2.5rem 1.5rem 3rem;text-align:center;border-top:1px solid var(--border)}
+.footer-logo{width:110px;display:block;margin:0 auto 8px;mix-blend-mode:screen;filter:saturate(1.2) brightness(1.05);opacity:0.6}
+.footer-sub{font-size:10px;color:var(--muted);letter-spacing:0.2em;text-transform:uppercase}
+.footer-line{width:28px;height:2px;background:var(--gold);opacity:0.3;margin:14px auto}
+.footer-copy{font-size:10px;color:rgba(255,255,255,0.18)}
 </style>
 </head>
 <body>
 
-<!-- BANDES LAOTIENNES -->
-<div class="lao-strip left"><div class="lao-strip-inner"><span>ດກຂຄງສຍທນບພມລວຫອຮຯໆຊຕຝຟຢດກຂຄງສຍທນບພມລວຫອຮຯໆຊຕຝຟຢດກຂຄງສຍທນບພມລວຫອຮຯໆຊຕຝຟຢດກຂຄງສຍທນບພມລວຫອຮຯໆຊຕຝຟຢດກຂຄງສຍທນບພມລວຫອຮຯໆຊຕຝຟຢດກຂຄງສຍທນບພມລວຫອຮຯໆຊຕຝຟຢດກຂຄງສຍທນບພມລວຫອຮຯໆຊຕຝຟຢດກຂຄງສຍທນບພມລວຫອຮຯໆຊຕຝຟຢ</span></div></div>
-<div class="lao-strip right"><div class="lao-strip-inner"><span>ດກຂຄງສຍທນບພມລວຫອຮຯໆຊຕຝຟຢດກຂຄງສຍທນບພມລວຫອຮຯໆຊຕຝຟຢດກຂຄງສຍທນບພມລວຫອຮຯໆຊຕຝຟຢດກຂຄງສຍທນບພມລວຫອຮຯໆຊຕຝຟຢດກຂຄງສຍທນບພມລວຫອຮຯໆຊຕຝຟຢດກຂຄງສຍທນບພມລວຫອຮຯໆຊຕຝຟຢດກຂຄງສຍທນບພມລວຫອຮຯໆຊຕຝຟຢດກຂຄງສຍທນບພມລວຫອຮຯໆຊຕຝຟຢ</span></div></div>
+<!-- SPLASH -->
+<div id="splash">
+  <img id="splash-logo" src="img/logo.png" alt="NOOK">
+  <div id="splash-tag">Cuisine Nomade · Aubenas</div>
+  <div id="splash-bar"></div>
+</div>
 
 <!-- PAGE -->
-<div class="page">
+<div id="page">
 
   <!-- HERO -->
   <div class="hero">
-    <img class="hero-logo" style="width:260px;border-radius:0" src="img/logo.png" alt="NOOK Cuisine Nomade">
-    <div class="hero-tagline">Cuisine Nomade</div>
-    <div class="hero-city">Aubenas · Ardèche</div>
+    <img class="hero-img" src="img/facade.jpg" alt="NOOK Aubenas">
+    <div class="hero-overlay"></div>
+    <div class="hero-topbar"></div>
+    <div class="hero-content">
+      <img class="hero-logo" src="img/logo.png" alt="NOOK">
+      <div class="hero-tagline">Saveurs du monde, cœur ardéchois</div>
+      <div class="hero-city">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+        Aubenas · Ardèche
+      </div>
+    </div>
   </div>
 
-  <!-- CTA -->
-  <div class="quick-cta">
-    <a class="cta-btn cta-call" href="tel:+33475360910">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 012 1.18 2 2 0 013.99 0h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg>
+  <!-- CTA STRIP -->
+  <div class="cta-strip rb">
+    <a class="cta-item primary" href="tel:+33475360910">
+      <div class="cta-icon">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#C84B2F" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 012 1.18 2 2 0 013.99 0h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg>
+      </div>
       Appeler
     </a>
-    <a class="cta-btn cta-map" href="https://maps.google.com/?q=8+rue+de+la+Prévoté,+07200+Aubenas" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-      Itinéraire
-    </a>
-    <a class="cta-btn cta-menu" href="https://www.facebook.com/people/NOOK-Restaurant/61575514529548/" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7 12h10M7 8h6M7 16h8" stroke-linecap="round"/></svg>
+    <a class="cta-item" href="https://www.facebook.com/people/NOOK-Restaurant/61575514529548/" target="_blank" rel="noopener">
+      <div class="cta-icon">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="rgba(240,230,200,0.55)" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7 12h10M7 8h6M7 16h8" stroke-linecap="round"/></svg>
+      </div>
       Menu
     </a>
+    <a class="cta-item" href="https://maps.google.com/?q=8+rue+de+la+Prévoté,+07200+Aubenas" target="_blank" rel="noopener">
+      <div class="cta-icon">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="rgba(240,230,200,0.55)" stroke-width="1.8"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+      </div>
+      Itinéraire
+    </a>
   </div>
 
-  <!-- PHOTO RESTO -->
-  <div class="section" style="padding-top:0;border-top:none;margin-top:0;">
-    <div class="s-label">Le restaurant</div>
-    <img src="img/facade.jpg" alt="NOOK Restaurant Aubenas" style="width:100%;height:380px;object-fit:cover;border-radius:0;display:block;">
+  <!-- ABOUT -->
+  <div class="section rb" style="border-top:none">
+    <div class="label">Le restaurant</div>
+    <p class="about-pull">Une table qui <em>voyage</em> sans jamais quitter Aubenas.</p>
+    <p class="about-body">Chaque jour un menu différent, une nouvelle escale. Des produits locaux, des épices lointaines, une cuisine franche et généreuse.</p>
   </div>
 
-  <!-- MENU DU JOUR -->
-  <div class="section">
-    <div class="s-label">Menu du jour</div>
-    <a class="menu-card" href="https://www.facebook.com/people/NOOK-Restaurant/61575514529548/" target="_blank" rel="noopener">
-      <div class="menu-icon">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7A2200" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7 12h10M7 8h6M7 16h8" stroke-linecap="round"/></svg>
+  <!-- PHOTOS -->
+  <div class="section rb" style="padding-top:0;border-top:none">
+    <div class="label">Nos plats</div>
+    <div class="grid-2">
+      <img src="img/curry.jpg" alt="Curry vert NOOK">
+      <img src="img/dessert.jpg" alt="Dessert NOOK">
+    </div>
+    <div class="grid-full">
+      <img src="img/assiette.jpg" alt="Assiette nomade NOOK">
+    </div>
+    <p class="img-caption">Menu renouvelé chaque jour</p>
+  </div>
+
+  <!-- MENU -->
+  <div class="section rb">
+    <div class="label">Menu du jour</div>
+    <a class="menu-feature" href="https://www.facebook.com/people/NOOK-Restaurant/61575514529548/" target="_blank" rel="noopener">
+      <div class="menu-accent"></div>
+      <div class="menu-body">
+        <div class="menu-label">Mis à jour chaque matin</div>
+        <div class="menu-title">Carte du jour</div>
+        <div class="menu-cta">
+          Voir sur Facebook
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
       </div>
-      <div>
-        <div class="menu-title">Menu renouvelé chaque jour</div>
-        <div class="menu-sub">Voir sur Facebook →</div>
-      </div>
-      <svg class="menu-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </a>
     <div class="social-row">
       <a class="social-btn" href="https://www.facebook.com/people/NOOK-Restaurant/61575514529548/" target="_blank" rel="noopener">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="#3b5998"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#5890FF"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
         Facebook
       </a>
       <a class="social-btn" href="https://www.instagram.com/nook.aubenas/" target="_blank" rel="noopener">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C13584" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="#C13584" stroke="none"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E1306C" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="#E1306C" stroke="none"/></svg>
         Instagram
       </a>
     </div>
   </div>
 
-  <!-- PHOTOS PLATS -->
-  <div class="section">
-    <div class="s-label">Nos plats</div>
-    <div class="photo-grid">
-      <img src="img/curry.jpg" alt="Curry vert NOOK">
-      <img src="img/dessert.jpg" alt="Dessert NOOK">
-      <img src="img/assiette.jpg" alt="Assiette nomade NOOK" class="wide">
-    </div>
-  </div>
-
   <!-- HORAIRES -->
-  <div class="section">
-    <div class="s-label">Horaires</div>
-    <div class="hours-wrap">
-      <div class="hour-row"><span class="hour-day">Lundi</span><span class="hour-time">18h30 – 23h00</span></div>
-      <div class="hour-row"><span class="hour-day">Mardi</span><span class="hour-time">11h30 – 23h00</span></div>
-      <div class="hour-row"><span class="hour-day">Mercredi</span><span class="hour-time">11h30 – 14h30</span></div>
-      <div class="hour-row"><span class="hour-day">Jeudi</span><span class="hour-time">11h30 – 23h00</span></div>
-      <div class="hour-row"><span class="hour-day">Vendredi</span><span class="hour-time">11h30 – 14h30</span></div>
-      <div class="hour-row"><span class="hour-day">Samedi</span><span class="hour-closed">Fermé</span></div>
-      <div class="hour-row"><span class="hour-day">Dimanche</span><span class="hour-closed">Fermé</span></div>
-    </div>
+  <div class="section rb">
+    <div class="label">Horaires</div>
+    <table class="hours-table">
+      <tr id="row-lun"><td class="day">Lundi</td><td class="time">18h30 – 23h00</td></tr>
+      <tr id="row-mar"><td class="day">Mardi</td><td class="time">11h30 – 23h00</td></tr>
+      <tr id="row-mer"><td class="day">Mercredi</td><td class="time">11h30 – 14h30</td></tr>
+      <tr id="row-jeu"><td class="day">Jeudi</td><td class="time">11h30 – 23h00</td></tr>
+      <tr id="row-ven"><td class="day">Vendredi</td><td class="time">11h30 – 14h30</td></tr>
+      <tr id="row-sam"><td class="day">Samedi</td><td class="closed">Fermé</td></tr>
+      <tr id="row-dim"><td class="day">Dimanche</td><td class="closed">Fermé</td></tr>
+    </table>
   </div>
 
   <!-- ADRESSE -->
-  <div class="section" style="border-bottom:none">
-    <div class="s-label">Nous trouver</div>
-    <iframe
-      class="map-embed"
-      loading="lazy"
-      allowfullscreen
-      referrerpolicy="no-referrer-when-downgrade"
-      src="https://www.google.com/maps?q=8+rue+de+la+Prévôté,+07200+Aubenas&output=embed"
-      title="NOOK Aubenas">
-    </iframe>
-    <div class="addr-block">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7A2200" stroke-width="1.8"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+  <div class="section rb">
+    <div class="label">Nous trouver</div>
+    <div class="map-wrap">
+      <iframe loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"
+        src="https://www.google.com/maps?q=8+rue+de+la+Prévôté,+07200+Aubenas&output=embed"
+        title="NOOK Aubenas"></iframe>
+    </div>
+    <div class="addr-row">
+      <div class="addr-icon">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C84B2F" stroke-width="1.8"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+      </div>
       <div>
-        <div class="addr-main">8 rue de la Prévoté</div>
-        <div class="addr-sub">07200 Aubenas</div>
+        <div class="addr-street">8 rue de la Prévoté</div>
+        <div class="addr-city">07200 Aubenas</div>
       </div>
     </div>
-    <a class="btn-directions" href="https://maps.google.com/?q=8+rue+de+la+Prévoté,+07200+Aubenas" target="_blank" rel="noopener">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+    <a class="btn-map" href="https://maps.google.com/?q=8+rue+de+la+Prévoté,+07200+Aubenas" target="_blank" rel="noopener">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
       Ouvrir dans Google Maps
     </a>
   </div>
 
-  <div class="footer">© NOOK Cuisine Nomade · Aubenas</div>
+  <!-- FOOTER -->
+  <div class="footer rb">
+    <img class="footer-logo" src="img/logo.png" alt="NOOK">
+    <div class="footer-sub">Cuisine Nomade · Aubenas</div>
+    <div class="footer-line"></div>
+    <div class="footer-copy">© NOOK Restaurant · 8 rue de la Prévoté, 07200 Aubenas</div>
+  </div>
 
-</div>
+</div><!-- /page -->
 
+<script>
+/* ── TODAY HIGHLIGHT ── */
+const days=['dim','lun','mar','mer','jeu','ven','sam'];
+const todayRow=document.getElementById('row-'+days[new Date().getDay()]);
+if(todayRow){
+  todayRow.classList.add('today-row');
+  const d=todayRow.querySelector('.day');
+  if(d){const b=document.createElement('span');b.className='today-badge';b.textContent="Aujourd'hui";d.appendChild(b);}
+}
+
+/* ── SPLASH → PAGE ── */
+const splash     = document.getElementById('splash');
+const sLogo      = document.getElementById('splash-logo');
+const sTag       = document.getElementById('splash-tag');
+const sBar       = document.getElementById('splash-bar');
+const page       = document.getElementById('page');
+const heroImg    = document.querySelector('.hero-img');
+const heroLogo   = document.querySelector('.hero-logo');
+const heroTagl   = document.querySelector('.hero-tagline');
+const heroCity   = document.querySelector('.hero-city');
+const heroTopbar = document.querySelector('.hero-topbar');
+
+// Step 1 — splash logo appears
+requestAnimationFrame(()=>{
+  requestAnimationFrame(()=>{
+    sLogo.classList.add('in');
+    sTag.classList.add('in');
+    sBar.classList.add('in');
+  });
+});
+
+// Step 2 — after 1.4s, fade out splash and reveal page
+setTimeout(()=>{
+  splash.classList.add('out');
+  page.classList.add('visible');
+
+  // Trigger hero element animations with stagger
+  setTimeout(()=>{ heroImg.classList.add('on'); heroTopbar.classList.add('on'); }, 50);
+  setTimeout(()=>{ heroLogo.classList.add('on'); }, 100);
+  setTimeout(()=>{ heroTagl.classList.add('on'); }, 200);
+  setTimeout(()=>{ heroCity.classList.add('on'); }, 350);
+
+  // Reveal above-fold blocks immediately
+  document.querySelectorAll('.rb').forEach((el,i)=>{
+    const rect = el.getBoundingClientRect();
+    if(rect.top < window.innerHeight){
+      setTimeout(()=>el.classList.add('on'), 80 + i * 60);
+    }
+  });
+
+  // Remove splash from DOM after transition
+  setTimeout(()=>{ splash.remove(); }, 700);
+}, 1400);
+
+/* ── SCROLL REVEAL ── */
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.rb').forEach(el=>io.observe(el));
+</script>
 </body>
 </html>
