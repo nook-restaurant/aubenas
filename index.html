@@ -347,10 +347,7 @@ body{
 
 
 
-/* ── PARALLAX ── */
-.hero-content {
-  will-change: transform;
-}
+
 
 /* ── RESPONSIVE ── */
 
@@ -608,42 +605,7 @@ document.querySelectorAll('.r').forEach(el=>io.observe(el));
 })();
 
 
-/* PARALLAX */
-(function(){
-  const heroImg     = document.querySelector('.hero-img');
-  const heroContent = document.querySelector('.hero-content');
-  const hero        = document.querySelector('.hero');
-  if(!heroImg || !heroContent || !hero) return;
 
-  let ticking = false;
-
-  function applyParallax() {
-    const y          = window.scrollY;
-    const heroH      = hero.offsetHeight;
-
-    // Seulement actif quand le hero est visible
-    if(y > heroH) return;
-
-    // Image : parallax vers le bas en scrollant, remonte en remontant
-    heroImg.style.transform = `scale(1.06) translateY(${y * 0.22}px)`;
-
-    // Contenu : léger décalage vers le haut + fade out
-    heroContent.style.transform = `translateY(${y * 0.12}px)`;
-    heroContent.style.opacity   = Math.max(0, 1 - y / 300);
-
-    ticking = false;
-  }
-
-  window.addEventListener('scroll', () => {
-    if(!ticking) {
-      requestAnimationFrame(applyParallax);
-      ticking = true;
-    }
-  }, { passive: true });
-
-  // Init au chargement
-  applyParallax();
-})();
 
 </script>
 </body>
