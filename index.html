@@ -68,7 +68,7 @@ body {
 
 #s-city {
   font-family: var(--hand);
-  font-size: 22px; font-weight: 700; letter-spacing: 0.05em;
+  font-size: 22px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
   color: #fff; margin-top: 10px;
   opacity: 0; transform: translateY(4px);
   transition: opacity 0.5s 0.45s cubic-bezier(.4,0,.2,1), transform 0.5s 0.45s cubic-bezier(.4,0,.2,1);
@@ -123,9 +123,9 @@ body {
 .hero-topbar.on { opacity: 0.65; }
 
 .hero-content {
-  position: absolute; bottom: 0; left: 0; right: 0;
-  padding: 2rem 1.5rem 2.8rem;
-  display: flex; flex-direction: column; align-items: center; text-align: center;
+  position: absolute; inset: 0;
+  padding: 2rem 1.5rem;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
   max-width: 600px; margin: 0 auto;
 }
 
