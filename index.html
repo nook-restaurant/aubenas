@@ -163,6 +163,57 @@ body{
 .cta-item.primary .cta-icon{background:var(--spice-glow)}
 .cta-item:not(.primary) .cta-icon{background:rgba(255,255,255,0.07)}
 
+/* ── FB FEED ── */
+.fb-loading{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  padding:2rem;color:var(--muted);font-size:13px;
+}
+.fb-spinner{
+  width:18px;height:18px;border-radius:50%;
+  border:2px solid rgba(255,255,255,0.1);
+  border-top-color:var(--spice);
+  animation:spin .8s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.fb-post{
+  border:1px solid var(--border-strong);
+  border-radius:6px;overflow:hidden;
+  background:var(--surface);
+}
+.fb-post-header{
+  display:flex;align-items:center;gap:10px;
+  padding:14px 16px 10px;
+}
+.fb-post-avatar{
+  width:36px;height:36px;border-radius:50%;
+  background:var(--spice-glow);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.fb-post-meta{}
+.fb-post-name{font-size:13px;font-weight:500;color:var(--text)}
+.fb-post-date{font-size:11px;color:var(--muted);margin-top:2px}
+.fb-post-img{width:100%;display:block;max-height:280px;object-fit:cover}
+.fb-post-text{
+  padding:14px 16px;
+  font-size:13px;line-height:1.65;color:var(--muted);
+  display:-webkit-box;-webkit-line-clamp:6;-webkit-box-orient:vertical;overflow:hidden;
+}
+.fb-post-link{
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  padding:13px;margin:0 16px 16px;
+  border:1px solid var(--border-strong);border-radius:4px;
+  font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--spice);text-decoration:none;
+  transition:background .18s;
+}
+.fb-post-link:hover{background:rgba(255,255,255,.03)}
+.fb-post-error{
+  padding:1.5rem;text-align:center;
+  font-size:13px;color:var(--muted);
+}
+
 /* ── FB EMBED ── */
 .fb-wrap{
   border-radius:6px;overflow:hidden;
@@ -351,17 +402,11 @@ body{
   <!-- MENU -->
   <div class="section r">
     <div class="label">Menu du jour</div>
-    <div class="fb-wrap">
-      <iframe
-        src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fpeople%2FNOOK-Restaurant%2F61575514529548%2F&tabs=timeline&width=380&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false"
-        width="380"
-        height="500"
-        style="border:none;overflow:hidden;display:block;width:100%;border-radius:6px;"
-        scrolling="no"
-        frameborder="0"
-        allowfullscreen="true"
-        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
-      </iframe>
+    <div id="fb-feed">
+      <div class="fb-loading">
+        <div class="fb-spinner"></div>
+        <span>Chargement du menu…</span>
+      </div>
     </div>
     <div class="social-row" style="margin-top:12px">
       <a class="social-btn" href="https://www.facebook.com/people/NOOK-Restaurant/61575514529548/" target="_blank" rel="noopener">
