@@ -81,6 +81,57 @@ body{
 }
 .r.on{opacity:1;transform:translateY(0)}
 
+/* ── STATUS BADGE ── */
+.hero-status{
+  position:absolute;top:22px;left:50%;transform:translateX(-50%);
+  display:inline-flex;flex-direction:column;align-items:center;gap:6px;
+  z-index:2;
+  opacity:1;
+}
+.hero-status.on{opacity:1}
+
+.status-dot-wrap{
+  position:relative;
+  width:28px;height:28px;
+  display:flex;align-items:center;justify-content:center;
+}
+.status-dot{
+  width:14px;height:14px;border-radius:50%;
+  position:relative;z-index:1;
+}
+.status-ring{
+  position:absolute;inset:0;border-radius:50%;
+  animation:ring-pulse 2s ease-out infinite;
+  opacity:0;
+}
+
+/* Ouvert = vert */
+.hero-status.open .status-dot{ background:#4ade80; }
+.hero-status.open .status-ring{ border:2px solid #4ade80; }
+
+/* Bientôt = orange */
+.hero-status.soon .status-dot{ background:var(--spice); }
+.hero-status.soon .status-ring{ border:2px solid var(--spice); }
+
+/* Fermé = rouge */
+.hero-status.closed .status-dot{ background:#ef4444; }
+.hero-status.closed .status-ring{ border:2px solid #ef4444; }
+
+@keyframes ring-pulse{
+  0%  { transform:scale(1);   opacity:0.8; }
+  100%{ transform:scale(2.8); opacity:0;   }
+}
+
+.status-label{
+  font-family:var(--sans);font-size:10px;font-weight:500;
+  letter-spacing:0.1em;text-transform:uppercase;
+  color:#fff;
+  background:rgba(0,0,0,0.35);
+  backdrop-filter:blur(8px);
+  padding:4px 12px;border-radius:40px;
+  white-space:nowrap;
+}
+
 /* ── HERO ── */
 .hero{
   position:relative;
@@ -392,6 +443,13 @@ body{
   <!-- HERO -->
   <div class="hero">
     <img class="hero-img" src="img/facade.jpg" alt="NOOK Aubenas">
+    <div id="hero-status" class="hero-status on">
+      <div class="status-dot-wrap">
+        <div class="status-ring"></div>
+        <div class="status-dot"></div>
+      </div>
+      <div class="status-label" id="status-label">…</div>
+    </div>
     <div class="hero-overlay"></div>
     <div class="hero-topbar"></div>
     <div class="hero-content">
