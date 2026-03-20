@@ -82,54 +82,53 @@ body{
 .r.on{opacity:1;transform:translateY(0)}
 
 /* ── STATUS BADGE ── */
-.hero-status{
-  position:absolute;top:22px;left:50%;transform:translateX(-50%);
-  display:inline-flex;flex-direction:column;align-items:center;gap:6px;
-  z-index:2;
-  opacity:1;
-}
-.hero-status.on{opacity:1}
-
-.status-dot-wrap{
-  position:relative;
-  width:28px;height:28px;
-  display:flex;align-items:center;justify-content:center;
-}
-.status-dot{
-  width:14px;height:14px;border-radius:50%;
-  position:relative;z-index:1;
-}
-.status-ring{
-  position:absolute;inset:0;border-radius:50%;
-  animation:ring-pulse 2s ease-out infinite;
-  opacity:0;
-}
-
-/* Ouvert = vert */
-.hero-status.open .status-dot{ background:#4ade80; }
-.hero-status.open .status-ring{ border:2px solid #4ade80; }
-
-/* Bientôt = orange */
-.hero-status.soon .status-dot{ background:var(--spice); }
-.hero-status.soon .status-ring{ border:2px solid var(--spice); }
-
-/* Fermé = rouge */
-.hero-status.closed .status-dot{ background:#ef4444; }
-.hero-status.closed .status-ring{ border:2px solid #ef4444; }
-
-@keyframes ring-pulse{
-  0%  { transform:scale(1);   opacity:0.8; }
-  100%{ transform:scale(2.8); opacity:0;   }
-}
-
-.status-label{
-  font-family:var(--sans);font-size:10px;font-weight:500;
-  letter-spacing:0.1em;text-transform:uppercase;
-  color:#fff;
-  background:rgba(0,0,0,0.35);
-  backdrop-filter:blur(8px);
-  padding:4px 12px;border-radius:40px;
+#hero-status{
+  position:absolute;top:20px;left:50%;transform:translateX(-50%);
+  display:inline-flex;align-items:center;gap:8px;
+  padding:7px 16px 7px 12px;
+  border-radius:40px;
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
   white-space:nowrap;
+  z-index:10;
+  font-family:var(--sans);font-size:12px;font-weight:600;
+  letter-spacing:0.06em;text-transform:uppercase;
+  transition:background 0.4s, color 0.4s;
+}
+#hero-status.open{
+  background:rgba(22,163,74,0.3);
+  border:1px solid rgba(74,222,128,0.5);
+  color:#4ade80;
+}
+#hero-status.soon{
+  background:rgba(242,100,25,0.25);
+  border:1px solid rgba(242,100,25,0.5);
+  color:#F26419;
+}
+#hero-status.closed{
+  background:rgba(220,38,38,0.25);
+  border:1px solid rgba(248,113,113,0.4);
+  color:#f87171;
+}
+.sdot{
+  width:9px;height:9px;border-radius:50%;flex-shrink:0;
+  position:relative;
+}
+.sdot::after{
+  content:'';position:absolute;inset:-3px;
+  border-radius:50%;
+  animation:spulse 1.8s ease-out infinite;
+}
+#hero-status.open  .sdot{ background:#4ade80; }
+#hero-status.open  .sdot::after{ border:2px solid #4ade80; }
+#hero-status.soon  .sdot{ background:#F26419; }
+#hero-status.soon  .sdot::after{ border:2px solid #F26419; }
+#hero-status.closed .sdot{ background:#f87171; }
+#hero-status.closed .sdot::after{ border:2px solid #f87171; animation:none; opacity:0.4; }
+
+@keyframes spulse{
+  0%  { transform:scale(1); opacity:.9; }
+  100%{ transform:scale(2.6); opacity:0; }
 }
 
 /* ── HERO ── */
@@ -443,13 +442,7 @@ body{
   <!-- HERO -->
   <div class="hero">
     <img class="hero-img" src="img/facade.jpg" alt="NOOK Aubenas">
-    <div id="hero-status" class="hero-status on">
-      <div class="status-dot-wrap">
-        <div class="status-ring"></div>
-        <div class="status-dot"></div>
-      </div>
-      <div class="status-label" id="status-label">…</div>
-    </div>
+    <div id="hero-status"><span class="sdot"></span><span id="status-label">…</span></div>
     <div class="hero-overlay"></div>
     <div class="hero-topbar"></div>
     <div class="hero-content">
