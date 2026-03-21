@@ -123,6 +123,90 @@ document.getElementById('btn-share')?.addEventListener('click', () => {
   obs.observe(el);
 })();
 
+
+/* BOUTON LANGUE */
+(function(){
+  const btn   = document.getElementById('btn-lang');
+  const flag  = document.getElementById('lang-flag');
+  const label = document.getElementById('lang-label');
+  if(!btn) return;
+
+  let lang = 'fr';
+
+  const translations = {
+    fr: {
+      'hero-tagline':    'Saveurs du monde',
+      'about-label':     'Le restaurant',
+      'about-pull':      'Une table qui <em>voyage</em> sans jamais quitter Aubenas.',
+      'about-body':      'Chaque jour un menu différent, une nouvelle escale. Des produits locaux, des épices lointaines, une cuisine franche et généreuse.',
+      'photos-label':    'Nos plats',
+      'img-caption':     'Menu renouvelé chaque jour',
+      'menu-label-txt':  'Mis à jour chaque matin',
+      'menu-title-txt':  'Carte du jour',
+      'menu-cta-txt':    'Voir sur Facebook',
+      'hours-label':     'Horaires',
+      'addr-label':      'Nous trouver',
+      'btn-map-txt':     'Ouvrir dans Google Maps',
+      'reserve-txt':     'Réserver',
+      'menu-txt':        'Menu',
+      'yaller-txt':      'Y aller',
+      'rating-txt':      '(46 avis)',
+    },
+    en: {
+      'hero-tagline':    'World flavours',
+      'about-label':     'The restaurant',
+      'about-pull':      'A table that <em>travels</em> without leaving Aubenas.',
+      'about-body':      'A different menu every day, a new destination. Local produce, faraway spices, honest and generous cooking.',
+      'photos-label':    'Our dishes',
+      'img-caption':     'Menu renewed every day',
+      'menu-label-txt':  'Updated every morning',
+      'menu-title-txt':  "Today's menu",
+      'menu-cta-txt':    'View on Facebook',
+      'hours-label':     'Opening hours',
+      'addr-label':      'Find us',
+      'btn-map-txt':     'Open in Google Maps',
+      'reserve-txt':     'Book',
+      'menu-txt':        'Menu',
+      'yaller-txt':      'Directions',
+      'rating-txt':      '(46 reviews)',
+    }
+  };
+
+  function apply(t) {
+    const q = (sel) => document.querySelector(sel);
+    const qa = (sel) => document.querySelectorAll(sel);
+
+    q('.hero-tagline').innerHTML        = t['hero-tagline'];
+    q('.about-body').textContent        = t['about-body'];
+    q('.about-pull').innerHTML          = t['about-pull'];
+    q('.img-caption').textContent       = t['img-caption'];
+    q('.menu-label').textContent        = t['menu-label-txt'];
+    q('.menu-title').textContent        = t['menu-title-txt'];
+    q('.menu-cta').innerHTML            = t['menu-cta-txt'] + ' <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+    q('.rating-count').textContent      = t['rating-txt'];
+    q('#btn-directions span:last-child').textContent = t['yaller-txt'];
+    q('.btn-map').innerHTML             = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg> ' + t['btn-map-txt'];
+
+    // Labels sections
+    const labels = document.querySelectorAll('.label');
+    const labelMap = [t['about-label'], t['photos-label'], t['menu-label-txt'].split(' ')[0], t['hours-label'], t['addr-label']];
+    // CTA texts
+    const ctaItems = document.querySelectorAll('.cta-item');
+    const ctaTexts = [t['reserve-txt'], t['menu-txt'], t['yaller-txt']];
+    ctaItems.forEach((el, i) => {
+      const textNode = [...el.childNodes].find(n => n.nodeType === 3 && n.textContent.trim());
+      if(textNode && ctaTexts[i]) textNode.textContent = '\n      ' + ctaTexts[i] + '\n    ';
+    });
+  }
+
+  btn.addEventListener('click', () => {
+    lang = lang === 'fr' ? 'en' : 'fr';
+    flag.textContent  = lang === 'fr' ? '🇬🇧' : '🇫🇷';
+    label.textContent = lang === 'fr' ? 'EN' : 'FR';
+    apply(translations[lang]);
+  });
+})();
+
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -233,7 +317,7 @@ body {
 
 .hero-overlay {
   position: absolute; inset: 0;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.0) 0%, rgba(0,0,0,0.0) 40%, rgba(0,0,0,0.2) 100%);
+  background: linear-gradient(to bottom, rgba(0,0,0,0.0) 0%, rgba(0,0,0,0.0) 40%, rgba(0,0,0,0.35) 100%);
 }
 
 .hero-topbar {
@@ -603,6 +687,29 @@ body {
 ───────────────────────────────────── */
 .rating-count { font-variant-numeric: tabular-nums; }
 
+
+/* ─────────────────────────────────────
+   BOUTON LANGUE
+───────────────────────────────────── */
+#btn-lang {
+  position: fixed;
+  bottom: 24px; left: 20px;
+  z-index: 999;
+  padding: 8px 14px;
+  border-radius: 40px;
+  background: #fff;
+  border: none;
+  font-family: var(--sans);
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.1em;
+  color: #1A1612;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  transition: transform 0.2s, background 0.2s;
+  display: flex; align-items: center; gap: 6px;
+}
+#btn-lang:active { transform: scale(0.93); background: #f0ece4; }
+
 </style>
 </head>
 <body>
@@ -772,6 +879,12 @@ body {
     <div class="footer-line"></div>
     <div class="footer-copy">© NOOK Restaurant · 8 rue de la Prévoté, 07200 Aubenas</div>
   </div>
+
+  <!-- BOUTON LANGUE -->
+  <button id="btn-lang" aria-label="Changer la langue">
+    <span id="lang-flag">🇬🇧</span>
+    <span id="lang-label">EN</span>
+  </button>
 
   <!-- BOUTON PARTAGER -->
   <button id="btn-share" aria-label="Partager">
@@ -991,6 +1104,90 @@ document.getElementById('btn-share')?.addEventListener('click', () => {
     if(entries[0].isIntersecting) { animateCount(); obs.disconnect(); }
   }, { threshold: 0.5 });
   obs.observe(el);
+})();
+
+
+/* BOUTON LANGUE */
+(function(){
+  const btn   = document.getElementById('btn-lang');
+  const flag  = document.getElementById('lang-flag');
+  const label = document.getElementById('lang-label');
+  if(!btn) return;
+
+  let lang = 'fr';
+
+  const translations = {
+    fr: {
+      'hero-tagline':    'Saveurs du monde',
+      'about-label':     'Le restaurant',
+      'about-pull':      'Une table qui <em>voyage</em> sans jamais quitter Aubenas.',
+      'about-body':      'Chaque jour un menu différent, une nouvelle escale. Des produits locaux, des épices lointaines, une cuisine franche et généreuse.',
+      'photos-label':    'Nos plats',
+      'img-caption':     'Menu renouvelé chaque jour',
+      'menu-label-txt':  'Mis à jour chaque matin',
+      'menu-title-txt':  'Carte du jour',
+      'menu-cta-txt':    'Voir sur Facebook',
+      'hours-label':     'Horaires',
+      'addr-label':      'Nous trouver',
+      'btn-map-txt':     'Ouvrir dans Google Maps',
+      'reserve-txt':     'Réserver',
+      'menu-txt':        'Menu',
+      'yaller-txt':      'Y aller',
+      'rating-txt':      '(46 avis)',
+    },
+    en: {
+      'hero-tagline':    'World flavours',
+      'about-label':     'The restaurant',
+      'about-pull':      'A table that <em>travels</em> without leaving Aubenas.',
+      'about-body':      'A different menu every day, a new destination. Local produce, faraway spices, honest and generous cooking.',
+      'photos-label':    'Our dishes',
+      'img-caption':     'Menu renewed every day',
+      'menu-label-txt':  'Updated every morning',
+      'menu-title-txt':  "Today's menu",
+      'menu-cta-txt':    'View on Facebook',
+      'hours-label':     'Opening hours',
+      'addr-label':      'Find us',
+      'btn-map-txt':     'Open in Google Maps',
+      'reserve-txt':     'Book',
+      'menu-txt':        'Menu',
+      'yaller-txt':      'Directions',
+      'rating-txt':      '(46 reviews)',
+    }
+  };
+
+  function apply(t) {
+    const q = (sel) => document.querySelector(sel);
+    const qa = (sel) => document.querySelectorAll(sel);
+
+    q('.hero-tagline').innerHTML        = t['hero-tagline'];
+    q('.about-body').textContent        = t['about-body'];
+    q('.about-pull').innerHTML          = t['about-pull'];
+    q('.img-caption').textContent       = t['img-caption'];
+    q('.menu-label').textContent        = t['menu-label-txt'];
+    q('.menu-title').textContent        = t['menu-title-txt'];
+    q('.menu-cta').innerHTML            = t['menu-cta-txt'] + ' <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+    q('.rating-count').textContent      = t['rating-txt'];
+    q('#btn-directions span:last-child').textContent = t['yaller-txt'];
+    q('.btn-map').innerHTML             = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg> ' + t['btn-map-txt'];
+
+    // Labels sections
+    const labels = document.querySelectorAll('.label');
+    const labelMap = [t['about-label'], t['photos-label'], t['menu-label-txt'].split(' ')[0], t['hours-label'], t['addr-label']];
+    // CTA texts
+    const ctaItems = document.querySelectorAll('.cta-item');
+    const ctaTexts = [t['reserve-txt'], t['menu-txt'], t['yaller-txt']];
+    ctaItems.forEach((el, i) => {
+      const textNode = [...el.childNodes].find(n => n.nodeType === 3 && n.textContent.trim());
+      if(textNode && ctaTexts[i]) textNode.textContent = '\n      ' + ctaTexts[i] + '\n    ';
+    });
+  }
+
+  btn.addEventListener('click', () => {
+    lang = lang === 'fr' ? 'en' : 'fr';
+    flag.textContent  = lang === 'fr' ? '🇬🇧' : '🇫🇷';
+    label.textContent = lang === 'fr' ? 'EN' : 'FR';
+    apply(translations[lang]);
+  });
 })();
 
 </script>
