@@ -99,6 +99,7 @@ body {
   overflow: hidden;
   background: #1A1612;
   width: 100%;
+  
 }
 
 .hero-img {
@@ -199,6 +200,29 @@ body {
 @keyframes dot-halo {
   0%   { transform: scale(1);   opacity: 0.5; }
   100% { transform: scale(2.8); opacity: 0; }
+}
+
+/* ─────────────────────────────────────
+   RATING
+───────────────────────────────────── */
+.hero-rating {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 10px;
+  background: rgba(255,255,255,0.92);
+  border-radius: 40px; padding: 4px 12px 4px 10px;
+  opacity: 0; transform: translateY(6px);
+  transition: opacity 0.5s 0.5s cubic-bezier(.4,0,.2,1), transform 0.5s 0.5s cubic-bezier(.4,0,.2,1);
+}
+.hero-rating.on { opacity: 1; transform: translateY(0); }
+.rating-stars { display: flex; gap: 2px; }
+.rating-stars svg { width: 12px; height: 12px; }
+.rating-text {
+  font-family: var(--sans); font-size: 11px; font-weight: 600;
+  color: #1A1612; letter-spacing: 0.02em;
+}
+.rating-count {
+  font-family: var(--sans); font-size: 10px; font-weight: 400;
+  color: rgba(26,22,18,0.5);
 }
 
 /* ─────────────────────────────────────
@@ -418,6 +442,18 @@ body {
         <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
         Aubenas · Ardèche
       </div>
+      <a class="hero-rating" id="hero-rating" href="https://www.google.com/maps/search/?api=1&query=NOOK+Restaurant+Aubenas&query_place_id=ChIJ6WVy3BGGB0gRMwQH9jtbg4A" target="_blank" rel="noopener" style="text-decoration:none;">
+        <div class="rating-stars">
+          <svg viewBox="0 0 24 24" fill="#F26419"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24" fill="#F26419"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24" fill="#F26419"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24" fill="#F26419"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24" fill="#F26419"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <span class="rating-text">5.0</span>
+        <span class="rating-count">(46 avis)</span>
+        <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#1A1612" stroke-width="2" opacity="0.4"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
     </div>
   </div>
 
@@ -566,6 +602,8 @@ setTimeout(() => {
   setTimeout(() => { heroLogo.classList.add('on'); }, 100);
   setTimeout(() => { heroTagl.classList.add('on'); }, 220);
   setTimeout(() => { heroCity.classList.add('on'); }, 360);
+  const heroRating = document.getElementById('hero-rating');
+  setTimeout(() => { if(heroRating) heroRating.classList.add('on'); }, 460);
 
   // Above-fold sections
   document.querySelectorAll('.r').forEach((el, i) => {
