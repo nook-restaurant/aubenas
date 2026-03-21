@@ -215,6 +215,92 @@ body {
 
 /* ── LANDSCAPE ── */
 @media (orientation: landscape) and (max-height: 500px) { .hero { height: 100svh; max-height: none; } }
+
+/* ════════════════════════════════════
+   DESKTOP — 768px et plus
+   (mobile inchangé en dessous)
+════════════════════════════════════ */
+@media (min-width: 768px) {
+
+  body {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* Hero plus grand */
+  .hero {
+    height: 85vh;
+    max-height: 780px;
+    border-radius: 0 0 16px 16px;
+  }
+
+  .hero-logo { width: 280px; }
+  .hero-tagline { font-size: 2.6rem; }
+  .hero-city { font-size: 12px; padding: 7px 18px 7px 13px; }
+
+  /* Status badge plus grand */
+  #status-badge { font-size: 14px; padding: 8px 18px 8px 14px; top: 28px; }
+
+  /* CTA strip — boutons plus grands */
+  .cta-strip { gap: 0; }
+  .cta-item { padding: 28px 40px 16px; min-width: 140px; font-size: 11px; }
+  .cta-icon { width: 52px; height: 52px; }
+
+  /* Layout 2 colonnes pour les sections */
+  .desktop-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    align-items: start;
+  }
+
+  /* About + photos côte à côte */
+  .section { padding: 2.5rem 2rem; }
+
+  .about-pull { font-size: 2.4rem; }
+  .about-body { font-size: 15px; }
+
+  /* Carousel plus grand */
+  .carousel-item { flex: 0 0 72%; }
+  .carousel-item img { height: 320px; }
+
+  /* Menu card */
+  .menu-title { font-size: 1.8rem; }
+
+  /* Horaires + adresse côte à côte */
+  .hours-adresse-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding: 2.5rem 2rem;
+    border-top: 1px solid var(--border);
+  }
+  .hours-adresse-grid .section {
+    border-top: none;
+    padding: 0;
+  }
+
+  /* Map plus grande */
+  .map-wrap iframe { height: 260px; }
+
+  /* Image restaurant plus grande */
+  .restaurant-img { height: 380px !important; }
+
+  /* Footer */
+  .footer { padding: 3rem 2rem 4rem; }
+  .footer-logo { width: 140px; }
+
+  /* Boutons fixes plus bas sur desktop */
+  #btn-lang  { bottom: 32px; left: 32px; }
+  #btn-share { bottom: 32px; right: 32px; }
+}
+
+@media (min-width: 1100px) {
+  body { max-width: 1000px; }
+  .hero { height: 80vh; }
+  .cta-item { padding: 28px 60px 16px; }
+}
+
 </style>
 </head>
 <body>
@@ -330,11 +416,12 @@ body {
 
   <!-- IMAGE RESTAURANT -->
   <div class="r" style="width:100%">
-    <img src="img/restaurant.jpg" alt="NOOK Restaurant Aubenas" style="width:100%;height:260px;object-fit:cover;display:block;">
+    <img src="img/restaurant.jpg" alt="NOOK Restaurant Aubenas" class="restaurant-img" style="width:100%;height:260px;object-fit:cover;display:block;">
   </div>
 
+  <div class="hours-adresse-grid">
   <!-- HORAIRES -->
-  <div class="section r">
+  <div class="section r" style="border-top:none">
     <div class="label"><span data-i18n="hours-label">Horaires</span></div>
     <table class="hours-table">
       <tr id="row-lun"><td class="day"><span data-i18n="day-lun">Lundi</span></td><td class="time">18h30 – 23h00</td></tr>
@@ -348,7 +435,7 @@ body {
   </div>
 
   <!-- ADRESSE -->
-  <div class="section r">
+  <div class="section r" style="border-top:none">
     <div class="label"><span data-i18n="addr-label">Nous trouver</span></div>
     <div class="map-wrap">
       <iframe loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"
@@ -369,6 +456,8 @@ body {
       <span data-i18n="btn-map-txt">Ouvrir dans Google Maps</span>
     </a>
   </div>
+
+  </div><!-- /hours-adresse-grid -->
 
   <!-- FOOTER -->
   <div class="footer r">
