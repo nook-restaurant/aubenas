@@ -535,7 +535,7 @@ document.getElementById('btn-share')?.addEventListener('click', () => {
 /* ══════════════════════════════════════
    TRADUCTION FR / EN
 ══════════════════════════════════════ */
-(function(){
+document.addEventListener('DOMContentLoaded', function(){
   const btn  = document.getElementById('btn-lang');
   const flag = document.getElementById('lang-flag');
   const lbl  = document.getElementById('lang-label');
@@ -625,7 +625,7 @@ document.getElementById('btn-share')?.addEventListener('click', () => {
     lbl.textContent  = lang === 'fr' ? 'EN' : 'FR';
     apply(T[lang]);
   });
-})();
+});
 
 /* ══════════════════════════════════════
    SERVICE WORKER
