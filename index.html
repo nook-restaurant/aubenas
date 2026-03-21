@@ -128,117 +128,14 @@ document.getElementById('btn-share')?.addEventListener('click', () => {
 
 
 /* SERVICE WORKER */
-if('serviceWorker' in navigator) {
+if('serviceWorker' in navigator && location.hostname !== 'www.claudeusercontent.com') {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./sw.js')
       .catch(err => console.log('SW:', err));
   });
 }
 
-/* BOUTON LANGUE */
-(function(){
-  const btn   = document.getElementById('btn-lang');
-  const flag  = document.getElementById('lang-flag');
-  const label = document.getElementById('lang-label');
-  if(!btn) return;
 
-  let lang = 'fr';
-
-  const T = {
-    fr: {
-      'hero-tagline':   'Saveurs du monde',
-      'rating-txt':     '(46 avis)',
-      'reserve-txt':    'Réserver',
-      'menu-txt':       'Menu',
-      'yaller-txt':     'Y aller',
-      'about-label':    'Le restaurant',
-      'about-pull':     'Une table qui <em>voyage</em> sans jamais quitter Aubenas.',
-      'about-body':     'Chaque jour un menu différent, une nouvelle escale. Des produits locaux, des épices lointaines, une cuisine franche et généreuse.',
-      'photos-label':   'Nos plats',
-      'img-caption':    'Menu renouvelé chaque jour',
-      'menu-section-label': 'Menu du jour',
-      'menu-label-txt': 'Mis à jour chaque matin',
-      'menu-title-txt': 'Carte du jour',
-      'menu-cta-txt':   'Voir sur Facebook',
-      'fb-btn':         'Facebook',
-      'ig-btn':         'Instagram',
-      'hours-label':    'Horaires',
-      'day-lun': 'Lundi', 'day-mar': 'Mardi', 'day-mer': 'Mercredi',
-      'day-jeu': 'Jeudi', 'day-ven': 'Vendredi', 'day-sam': 'Samedi', 'day-dim': 'Dimanche',
-      'closed-txt':     'Fermé',
-      'today-txt':      "Aujourd'hui",
-      'addr-label':     'Nous trouver',
-      'addr-street':    '8 rue de la Prévoté',
-      'addr-city':      '07200 Aubenas',
-      'btn-map-txt':    'Ouvrir dans Google Maps',
-      'footer-sub':     'Cuisine Nomade · Aubenas',
-      'footer-copy':    '© NOOK Restaurant · 8 rue de la Prévoté, 07200 Aubenas',
-    },
-    en: {
-      'hero-tagline':   'World flavours',
-      'rating-txt':     '(46 reviews)',
-      'reserve-txt':    'Book',
-      'menu-txt':       'Menu',
-      'yaller-txt':     'Directions',
-      'about-label':    'The restaurant',
-      'about-pull':     'A table that <em>travels</em> without leaving Aubenas.',
-      'about-body':     'A different menu every day, a new destination. Local produce, faraway spices, honest and generous cooking.',
-      'photos-label':   'Our dishes',
-      'img-caption':    'Menu renewed every day',
-      'menu-section-label': "Today's menu",
-      'menu-label-txt': 'Updated every morning',
-      'menu-title-txt': "Today's menu",
-      'menu-cta-txt':   'View on Facebook',
-      'fb-btn':         'Facebook',
-      'ig-btn':         'Instagram',
-      'hours-label':    'Opening hours',
-      'day-lun': 'Monday', 'day-mar': 'Tuesday', 'day-mer': 'Wednesday',
-      'day-jeu': 'Thursday', 'day-ven': 'Friday', 'day-sam': 'Saturday', 'day-dim': 'Sunday',
-      'closed-txt':     'Closed',
-      'today-txt':      'Today',
-      'addr-label':     'Find us',
-      'addr-street':    '8 rue de la Prévoté',
-      'addr-city':      '07200 Aubenas, France',
-      'btn-map-txt':    'Open in Google Maps',
-      'footer-sub':     'Nomadic Cuisine · Aubenas',
-      'footer-copy':    '© NOOK Restaurant · 8 rue de la Prévoté, 07200 Aubenas',
-    }
-  };
-
-  const LABELS = ['about-label','photos-label','menu-section-label','hours-label','addr-label'];
-
-  function apply(t) {
-    // data-i18n (textContent)
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      const k = el.getAttribute('data-i18n');
-      if(t[k] !== undefined) el.textContent = t[k];
-    });
-    // data-i18n-html (innerHTML)
-    document.querySelectorAll('[data-i18n-html]').forEach(el => {
-      const k = el.getAttribute('data-i18n-html');
-      if(t[k] !== undefined) el.innerHTML = t[k];
-    });
-    // Section labels
-    document.querySelectorAll('.label').forEach((el, i) => {
-      if(LABELS[i] && t[LABELS[i]]) el.childNodes[0].textContent = t[LABELS[i]];
-    });
-    // Menu CTA arrow
-    const menuCta = document.querySelector('.menu-cta');
-    if(menuCta) menuCta.innerHTML = t['menu-cta-txt'] + ' <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
-    // Google Maps button
-    const btnMap = document.querySelector('.btn-map');
-    if(btnMap) btnMap.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg> ' + t['btn-map-txt'];
-    // Today badge
-    document.querySelectorAll('.today-badge').forEach(el => { el.textContent = t['today-txt']; });
-  }
-
-  btn.addEventListener('click', () => {
-    lang = lang === 'fr' ? 'en' : 'fr';
-    flag.textContent  = lang === 'fr' ? '🇬🇧' : '🇫🇷';
-    label.textContent = lang === 'fr' ? 'EN' : 'FR';
-    apply(T[lang]);
-  });
-})();
 
 </script>
 
@@ -815,7 +712,7 @@ body {
 
   <!-- LE RESTAURANT -->
   <div class="section r" style="border-top:none">
-    <div class="label">Le restaurant</div>
+    <div class="label"><span data-i18n="about-label">Le restaurant</span></div>
     <p class="about-pull" data-i18n-html="about-pull">Une table qui <em>voyage</em> sans jamais quitter Aubenas.</p>
     <p class="about-body" data-i18n="about-body">Chaque jour un menu différent, une nouvelle escale. Des produits locaux, des épices lointaines, une cuisine franche et généreuse.</p>
   </div>
@@ -839,7 +736,7 @@ body {
 
   <!-- MENU DU JOUR -->
   <div class="section r">
-    <div class="label">Menu du jour</div>
+    <div class="label"><span data-i18n="menu-section-label">Menu du jour</span></div>
     <a class="menu-feature" href="https://www.facebook.com/people/NOOK-Restaurant/61575514529548/" target="_blank" rel="noopener">
       <div class="menu-accent"></div>
       <div class="menu-body">
@@ -870,7 +767,7 @@ body {
 
   <!-- HORAIRES -->
   <div class="section r">
-    <div class="label">Horaires</div>
+    <div class="label"><span data-i18n="hours-label">Horaires</span></div>
     <table class="hours-table">
       <tr id="row-lun"><td class="day"><span data-i18n="day-lun">Lundi</span></td><td class="time">18h30 – 23h00</td></tr>
       <tr id="row-mar"><td class="day"><span data-i18n="day-mar">Mardi</span></td><td class="time">11h30 – 23h00</td></tr>
@@ -878,13 +775,13 @@ body {
       <tr id="row-jeu"><td class="day"><span data-i18n="day-jeu">Jeudi</span></td><td class="time">11h30 – 23h00</td></tr>
       <tr id="row-ven"><td class="day"><span data-i18n="day-ven">Vendredi</span></td><td class="time">11h30 – 14h30</td></tr>
       <tr id="row-sam"><td class="day"><span data-i18n="day-sam">Samedi</span></td><td class="closed">Fermé</td></tr>
-      <tr id="row-dim"><td class="day"><span data-i18n="day-dim">Dimanche</span></td><td class="closed">Fermé</td></tr>
+      <tr id="row-dim"><td class="day"><span data-i18n="day-dim">Dimanche</span></td><td class="closed" data-i18n="closed-txt">Fermé</td></tr>
     </table>
   </div>
 
   <!-- ADRESSE -->
   <div class="section r">
-    <div class="label">Nous trouver</div>
+    <div class="label"><span data-i18n="addr-label">Nous trouver</span></div>
     <div class="map-wrap">
       <iframe loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"
         src="https://www.google.com/maps?q=8+rue+de+la+Prévôté,+07200+Aubenas&output=embed"
@@ -1144,117 +1041,14 @@ document.getElementById('btn-share')?.addEventListener('click', () => {
 
 
 /* SERVICE WORKER */
-if('serviceWorker' in navigator) {
+if('serviceWorker' in navigator && location.hostname !== 'www.claudeusercontent.com') {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./sw.js')
       .catch(err => console.log('SW:', err));
   });
 }
 
-/* BOUTON LANGUE */
-(function(){
-  const btn   = document.getElementById('btn-lang');
-  const flag  = document.getElementById('lang-flag');
-  const label = document.getElementById('lang-label');
-  if(!btn) return;
 
-  let lang = 'fr';
-
-  const T = {
-    fr: {
-      'hero-tagline':   'Saveurs du monde',
-      'rating-txt':     '(46 avis)',
-      'reserve-txt':    'Réserver',
-      'menu-txt':       'Menu',
-      'yaller-txt':     'Y aller',
-      'about-label':    'Le restaurant',
-      'about-pull':     'Une table qui <em>voyage</em> sans jamais quitter Aubenas.',
-      'about-body':     'Chaque jour un menu différent, une nouvelle escale. Des produits locaux, des épices lointaines, une cuisine franche et généreuse.',
-      'photos-label':   'Nos plats',
-      'img-caption':    'Menu renouvelé chaque jour',
-      'menu-section-label': 'Menu du jour',
-      'menu-label-txt': 'Mis à jour chaque matin',
-      'menu-title-txt': 'Carte du jour',
-      'menu-cta-txt':   'Voir sur Facebook',
-      'fb-btn':         'Facebook',
-      'ig-btn':         'Instagram',
-      'hours-label':    'Horaires',
-      'day-lun': 'Lundi', 'day-mar': 'Mardi', 'day-mer': 'Mercredi',
-      'day-jeu': 'Jeudi', 'day-ven': 'Vendredi', 'day-sam': 'Samedi', 'day-dim': 'Dimanche',
-      'closed-txt':     'Fermé',
-      'today-txt':      "Aujourd'hui",
-      'addr-label':     'Nous trouver',
-      'addr-street':    '8 rue de la Prévoté',
-      'addr-city':      '07200 Aubenas',
-      'btn-map-txt':    'Ouvrir dans Google Maps',
-      'footer-sub':     'Cuisine Nomade · Aubenas',
-      'footer-copy':    '© NOOK Restaurant · 8 rue de la Prévoté, 07200 Aubenas',
-    },
-    en: {
-      'hero-tagline':   'World flavours',
-      'rating-txt':     '(46 reviews)',
-      'reserve-txt':    'Book',
-      'menu-txt':       'Menu',
-      'yaller-txt':     'Directions',
-      'about-label':    'The restaurant',
-      'about-pull':     'A table that <em>travels</em> without leaving Aubenas.',
-      'about-body':     'A different menu every day, a new destination. Local produce, faraway spices, honest and generous cooking.',
-      'photos-label':   'Our dishes',
-      'img-caption':    'Menu renewed every day',
-      'menu-section-label': "Today's menu",
-      'menu-label-txt': 'Updated every morning',
-      'menu-title-txt': "Today's menu",
-      'menu-cta-txt':   'View on Facebook',
-      'fb-btn':         'Facebook',
-      'ig-btn':         'Instagram',
-      'hours-label':    'Opening hours',
-      'day-lun': 'Monday', 'day-mar': 'Tuesday', 'day-mer': 'Wednesday',
-      'day-jeu': 'Thursday', 'day-ven': 'Friday', 'day-sam': 'Saturday', 'day-dim': 'Sunday',
-      'closed-txt':     'Closed',
-      'today-txt':      'Today',
-      'addr-label':     'Find us',
-      'addr-street':    '8 rue de la Prévoté',
-      'addr-city':      '07200 Aubenas, France',
-      'btn-map-txt':    'Open in Google Maps',
-      'footer-sub':     'Nomadic Cuisine · Aubenas',
-      'footer-copy':    '© NOOK Restaurant · 8 rue de la Prévoté, 07200 Aubenas',
-    }
-  };
-
-  const LABELS = ['about-label','photos-label','menu-section-label','hours-label','addr-label'];
-
-  function apply(t) {
-    // data-i18n (textContent)
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      const k = el.getAttribute('data-i18n');
-      if(t[k] !== undefined) el.textContent = t[k];
-    });
-    // data-i18n-html (innerHTML)
-    document.querySelectorAll('[data-i18n-html]').forEach(el => {
-      const k = el.getAttribute('data-i18n-html');
-      if(t[k] !== undefined) el.innerHTML = t[k];
-    });
-    // Section labels
-    document.querySelectorAll('.label').forEach((el, i) => {
-      if(LABELS[i] && t[LABELS[i]]) el.childNodes[0].textContent = t[LABELS[i]];
-    });
-    // Menu CTA arrow
-    const menuCta = document.querySelector('.menu-cta');
-    if(menuCta) menuCta.innerHTML = t['menu-cta-txt'] + ' <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
-    // Google Maps button
-    const btnMap = document.querySelector('.btn-map');
-    if(btnMap) btnMap.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg> ' + t['btn-map-txt'];
-    // Today badge
-    document.querySelectorAll('.today-badge').forEach(el => { el.textContent = t['today-txt']; });
-  }
-
-  btn.addEventListener('click', () => {
-    lang = lang === 'fr' ? 'en' : 'fr';
-    flag.textContent  = lang === 'fr' ? '🇬🇧' : '🇫🇷';
-    label.textContent = lang === 'fr' ? 'EN' : 'FR';
-    apply(T[lang]);
-  });
-})();
 
 </script>
 </body>
