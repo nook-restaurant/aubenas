@@ -79,6 +79,50 @@
   }, { passive: true });
 })();
 
+
+/* BOUTON PARTAGER */
+document.getElementById('btn-share')?.addEventListener('click', () => {
+  if (navigator.share) {
+    navigator.share({
+      title: 'NOOK – Cuisine Nomade · Aubenas',
+      text: 'Découvrez le restaurant NOOK à Aubenas, cuisine nomade et menu du jour 🍽️',
+      url: 'https://nook-restaurant.github.io/aubenas'
+    });
+  } else {
+    // Fallback : ouvre WhatsApp Web
+    const msg = encodeURIComponent('Découvrez le restaurant NOOK à Aubenas 🍽️ https://nook-restaurant.github.io/aubenas');
+    window.open('https://wa.me/?text=' + msg, '_blank');
+  }
+});
+
+/* COMPTEUR ANIMÉ — avis Google */
+(function(){
+  const el = document.querySelector('.rating-count');
+  if(!el) return;
+
+  const target = 46;
+  let started = false;
+
+  function animateCount() {
+    if(started) return;
+    started = true;
+    let current = 0;
+    const duration = 1200;
+    const step = target / (duration / 16);
+    const timer = setInterval(() => {
+      current = Math.min(current + step, target);
+      el.textContent = '(' + Math.floor(current) + ' avis)';
+      if(current >= target) clearInterval(timer);
+    }, 16);
+  }
+
+  // Lance quand le badge devient visible
+  const obs = new IntersectionObserver(entries => {
+    if(entries[0].isIntersecting) { animateCount(); obs.disconnect(); }
+  }, { threshold: 0.5 });
+  obs.observe(el);
+})();
+
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -533,6 +577,32 @@ body {
   transform: scale(1.3);
 }
 
+
+/* ─────────────────────────────────────
+   BOUTON PARTAGER FIXE
+───────────────────────────────────── */
+#btn-share {
+  position: fixed;
+  bottom: 24px; right: 20px;
+  z-index: 999;
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: #fff;
+  color: #1A1612;
+  border: none;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+}
+#btn-share:hover  { transform: scale(1.08); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+#btn-share:active { transform: scale(0.93); background: #f0ece4; }
+
+/* ─────────────────────────────────────
+   COMPTEUR ANIMÉ
+───────────────────────────────────── */
+.rating-count { font-variant-numeric: tabular-nums; }
+
 </style>
 </head>
 <body>
@@ -703,6 +773,14 @@ body {
     <div class="footer-copy">© NOOK Restaurant · 8 rue de la Prévoté, 07200 Aubenas</div>
   </div>
 
+  <!-- BOUTON PARTAGER -->
+  <button id="btn-share" aria-label="Partager">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1A1612" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+      <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+    </svg>
+  </button>
+
 </div><!-- /page -->
 
 <script>
@@ -869,6 +947,50 @@ document.querySelectorAll('.r').forEach(el => io.observe(el));
     const index = Math.round(carousel.scrollLeft / (carousel.scrollWidth / dots.length));
     dots.forEach((d, i) => d.classList.toggle('active', i === index));
   }, { passive: true });
+})();
+
+
+/* BOUTON PARTAGER */
+document.getElementById('btn-share')?.addEventListener('click', () => {
+  if (navigator.share) {
+    navigator.share({
+      title: 'NOOK – Cuisine Nomade · Aubenas',
+      text: 'Découvrez le restaurant NOOK à Aubenas, cuisine nomade et menu du jour 🍽️',
+      url: 'https://nook-restaurant.github.io/aubenas'
+    });
+  } else {
+    // Fallback : ouvre WhatsApp Web
+    const msg = encodeURIComponent('Découvrez le restaurant NOOK à Aubenas 🍽️ https://nook-restaurant.github.io/aubenas');
+    window.open('https://wa.me/?text=' + msg, '_blank');
+  }
+});
+
+/* COMPTEUR ANIMÉ — avis Google */
+(function(){
+  const el = document.querySelector('.rating-count');
+  if(!el) return;
+
+  const target = 46;
+  let started = false;
+
+  function animateCount() {
+    if(started) return;
+    started = true;
+    let current = 0;
+    const duration = 1200;
+    const step = target / (duration / 16);
+    const timer = setInterval(() => {
+      current = Math.min(current + step, target);
+      el.textContent = '(' + Math.floor(current) + ' avis)';
+      if(current >= target) clearInterval(timer);
+    }, 16);
+  }
+
+  // Lance quand le badge devient visible
+  const obs = new IntersectionObserver(entries => {
+    if(entries[0].isIntersecting) { animateCount(); obs.disconnect(); }
+  }, { threshold: 0.5 });
+  obs.observe(el);
 })();
 
 </script>
