@@ -124,149 +124,7 @@ document.getElementById('btn-share')?.addEventListener('click', () => {
 })();
 
 
-/* BOUTON LANGUE */
-(function(){
-  const btn   = document.getElementById('btn-lang');
-  const flag  = document.getElementById('lang-flag');
-  const label = document.getElementById('lang-label');
-  if(!btn) return;
 
-  let lang = 'fr';
-
-  const translations = {
-    fr: {
-      'hero-tagline':     'Saveurs du monde',
-      'hero-city':        'Aubenas · Ardèche',
-      'rating-txt':       '(46 avis)',
-      'reserve-txt':      'Réserver',
-      'menu-txt':         'Menu',
-      'yaller-txt':       'Y aller',
-      'about-label':      'Le restaurant',
-      'about-pull':       'Une table qui <em>voyage</em> sans jamais quitter Aubenas.',
-      'about-body':       'Chaque jour un menu différent, une nouvelle escale. Des produits locaux, des épices lointaines, une cuisine franche et généreuse.',
-      'photos-label':     'Nos plats',
-      'img-caption':      'Menu renouvelé chaque jour',
-      'menu-section-label': 'Menu du jour',
-      'menu-label-txt':   'Mis à jour chaque matin',
-      'menu-title-txt':   'Carte du jour',
-      'menu-cta-txt':     'Voir sur Facebook',
-      'fb-btn':           'Facebook',
-      'ig-btn':           'Instagram',
-      'hours-label':      'Horaires',
-      'days': ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'],
-      'closed-txt':       'Fermé',
-      'today-txt':        "Aujourd'hui",
-      'addr-label':       'Nous trouver',
-      'addr-street':      '8 rue de la Prévoté',
-      'addr-city':        '07200 Aubenas',
-      'btn-map-txt':      'Ouvrir dans Google Maps',
-      'footer-sub':       'Cuisine Nomade · Aubenas',
-      'footer-copy':      '© NOOK Restaurant · 8 rue de la Prévoté, 07200 Aubenas',
-    },
-    en: {
-      'hero-tagline':     'World flavours',
-      'hero-city':        'Aubenas · Ardèche',
-      'rating-txt':       '(46 reviews)',
-      'reserve-txt':      'Book',
-      'menu-txt':         'Menu',
-      'yaller-txt':       'Directions',
-      'about-label':      'The restaurant',
-      'about-pull':       'A table that <em>travels</em> without leaving Aubenas.',
-      'about-body':       'A different menu every day, a new destination. Local produce, faraway spices, honest and generous cooking.',
-      'photos-label':     'Our dishes',
-      'img-caption':      'Menu renewed every day',
-      'menu-section-label': "Today's menu",
-      'menu-label-txt':   'Updated every morning',
-      'menu-title-txt':   "Today's menu",
-      'menu-cta-txt':     'View on Facebook',
-      'fb-btn':           'Facebook',
-      'ig-btn':           'Instagram',
-      'hours-label':      'Opening hours',
-      'days': ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],
-      'closed-txt':       'Closed',
-      'today-txt':        'Today',
-      'addr-label':       'Find us',
-      'addr-street':      '8 rue de la Prévoté',
-      'addr-city':        '07200 Aubenas, France',
-      'btn-map-txt':      'Open in Google Maps',
-      'footer-sub':       'Nomadic Cuisine · Aubenas',
-      'footer-copy':      '© NOOK Restaurant · 8 rue de la Prévoté, 07200 Aubenas',
-    }
-  };
-
-  function apply(t) {
-    const q  = sel => document.querySelector(sel);
-    const qa = sel => document.querySelectorAll(sel);
-
-    // Hero
-    q('.hero-tagline').innerHTML  = t['hero-tagline'];
-    q('.rating-count').textContent = t['rating-txt'];
-
-    // CTA buttons
-    const ctaItems = qa('.cta-item');
-    const ctaTexts = [t['reserve-txt'], t['menu-txt'], t['yaller-txt']];
-    ctaItems.forEach((el, i) => {
-      const tn = [...el.childNodes].find(n => n.nodeType === 3 && n.textContent.trim());
-      if(tn && ctaTexts[i]) tn.textContent = '\n      ' + ctaTexts[i] + '\n    ';
-    });
-
-    // Section labels
-    const labels = qa('.label');
-    const labelTexts = [t['about-label'], t['photos-label'], t['menu-section-label'], t['hours-label'], t['addr-label']];
-    labels.forEach((el, i) => { if(labelTexts[i]) el.childNodes[0].textContent = labelTexts[i]; });
-
-    // About
-    q('.about-pull').innerHTML   = t['about-pull'];
-    q('.about-body').textContent = t['about-body'];
-
-    // Photos
-    q('.img-caption').textContent = t['img-caption'];
-
-    // Menu card
-    q('.menu-label').textContent  = t['menu-label-txt'];
-    q('.menu-title').textContent  = t['menu-title-txt'];
-    q('.menu-cta').innerHTML      = t['menu-cta-txt'] + ' <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
-
-    // Social buttons
-    const sbBtns = qa('.social-btn');
-    if(sbBtns[0]) sbBtns[0].childNodes[1].textContent = ' ' + t['fb-btn'];
-    if(sbBtns[1]) sbBtns[1].childNodes[1].textContent = ' ' + t['ig-btn'];
-
-    // Horaires — jours de la semaine
-    const dayOrder = ['lun','mar','mer','jeu','ven','sam','dim'];
-    const dayMap   = {lun:0, mar:1, mer:2, jeu:3, ven:4, sam:5, dim:6};
-    dayOrder.forEach(d => {
-      const row = document.getElementById('row-' + d);
-      if(!row) return;
-      const dayCell = row.querySelector('.day');
-      if(!dayCell) return;
-      // preserve today badge
-      const badge = dayCell.querySelector('.today-badge');
-      dayCell.firstChild.textContent = t['days'][dayMap[d]];
-      // translate today badge
-      if(badge) badge.textContent = t['today-txt'];
-      // closed text
-      const closed = row.querySelector('.closed');
-      if(closed) closed.textContent = t['closed-txt'];
-    });
-
-    // Adresse
-    q('.addr-street').textContent = t['addr-street'];
-    q('.addr-city').textContent   = t['addr-city'];
-    q('.btn-map').innerHTML       = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg> ' + t['btn-map-txt'];
-
-    // Footer
-    q('.footer-sub').textContent  = t['footer-sub'];
-    q('.footer-copy').textContent = t['footer-copy'];
-  }
-
-  btn.addEventListener('click', () => {
-    lang = lang === 'fr' ? 'en' : 'fr';
-    flag.textContent  = lang === 'fr' ? '🇬🇧' : '🇫🇷';
-    label.textContent = lang === 'fr' ? 'EN' : 'FR';
-    apply(translations[lang]);
-  });
-})();
 
 
 /* SERVICE WORKER */
@@ -276,6 +134,111 @@ if('serviceWorker' in navigator) {
       .catch(err => console.log('SW:', err));
   });
 }
+
+/* BOUTON LANGUE */
+(function(){
+  const btn   = document.getElementById('btn-lang');
+  const flag  = document.getElementById('lang-flag');
+  const label = document.getElementById('lang-label');
+  if(!btn) return;
+
+  let lang = 'fr';
+
+  const T = {
+    fr: {
+      'hero-tagline':   'Saveurs du monde',
+      'rating-txt':     '(46 avis)',
+      'reserve-txt':    'Réserver',
+      'menu-txt':       'Menu',
+      'yaller-txt':     'Y aller',
+      'about-label':    'Le restaurant',
+      'about-pull':     'Une table qui <em>voyage</em> sans jamais quitter Aubenas.',
+      'about-body':     'Chaque jour un menu différent, une nouvelle escale. Des produits locaux, des épices lointaines, une cuisine franche et généreuse.',
+      'photos-label':   'Nos plats',
+      'img-caption':    'Menu renouvelé chaque jour',
+      'menu-section-label': 'Menu du jour',
+      'menu-label-txt': 'Mis à jour chaque matin',
+      'menu-title-txt': 'Carte du jour',
+      'menu-cta-txt':   'Voir sur Facebook',
+      'fb-btn':         'Facebook',
+      'ig-btn':         'Instagram',
+      'hours-label':    'Horaires',
+      'day-lun': 'Lundi', 'day-mar': 'Mardi', 'day-mer': 'Mercredi',
+      'day-jeu': 'Jeudi', 'day-ven': 'Vendredi', 'day-sam': 'Samedi', 'day-dim': 'Dimanche',
+      'closed-txt':     'Fermé',
+      'today-txt':      "Aujourd'hui",
+      'addr-label':     'Nous trouver',
+      'addr-street':    '8 rue de la Prévoté',
+      'addr-city':      '07200 Aubenas',
+      'btn-map-txt':    'Ouvrir dans Google Maps',
+      'footer-sub':     'Cuisine Nomade · Aubenas',
+      'footer-copy':    '© NOOK Restaurant · 8 rue de la Prévoté, 07200 Aubenas',
+    },
+    en: {
+      'hero-tagline':   'World flavours',
+      'rating-txt':     '(46 reviews)',
+      'reserve-txt':    'Book',
+      'menu-txt':       'Menu',
+      'yaller-txt':     'Directions',
+      'about-label':    'The restaurant',
+      'about-pull':     'A table that <em>travels</em> without leaving Aubenas.',
+      'about-body':     'A different menu every day, a new destination. Local produce, faraway spices, honest and generous cooking.',
+      'photos-label':   'Our dishes',
+      'img-caption':    'Menu renewed every day',
+      'menu-section-label': "Today's menu",
+      'menu-label-txt': 'Updated every morning',
+      'menu-title-txt': "Today's menu",
+      'menu-cta-txt':   'View on Facebook',
+      'fb-btn':         'Facebook',
+      'ig-btn':         'Instagram',
+      'hours-label':    'Opening hours',
+      'day-lun': 'Monday', 'day-mar': 'Tuesday', 'day-mer': 'Wednesday',
+      'day-jeu': 'Thursday', 'day-ven': 'Friday', 'day-sam': 'Saturday', 'day-dim': 'Sunday',
+      'closed-txt':     'Closed',
+      'today-txt':      'Today',
+      'addr-label':     'Find us',
+      'addr-street':    '8 rue de la Prévoté',
+      'addr-city':      '07200 Aubenas, France',
+      'btn-map-txt':    'Open in Google Maps',
+      'footer-sub':     'Nomadic Cuisine · Aubenas',
+      'footer-copy':    '© NOOK Restaurant · 8 rue de la Prévoté, 07200 Aubenas',
+    }
+  };
+
+  const LABELS = ['about-label','photos-label','menu-section-label','hours-label','addr-label'];
+
+  function apply(t) {
+    // data-i18n (textContent)
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const k = el.getAttribute('data-i18n');
+      if(t[k] !== undefined) el.textContent = t[k];
+    });
+    // data-i18n-html (innerHTML)
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const k = el.getAttribute('data-i18n-html');
+      if(t[k] !== undefined) el.innerHTML = t[k];
+    });
+    // Section labels
+    document.querySelectorAll('.label').forEach((el, i) => {
+      if(LABELS[i] && t[LABELS[i]]) el.childNodes[0].textContent = t[LABELS[i]];
+    });
+    // Menu CTA arrow
+    const menuCta = document.querySelector('.menu-cta');
+    if(menuCta) menuCta.innerHTML = t['menu-cta-txt'] + ' <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+    // Google Maps button
+    const btnMap = document.querySelector('.btn-map');
+    if(btnMap) btnMap.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg> ' + t['btn-map-txt'];
+    // Today badge
+    document.querySelectorAll('.today-badge').forEach(el => { el.textContent = t['today-txt']; });
+  }
+
+  btn.addEventListener('click', () => {
+    lang = lang === 'fr' ? 'en' : 'fr';
+    flag.textContent  = lang === 'fr' ? '🇬🇧' : '🇫🇷';
+    label.textContent = lang === 'fr' ? 'EN' : 'FR';
+    apply(T[lang]);
+  });
+})();
 
 </script>
 
@@ -809,8 +772,8 @@ body {
     <!-- Contenu centré -->
     <div class="hero-content">
       <img class="hero-logo" src="img/logo.png" alt="NOOK">
-      <div class="hero-tagline">Saveurs du monde</div>
-      <div class="hero-city">
+      <div class="hero-tagline" data-i18n="hero-tagline">Saveurs du monde</div>
+      <div class="hero-city" data-i18n-after="hero-city">
         <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
         Aubenas · Ardèche
       </div>
@@ -823,7 +786,7 @@ body {
           <svg viewBox="0 0 24 24" fill="#D4781A"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
         </div>
         <span class="rating-text">5.0</span>
-        <span class="rating-count">(46 avis)</span>
+        <span class="rating-count" data-i18n="rating-txt">(46 avis)</span>
       </div>
     </div>
   </div>
@@ -834,27 +797,27 @@ body {
       <div class="cta-icon">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 012 1.18 2 2 0 013.99 0h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg>
       </div>
-      Réserver
+      <span data-i18n="reserve-txt">Réserver</span>
     </a>
     <a class="cta-item" href="https://www.facebook.com/people/NOOK-Restaurant/61575514529548/" target="_blank" rel="noopener">
       <div class="cta-icon">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7 12h10M7 8h6M7 16h8" stroke-linecap="round"/></svg>
       </div>
-      Menu
+      <span data-i18n="menu-txt">Menu</span>
     </a>
     <a class="cta-item" id="cta-directions" href="#">
       <div class="cta-icon">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
       </div>
-      Y aller
+      <span data-i18n="yaller-txt">Y aller</span>
     </a>
   </div>
 
   <!-- LE RESTAURANT -->
   <div class="section r" style="border-top:none">
     <div class="label">Le restaurant</div>
-    <p class="about-pull">Une table qui <em>voyage</em> sans jamais quitter Aubenas.</p>
-    <p class="about-body">Chaque jour un menu différent, une nouvelle escale. Des produits locaux, des épices lointaines, une cuisine franche et généreuse.</p>
+    <p class="about-pull" data-i18n-html="about-pull">Une table qui <em>voyage</em> sans jamais quitter Aubenas.</p>
+    <p class="about-body" data-i18n="about-body">Chaque jour un menu différent, une nouvelle escale. Des produits locaux, des épices lointaines, une cuisine franche et généreuse.</p>
   </div>
 
   <!-- PHOTOS -->
@@ -880,8 +843,8 @@ body {
     <a class="menu-feature" href="https://www.facebook.com/people/NOOK-Restaurant/61575514529548/" target="_blank" rel="noopener">
       <div class="menu-accent"></div>
       <div class="menu-body">
-        <div class="menu-label">Mis à jour chaque matin</div>
-        <div class="menu-title">Carte du jour</div>
+        <div class="menu-label" data-i18n="menu-label-txt">Mis à jour chaque matin</div>
+        <div class="menu-title" data-i18n="menu-title-txt">Carte du jour</div>
         <div class="menu-cta">
           Voir sur Facebook
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -891,11 +854,11 @@ body {
     <div class="social-row">
       <a class="social-btn" href="https://www.facebook.com/people/NOOK-Restaurant/61575514529548/" target="_blank" rel="noopener">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
-        Facebook
+        <span data-i18n="fb-btn">Facebook</span>
       </a>
       <a class="social-btn" href="https://www.instagram.com/nook.aubenas/" target="_blank" rel="noopener">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="#fff" stroke="none"/></svg>
-        Instagram
+        <span data-i18n="ig-btn">Instagram</span>
       </a>
     </div>
   </div>
@@ -909,13 +872,13 @@ body {
   <div class="section r">
     <div class="label">Horaires</div>
     <table class="hours-table">
-      <tr id="row-lun"><td class="day">Lundi</td><td class="time">18h30 – 23h00</td></tr>
-      <tr id="row-mar"><td class="day">Mardi</td><td class="time">11h30 – 23h00</td></tr>
-      <tr id="row-mer"><td class="day">Mercredi</td><td class="time">11h30 – 14h30</td></tr>
-      <tr id="row-jeu"><td class="day">Jeudi</td><td class="time">11h30 – 23h00</td></tr>
-      <tr id="row-ven"><td class="day">Vendredi</td><td class="time">11h30 – 14h30</td></tr>
-      <tr id="row-sam"><td class="day">Samedi</td><td class="closed">Fermé</td></tr>
-      <tr id="row-dim"><td class="day">Dimanche</td><td class="closed">Fermé</td></tr>
+      <tr id="row-lun"><td class="day"><span data-i18n="day-lun">Lundi</span></td><td class="time">18h30 – 23h00</td></tr>
+      <tr id="row-mar"><td class="day"><span data-i18n="day-mar">Mardi</span></td><td class="time">11h30 – 23h00</td></tr>
+      <tr id="row-mer"><td class="day"><span data-i18n="day-mer">Mercredi</span></td><td class="time">11h30 – 14h30</td></tr>
+      <tr id="row-jeu"><td class="day"><span data-i18n="day-jeu">Jeudi</span></td><td class="time">11h30 – 23h00</td></tr>
+      <tr id="row-ven"><td class="day"><span data-i18n="day-ven">Vendredi</span></td><td class="time">11h30 – 14h30</td></tr>
+      <tr id="row-sam"><td class="day"><span data-i18n="day-sam">Samedi</span></td><td class="closed">Fermé</td></tr>
+      <tr id="row-dim"><td class="day"><span data-i18n="day-dim">Dimanche</span></td><td class="closed">Fermé</td></tr>
     </table>
   </div>
 
@@ -932,8 +895,8 @@ body {
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#D4781A" stroke-width="1.8"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
       </div>
       <div>
-        <div class="addr-street">8 rue de la Prévoté</div>
-        <div class="addr-city">07200 Aubenas</div>
+        <div class="addr-street" data-i18n="addr-street">8 rue de la Prévoté</div>
+        <div class="addr-city" data-i18n="addr-city">07200 Aubenas</div>
       </div>
     </div>
     <a class="btn-map" href="#" id="btn-directions">
@@ -945,9 +908,9 @@ body {
   <!-- FOOTER -->
   <div class="footer r">
     <img class="footer-logo" src="img/logo.png" alt="NOOK">
-    <div class="footer-sub">Cuisine Nomade · Aubenas</div>
+    <div class="footer-sub" data-i18n="footer-sub">Cuisine Nomade · Aubenas</div>
     <div class="footer-line"></div>
-    <div class="footer-copy">© NOOK Restaurant · 8 rue de la Prévoté, 07200 Aubenas</div>
+    <div class="footer-copy" data-i18n="footer-copy">© NOOK Restaurant · 8 rue de la Prévoté, 07200 Aubenas</div>
   </div>
 
   <!-- BOUTON LANGUE -->
@@ -1177,149 +1140,7 @@ document.getElementById('btn-share')?.addEventListener('click', () => {
 })();
 
 
-/* BOUTON LANGUE */
-(function(){
-  const btn   = document.getElementById('btn-lang');
-  const flag  = document.getElementById('lang-flag');
-  const label = document.getElementById('lang-label');
-  if(!btn) return;
 
-  let lang = 'fr';
-
-  const translations = {
-    fr: {
-      'hero-tagline':     'Saveurs du monde',
-      'hero-city':        'Aubenas · Ardèche',
-      'rating-txt':       '(46 avis)',
-      'reserve-txt':      'Réserver',
-      'menu-txt':         'Menu',
-      'yaller-txt':       'Y aller',
-      'about-label':      'Le restaurant',
-      'about-pull':       'Une table qui <em>voyage</em> sans jamais quitter Aubenas.',
-      'about-body':       'Chaque jour un menu différent, une nouvelle escale. Des produits locaux, des épices lointaines, une cuisine franche et généreuse.',
-      'photos-label':     'Nos plats',
-      'img-caption':      'Menu renouvelé chaque jour',
-      'menu-section-label': 'Menu du jour',
-      'menu-label-txt':   'Mis à jour chaque matin',
-      'menu-title-txt':   'Carte du jour',
-      'menu-cta-txt':     'Voir sur Facebook',
-      'fb-btn':           'Facebook',
-      'ig-btn':           'Instagram',
-      'hours-label':      'Horaires',
-      'days': ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'],
-      'closed-txt':       'Fermé',
-      'today-txt':        "Aujourd'hui",
-      'addr-label':       'Nous trouver',
-      'addr-street':      '8 rue de la Prévoté',
-      'addr-city':        '07200 Aubenas',
-      'btn-map-txt':      'Ouvrir dans Google Maps',
-      'footer-sub':       'Cuisine Nomade · Aubenas',
-      'footer-copy':      '© NOOK Restaurant · 8 rue de la Prévoté, 07200 Aubenas',
-    },
-    en: {
-      'hero-tagline':     'World flavours',
-      'hero-city':        'Aubenas · Ardèche',
-      'rating-txt':       '(46 reviews)',
-      'reserve-txt':      'Book',
-      'menu-txt':         'Menu',
-      'yaller-txt':       'Directions',
-      'about-label':      'The restaurant',
-      'about-pull':       'A table that <em>travels</em> without leaving Aubenas.',
-      'about-body':       'A different menu every day, a new destination. Local produce, faraway spices, honest and generous cooking.',
-      'photos-label':     'Our dishes',
-      'img-caption':      'Menu renewed every day',
-      'menu-section-label': "Today's menu",
-      'menu-label-txt':   'Updated every morning',
-      'menu-title-txt':   "Today's menu",
-      'menu-cta-txt':     'View on Facebook',
-      'fb-btn':           'Facebook',
-      'ig-btn':           'Instagram',
-      'hours-label':      'Opening hours',
-      'days': ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],
-      'closed-txt':       'Closed',
-      'today-txt':        'Today',
-      'addr-label':       'Find us',
-      'addr-street':      '8 rue de la Prévoté',
-      'addr-city':        '07200 Aubenas, France',
-      'btn-map-txt':      'Open in Google Maps',
-      'footer-sub':       'Nomadic Cuisine · Aubenas',
-      'footer-copy':      '© NOOK Restaurant · 8 rue de la Prévoté, 07200 Aubenas',
-    }
-  };
-
-  function apply(t) {
-    const q  = sel => document.querySelector(sel);
-    const qa = sel => document.querySelectorAll(sel);
-
-    // Hero
-    q('.hero-tagline').innerHTML  = t['hero-tagline'];
-    q('.rating-count').textContent = t['rating-txt'];
-
-    // CTA buttons
-    const ctaItems = qa('.cta-item');
-    const ctaTexts = [t['reserve-txt'], t['menu-txt'], t['yaller-txt']];
-    ctaItems.forEach((el, i) => {
-      const tn = [...el.childNodes].find(n => n.nodeType === 3 && n.textContent.trim());
-      if(tn && ctaTexts[i]) tn.textContent = '\n      ' + ctaTexts[i] + '\n    ';
-    });
-
-    // Section labels
-    const labels = qa('.label');
-    const labelTexts = [t['about-label'], t['photos-label'], t['menu-section-label'], t['hours-label'], t['addr-label']];
-    labels.forEach((el, i) => { if(labelTexts[i]) el.childNodes[0].textContent = labelTexts[i]; });
-
-    // About
-    q('.about-pull').innerHTML   = t['about-pull'];
-    q('.about-body').textContent = t['about-body'];
-
-    // Photos
-    q('.img-caption').textContent = t['img-caption'];
-
-    // Menu card
-    q('.menu-label').textContent  = t['menu-label-txt'];
-    q('.menu-title').textContent  = t['menu-title-txt'];
-    q('.menu-cta').innerHTML      = t['menu-cta-txt'] + ' <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
-
-    // Social buttons
-    const sbBtns = qa('.social-btn');
-    if(sbBtns[0]) sbBtns[0].childNodes[1].textContent = ' ' + t['fb-btn'];
-    if(sbBtns[1]) sbBtns[1].childNodes[1].textContent = ' ' + t['ig-btn'];
-
-    // Horaires — jours de la semaine
-    const dayOrder = ['lun','mar','mer','jeu','ven','sam','dim'];
-    const dayMap   = {lun:0, mar:1, mer:2, jeu:3, ven:4, sam:5, dim:6};
-    dayOrder.forEach(d => {
-      const row = document.getElementById('row-' + d);
-      if(!row) return;
-      const dayCell = row.querySelector('.day');
-      if(!dayCell) return;
-      // preserve today badge
-      const badge = dayCell.querySelector('.today-badge');
-      dayCell.firstChild.textContent = t['days'][dayMap[d]];
-      // translate today badge
-      if(badge) badge.textContent = t['today-txt'];
-      // closed text
-      const closed = row.querySelector('.closed');
-      if(closed) closed.textContent = t['closed-txt'];
-    });
-
-    // Adresse
-    q('.addr-street').textContent = t['addr-street'];
-    q('.addr-city').textContent   = t['addr-city'];
-    q('.btn-map').innerHTML       = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg> ' + t['btn-map-txt'];
-
-    // Footer
-    q('.footer-sub').textContent  = t['footer-sub'];
-    q('.footer-copy').textContent = t['footer-copy'];
-  }
-
-  btn.addEventListener('click', () => {
-    lang = lang === 'fr' ? 'en' : 'fr';
-    flag.textContent  = lang === 'fr' ? '🇬🇧' : '🇫🇷';
-    label.textContent = lang === 'fr' ? 'EN' : 'FR';
-    apply(translations[lang]);
-  });
-})();
 
 
 /* SERVICE WORKER */
@@ -1329,6 +1150,111 @@ if('serviceWorker' in navigator) {
       .catch(err => console.log('SW:', err));
   });
 }
+
+/* BOUTON LANGUE */
+(function(){
+  const btn   = document.getElementById('btn-lang');
+  const flag  = document.getElementById('lang-flag');
+  const label = document.getElementById('lang-label');
+  if(!btn) return;
+
+  let lang = 'fr';
+
+  const T = {
+    fr: {
+      'hero-tagline':   'Saveurs du monde',
+      'rating-txt':     '(46 avis)',
+      'reserve-txt':    'Réserver',
+      'menu-txt':       'Menu',
+      'yaller-txt':     'Y aller',
+      'about-label':    'Le restaurant',
+      'about-pull':     'Une table qui <em>voyage</em> sans jamais quitter Aubenas.',
+      'about-body':     'Chaque jour un menu différent, une nouvelle escale. Des produits locaux, des épices lointaines, une cuisine franche et généreuse.',
+      'photos-label':   'Nos plats',
+      'img-caption':    'Menu renouvelé chaque jour',
+      'menu-section-label': 'Menu du jour',
+      'menu-label-txt': 'Mis à jour chaque matin',
+      'menu-title-txt': 'Carte du jour',
+      'menu-cta-txt':   'Voir sur Facebook',
+      'fb-btn':         'Facebook',
+      'ig-btn':         'Instagram',
+      'hours-label':    'Horaires',
+      'day-lun': 'Lundi', 'day-mar': 'Mardi', 'day-mer': 'Mercredi',
+      'day-jeu': 'Jeudi', 'day-ven': 'Vendredi', 'day-sam': 'Samedi', 'day-dim': 'Dimanche',
+      'closed-txt':     'Fermé',
+      'today-txt':      "Aujourd'hui",
+      'addr-label':     'Nous trouver',
+      'addr-street':    '8 rue de la Prévoté',
+      'addr-city':      '07200 Aubenas',
+      'btn-map-txt':    'Ouvrir dans Google Maps',
+      'footer-sub':     'Cuisine Nomade · Aubenas',
+      'footer-copy':    '© NOOK Restaurant · 8 rue de la Prévoté, 07200 Aubenas',
+    },
+    en: {
+      'hero-tagline':   'World flavours',
+      'rating-txt':     '(46 reviews)',
+      'reserve-txt':    'Book',
+      'menu-txt':       'Menu',
+      'yaller-txt':     'Directions',
+      'about-label':    'The restaurant',
+      'about-pull':     'A table that <em>travels</em> without leaving Aubenas.',
+      'about-body':     'A different menu every day, a new destination. Local produce, faraway spices, honest and generous cooking.',
+      'photos-label':   'Our dishes',
+      'img-caption':    'Menu renewed every day',
+      'menu-section-label': "Today's menu",
+      'menu-label-txt': 'Updated every morning',
+      'menu-title-txt': "Today's menu",
+      'menu-cta-txt':   'View on Facebook',
+      'fb-btn':         'Facebook',
+      'ig-btn':         'Instagram',
+      'hours-label':    'Opening hours',
+      'day-lun': 'Monday', 'day-mar': 'Tuesday', 'day-mer': 'Wednesday',
+      'day-jeu': 'Thursday', 'day-ven': 'Friday', 'day-sam': 'Saturday', 'day-dim': 'Sunday',
+      'closed-txt':     'Closed',
+      'today-txt':      'Today',
+      'addr-label':     'Find us',
+      'addr-street':    '8 rue de la Prévoté',
+      'addr-city':      '07200 Aubenas, France',
+      'btn-map-txt':    'Open in Google Maps',
+      'footer-sub':     'Nomadic Cuisine · Aubenas',
+      'footer-copy':    '© NOOK Restaurant · 8 rue de la Prévoté, 07200 Aubenas',
+    }
+  };
+
+  const LABELS = ['about-label','photos-label','menu-section-label','hours-label','addr-label'];
+
+  function apply(t) {
+    // data-i18n (textContent)
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const k = el.getAttribute('data-i18n');
+      if(t[k] !== undefined) el.textContent = t[k];
+    });
+    // data-i18n-html (innerHTML)
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const k = el.getAttribute('data-i18n-html');
+      if(t[k] !== undefined) el.innerHTML = t[k];
+    });
+    // Section labels
+    document.querySelectorAll('.label').forEach((el, i) => {
+      if(LABELS[i] && t[LABELS[i]]) el.childNodes[0].textContent = t[LABELS[i]];
+    });
+    // Menu CTA arrow
+    const menuCta = document.querySelector('.menu-cta');
+    if(menuCta) menuCta.innerHTML = t['menu-cta-txt'] + ' <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+    // Google Maps button
+    const btnMap = document.querySelector('.btn-map');
+    if(btnMap) btnMap.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg> ' + t['btn-map-txt'];
+    // Today badge
+    document.querySelectorAll('.today-badge').forEach(el => { el.textContent = t['today-txt']; });
+  }
+
+  btn.addEventListener('click', () => {
+    lang = lang === 'fr' ? 'en' : 'fr';
+    flag.textContent  = lang === 'fr' ? '🇬🇧' : '🇫🇷';
+    label.textContent = lang === 'fr' ? 'EN' : 'FR';
+    apply(T[lang]);
+  });
+})();
 
 </script>
 </body>
