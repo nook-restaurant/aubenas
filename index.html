@@ -535,7 +535,7 @@ document.getElementById('btn-share')?.addEventListener('click', () => {
 /* ══════════════════════════════════════
    TRADUCTION FR / EN
 ══════════════════════════════════════ */
-document.addEventListener('DOMContentLoaded', function(){
+(function(){
   const btn  = document.getElementById('btn-lang');
   const flag = document.getElementById('lang-flag');
   const lbl  = document.getElementById('lang-label');
@@ -623,9 +623,19 @@ document.addEventListener('DOMContentLoaded', function(){
     lang = lang === 'fr' ? 'en' : 'fr';
     flag.textContent = lang === 'fr' ? '🇬🇧' : '🇫🇷';
     lbl.textContent  = lang === 'fr' ? 'EN' : 'FR';
-    apply(T[lang]);
+    const els = document.querySelectorAll('[data-i18n]');
+    els.forEach(el => {
+      const k = el.getAttribute('data-i18n');
+      if(T[lang][k] !== undefined) el.textContent = T[lang][k];
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const k = el.getAttribute('data-i18n-html');
+      if(T[lang][k] !== undefined) el.innerHTML = T[lang][k];
+    });
+    const menuCta = document.getElementById('menu-cta-link');
+    if(menuCta) menuCta.innerHTML = T[lang]['menu-cta-txt'] + ' <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
   });
-});
+})();
 
 /* ══════════════════════════════════════
    SERVICE WORKER
