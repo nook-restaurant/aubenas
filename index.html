@@ -207,6 +207,15 @@ document.getElementById('btn-share')?.addEventListener('click', () => {
   });
 })();
 
+
+/* SERVICE WORKER */
+if('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js')
+      .catch(err => console.log('SW:', err));
+  });
+}
+
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1189,6 +1198,15 @@ document.getElementById('btn-share')?.addEventListener('click', () => {
     apply(translations[lang]);
   });
 })();
+
+
+/* SERVICE WORKER */
+if('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js')
+      .catch(err => console.log('SW:', err));
+  });
+}
 
 </script>
 </body>
