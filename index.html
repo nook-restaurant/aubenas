@@ -90,7 +90,7 @@
 
 /* ─── VARIABLES ─── */
 :root {
-  --orange:   #F26419;
+  --orange:   #D4781A;
   --ink:      #1A1612;
   --paper:    #F8F5EF;
   --surface:  #EEEBE3;
@@ -144,7 +144,7 @@ body {
 
 #s-city {
   font-family: var(--hand);
-  font-size: 26px; font-weight: 700; letter-spacing: 0.05em;
+  font-size: 36px; font-weight: 700; letter-spacing: 0.05em;
   color: #fff; margin-top: 10px;
   opacity: 0; transform: translateY(4px);
   transition: opacity 0.5s 0.45s cubic-bezier(.4,0,.2,1), transform 0.5s 0.45s cubic-bezier(.4,0,.2,1);
@@ -346,7 +346,7 @@ body {
   margin-bottom: 1.25rem;
   display: flex; align-items: center; gap: 12px;
 }
-.label::after { content: ''; flex: 1; height: 1px; background: rgba(242,100,25,0.15); }
+.label::after { content: ''; flex: 1; height: 1px; background: rgba(212,120,26,0.15); }
 
 /* ─────────────────────────────────────
    ABOUT
@@ -424,11 +424,11 @@ body {
 .hours-table .closed { color: rgba(0,0,0,0.2); font-style: italic; text-align: right; }
 .today-row .day { color: var(--orange) !important; }
 .today-badge {
-  display: inline-block; background: rgba(242,100,25,0.1); color: var(--orange);
+  display: inline-block; background: rgba(212,120,26,0.1); color: var(--orange);
   font-size: 9px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
   padding: 2px 7px; border-radius: 40px;
   margin-left: 8px; vertical-align: middle;
-  border: 1px solid rgba(242,100,25,0.2);
+  border: 1px solid rgba(212,120,26,0.2);
 }
 
 /* ─────────────────────────────────────
@@ -448,7 +448,7 @@ body {
 }
 .addr-icon {
   width: 36px; height: 36px; flex-shrink: 0;
-  background: rgba(242,100,25,0.12); border-radius: 50%;
+  background: rgba(212,120,26,0.12); border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
 }
 .addr-street { font-size: 14px; font-weight: 500; color: var(--ink); }
@@ -569,11 +569,11 @@ body {
       </div>
       <div class="hero-rating" id="hero-rating">
         <div class="rating-stars">
-          <svg viewBox="0 0 24 24" fill="#F26419"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg viewBox="0 0 24 24" fill="#F26419"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg viewBox="0 0 24 24" fill="#F26419"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg viewBox="0 0 24 24" fill="#F26419"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg viewBox="0 0 24 24" fill="#F26419"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24" fill="#D4781A"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24" fill="#D4781A"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24" fill="#D4781A"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24" fill="#D4781A"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24" fill="#D4781A"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
         </div>
         <span class="rating-text">5.0</span>
         <span class="rating-count">(46 avis)</span>
@@ -682,7 +682,7 @@ body {
     </div>
     <div class="addr-row">
       <div class="addr-icon">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#F26419" stroke-width="1.8"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#D4781A" stroke-width="1.8"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
       </div>
       <div>
         <div class="addr-street">8 rue de la Prévoté</div>
