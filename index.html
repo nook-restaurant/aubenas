@@ -66,6 +66,19 @@
     "https://www.instagram.com/nook.aubenas/"
   ]
 }
+
+/* CAROUSEL */
+(function(){
+  const carousel = document.getElementById('carousel');
+  const dots = document.querySelectorAll('#carousel-dots .dot');
+  if(!carousel || !dots.length) return;
+
+  carousel.addEventListener('scroll', () => {
+    const index = Math.round(carousel.scrollLeft / (carousel.scrollWidth / dots.length));
+    dots.forEach((d, i) => d.classList.toggle('active', i === index));
+  }, { passive: true });
+})();
+
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -474,6 +487,52 @@ body {
   .hero { height: 100svh; max-height: none; }
 }
 
+
+/* ─────────────────────────────────────
+   CAROUSEL
+───────────────────────────────────── */
+.carousel-wrap {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+.carousel {
+  display: flex;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  gap: 10px;
+  padding: 0 1.5rem;
+  scroll-padding-left: 1.5rem;
+}
+.carousel::-webkit-scrollbar { display: none; }
+
+.carousel-item {
+  flex: 0 0 82%;
+  scroll-snap-align: start;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.carousel-item img {
+  width: 100%; height: 240px;
+  object-fit: cover; display: block;
+}
+
+.carousel-dots {
+  display: flex; justify-content: center; gap: 6px;
+  margin-top: 12px; padding-bottom: 4px;
+}
+.carousel-dots .dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(0,0,0,0.15);
+  transition: background 0.3s, transform 0.3s;
+}
+.carousel-dots .dot.active {
+  background: var(--orange);
+  transform: scale(1.3);
+}
+
 </style>
 </head>
 <body>
@@ -552,16 +611,20 @@ body {
   </div>
 
   <!-- PHOTOS -->
-  <div class="section r" style="padding-top:0; border-top:none">
-    <div class="label">Nos plats</div>
-    <div class="grid-2">
-      <img src="img/curry.jpg" alt="Curry NOOK">
-      <img src="img/dessert.jpg" alt="Dessert NOOK">
+  <div class="section r" style="padding-top:0; border-top:none; padding-left:0; padding-right:0;">
+    <div class="label" style="padding:0 1.5rem">Nos plats</div>
+    <div class="carousel-wrap">
+      <div class="carousel" id="carousel">
+        <div class="carousel-item"><img src="img/curry.jpg" alt="Curry NOOK"></div>
+        <div class="carousel-item"><img src="img/dessert.jpg" alt="Dessert NOOK"></div>
+        <div class="carousel-item"><img src="img/assiette.jpg" alt="Assiette NOOK"></div>
+      </div>
+      <div class="carousel-dots" id="carousel-dots">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
     </div>
-    <div class="grid-full">
-      <img src="img/assiette.jpg" alt="Assiette NOOK">
-    </div>
-    <p class="img-caption">Menu renouvelé chaque jour</p>
   </div>
 
   <!-- MENU DU JOUR -->
@@ -795,6 +858,19 @@ document.querySelectorAll('.r').forEach(el => io.observe(el));
   document.getElementById('btn-directions')?.addEventListener('click', openDirections);
   document.getElementById('cta-directions')?.addEventListener('click', openDirections);
 })();
+
+/* CAROUSEL */
+(function(){
+  const carousel = document.getElementById('carousel');
+  const dots = document.querySelectorAll('#carousel-dots .dot');
+  if(!carousel || !dots.length) return;
+
+  carousel.addEventListener('scroll', () => {
+    const index = Math.round(carousel.scrollLeft / (carousel.scrollWidth / dots.length));
+    dots.forEach((d, i) => d.classList.toggle('active', i === index));
+  }, { passive: true });
+})();
+
 </script>
 </body>
 </html>
