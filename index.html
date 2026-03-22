@@ -163,7 +163,8 @@ body {
 .hero-tagline.on { opacity: 1; transform: translateY(0); }
 .hero-city { display: inline-flex; align-items: center; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.9); opacity: 0; transform: translateY(6px); transition: opacity .5s .38s ease, transform .5s .38s ease; }
 .hero-city.on { opacity: 1; transform: translateY(0); }
-.hero-tagline2 { font-family: var(--hand); font-size: 1.1rem; font-weight: 400; color: rgba(255,255,255,0.7); font-style: italic; }
+.hero-tagline2 { font-family: var(--hand); font-size: 1.1rem; font-weight: 400; color: rgba(255,255,255,0.7); font-style: italic; opacity: 0; transform: translateY(6px); transition: opacity .5s .58s ease, transform .5s .58s ease; }
+.hero-tagline2.on { opacity: 1; transform: translateY(0); }
 .hero-rating { display: inline-flex; align-items: center; gap: 5px; margin-top: 0; opacity: 0; transform: translateY(6px); transition: opacity .5s .5s ease, transform .5s .5s ease; }
 .hero-rating.on { opacity: 1; transform: translateY(0); }
 .rating-stars { display: flex; gap: 2px; }
@@ -454,6 +455,7 @@ body {
       </button>
     </div>
     <div class="footer-copy" data-i18n="footer-copy">© NOOK Restaurant · 8 rue de la Prévoté, 07200 Aubenas</div>
+    <div style="font-size:9px;color:rgba(0,0,0,0.18);margin-top:6px;letter-spacing:0.08em;">Webdesigner : G.Mikael</div>
   </div>
 
   <button id="btn-lang"><span id="lang-flag">🇬🇧</span><span id="lang-label">EN</span></button>
@@ -478,6 +480,7 @@ setTimeout(()=>{
   setTimeout(()=>document.querySelector('.hero-tagline').classList.add('on'),220);
   setTimeout(()=>document.querySelector('.hero-city').classList.add('on'),350);
   setTimeout(()=>document.getElementById('hero-rating')?.classList.add('on'),460);
+  setTimeout(()=>document.querySelector('.hero-tagline2')?.classList.add('on'),570);
   document.querySelectorAll('.r').forEach((el,i)=>{ if(el.getBoundingClientRect().top<window.innerHeight) setTimeout(()=>el.classList.add('on'),80+i*55); });
   setTimeout(()=>splash.remove(),800);
 },1500);
