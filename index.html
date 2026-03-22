@@ -42,6 +42,31 @@
   "image": "https://nook-restaurant.github.io/aubenas/img/facade.jpg",
   "sameAs": ["https://www.facebook.com/people/NOOK-Restaurant/61575514529548/", "https://www.instagram.com/nook.aubenas/"]
 }
+
+/* SAUVEGARDER LE CONTACT */
+function saveContact() {
+  const vcard = [
+    'BEGIN:VCARD',
+    'VERSION:3.0',
+    'FN:NOOK Restaurant',
+    'ORG:NOOK',
+    'TEL;TYPE=WORK,VOICE:+33475360910',
+    'ADR;TYPE=WORK:;;8 rue de la Prévoté;Aubenas;;07200;France',
+    'EMAIL:nook.aubenas@gmail.com',
+    'URL:https://nook-restaurant.github.io/aubenas',
+    'NOTE:Cuisine Nomade · Menu du jour renouvelé chaque jour',
+    'END:VCARD'
+  ].join('\n');
+
+  const blob = new Blob([vcard], { type: 'text/vcard' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = 'NOOK-Restaurant.vcf';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -301,6 +326,34 @@ body {
   .cta-item { padding: 28px 60px 16px; }
 }
 
+
+/* ── FOOTER CONTACT ── */
+.footer-phone {
+  display: inline-flex; align-items: center; gap: 7px;
+  margin: 10px auto 0;
+  font-family: var(--sans); font-size: 15px; font-weight: 500;
+  color: var(--ink); text-decoration: none;
+  padding: 8px 18px; border-radius: 40px;
+  background: var(--surface); border: 1px solid var(--border2);
+  transition: background .2s;
+}
+.footer-phone:hover { background: var(--surface2); }
+.footer-phone:active { transform: scale(.97); }
+
+.btn-vcard {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  margin: 10px auto 0;
+  padding: 11px 22px; border-radius: 40px;
+  background: var(--orange); color: #fff;
+  font-family: var(--sans); font-size: 12px; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  text-decoration: none; cursor: pointer; border: none;
+  transition: background .25s, transform .15s;
+}
+.btn-vcard:hover  { background: #1A1612; }
+.btn-vcard:active { transform: scale(.97); }
+.footer-actions { display: flex; flex-direction: column; align-items: center; gap: 0; margin-top: 4px; }
+
 </style>
 </head>
 <body>
@@ -463,6 +516,16 @@ body {
   <div class="footer r">
     <img class="footer-logo" src="img/logo.png" alt="NOOK">
     <div class="footer-sub" data-i18n="footer-sub">Cuisine Nomade · Aubenas</div>
+    <div class="footer-actions">
+      <a class="footer-phone" href="tel:+33475360910">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 012 1.18 2 2 0 013.99 0h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg>
+        04 75 36 09 10
+      </a>
+      <button class="btn-vcard" id="btn-vcard" onclick="saveContact()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Sauvegarder le contact
+      </button>
+    </div>
     <div class="footer-line"></div>
     <div class="footer-copy" data-i18n="footer-copy">© NOOK Restaurant · 8 rue de la Prévoté, 07200 Aubenas</div>
   </div>
@@ -799,6 +862,31 @@ if('serviceWorker' in navigator && location.hostname !== 'www.claudeusercontent.
     navigator.serviceWorker.register('./sw.js').catch(err => console.log('SW:', err));
   });
 }
+
+/* SAUVEGARDER LE CONTACT */
+function saveContact() {
+  const vcard = [
+    'BEGIN:VCARD',
+    'VERSION:3.0',
+    'FN:NOOK Restaurant',
+    'ORG:NOOK',
+    'TEL;TYPE=WORK,VOICE:+33475360910',
+    'ADR;TYPE=WORK:;;8 rue de la Prévoté;Aubenas;;07200;France',
+    'EMAIL:nook.aubenas@gmail.com',
+    'URL:https://nook-restaurant.github.io/aubenas',
+    'NOTE:Cuisine Nomade · Menu du jour renouvelé chaque jour',
+    'END:VCARD'
+  ].join('\n');
+
+  const blob = new Blob([vcard], { type: 'text/vcard' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = 'NOOK-Restaurant.vcf';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
 </script>
 </body>
 </html>
