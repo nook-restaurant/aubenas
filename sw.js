@@ -1,4 +1,4 @@
-const CACHE = 'nook-v70';
+const CACHE = 'nook-v71';
 const ASSETS = [
   './',
   './index.html',
