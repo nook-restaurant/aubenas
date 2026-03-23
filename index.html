@@ -9,7 +9,7 @@
 <meta property="og:type" content="restaurant">
 <meta property="og:url" content="https://nook-restaurant.github.io/aubenas">
 <meta property="og:title" content="NOOK – Cuisine Nomade · Aubenas">
-<meta property="og:description" content="Menu du jour renouvelé chaque jour. Saveurs du monde, Aubenas, Ardèche.">
+<meta property="og:description" content="Menu du jour renouvelé chaque jour. Cuisine du monde, Aubenas, Ardèche.">
 <meta property="og:image" content="https://nook-restaurant.github.io/aubenas/img/facade.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://nook-restaurant.github.io/aubenas/img/facade.jpg">
@@ -402,6 +402,49 @@ body {
   .carousel-dots   { display: none; }
 }
 
+
+/* ── ABOUT CARDS ── */
+.about-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.about-card {
+  padding: 16px 18px;
+  border-left: 3px solid var(--orange);
+  background: var(--paper);
+  border-radius: 0 8px 8px 0;
+}
+.about-card-title {
+  font-family: var(--hand);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.about-card-text {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--muted);
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .about-cards {
+    flex-direction: row;
+    gap: 20px;
+  }
+  .about-card {
+    flex: 1;
+    border-left: none;
+    border-top: 3px solid var(--orange);
+    border-radius: 0 0 8px 8px;
+    padding: 20px;
+  }
+  .about-card-title { font-size: 1.6rem; }
+  .about-card-text  { font-size: 14px; }
+}
+
 </style>
 </head>
 <body>
@@ -429,7 +472,7 @@ body {
     <div class="hero-content">
       <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none;">NOOK – Restaurant Cuisine Nomade à Aubenas, Ardèche</h1>
       <img class="hero-logo" src="img/logo.png" alt="NOOK Restaurant Cuisine Nomade Aubenas">
-      <div class="hero-tagline" data-i18n="hero-tagline">Saveurs du monde</div>
+      <div class="hero-tagline" data-i18n="hero-tagline">Cuisine du monde</div>
       <div class="hero-city">Aubenas · Ardèche</div>
       <div class="hero-rating" id="hero-rating">
         <div class="rating-stars">
@@ -468,8 +511,17 @@ body {
   <!-- LE RESTAURANT -->
   <div class="section r" style="border-top:none">
     <div class="label"><h2 data-i18n="about-label" style="font:inherit;margin:0;padding:0;display:inline">Le restaurant</h2></div>
-    <h2 class="about-pull" data-i18n-html="about-pull" style="font:inherit;margin:0 0 .8rem;padding:0">Une table qui <em>voyage</em> sans jamais quitter Aubenas.</h2>
-    <p class="about-body" data-i18n="about-body">Chaque jour un menu différent, une nouvelle escale. Des produits locaux, des épices lointaines, une cuisine franche et généreuse.</p>
+    <div class="about-cards">
+      <div class="about-card">
+        <div class="about-card-title" data-i18n="about-t1">La cuisine</div>
+        <p class="about-card-text" data-i18n="about-p1">Un nouveau pays dans l'assiette chaque jour. Penjab, Mali, Vietnam, Liban... la carte ne s'arrête jamais.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-card-title" data-i18n="about-t2">Le terroir</div>
+        <p class="about-card-text" data-i18n="about-p2">Les producteurs ont des prénoms. Les vins, bières et jus viennent de Pradons, Sécheras, Chirols — à quelques kilomètres d'ici.</p>
+      </div>
+
+    </div>
   </div>
 
   <!-- PHOTOS -->
@@ -748,11 +800,12 @@ function saveContact(){
   let lang='fr';
   const T={
     fr:{
-      'hero-tagline':'Saveurs du monde','rating-txt':'(46 avis)',
+      'hero-tagline':'Cuisine du monde','rating-txt':'(46 avis)',
       'reserve-txt':'Réserver','menu-txt':'Menu','yaller-txt':'Y aller',
       'about-label':'Le restaurant',
-      'about-pull':'Une table qui <em>voyage</em> sans jamais quitter Aubenas.',
-      'about-body':'Chaque jour un menu différent, une nouvelle escale. Des produits locaux, des épices lointaines, une cuisine franche et généreuse.',
+      'about-t1':'La cuisine','about-p1':"Un nouveau pays dans l'assiette chaque jour. Penjab, Mali, Vietnam, Liban... la carte ne s'arrête jamais.",
+      'about-t2':'Le terroir','about-p2':'Les producteurs ont des prénoms. Les vins, bières et jus viennent de Pradons, Sécheras, Chirols — à quelques kilomètres d\'ici.',
+      'about-t3':"L'esprit",'about-p3':"Une table sans chichi, généreuse et franche. Où l'on revient parce qu'on ne sait pas ce qu'on va trouver — et c'est exactement ça qui plaît.",
       'photos-label':'Nos plats','img-caption':'Menu renouvelé chaque jour',
       'menu-section-label':'Menu du jour','menu-label-txt':'Mis à jour chaque matin',
       'menu-title-txt':'Carte du jour','menu-cta-txt':'Voir sur Facebook',
@@ -771,8 +824,9 @@ function saveContact(){
       'hero-tagline':'World flavours','rating-txt':'(46 reviews)',
       'reserve-txt':'Book','menu-txt':'Menu','yaller-txt':'Directions',
       'about-label':'The restaurant',
-      'about-pull':'A table that <em>travels</em> without leaving Aubenas.',
-      'about-body':'A different menu every day, a new destination. Local produce, faraway spices, honest and generous cooking.',
+      'about-t1':'The cuisine','about-p1':'A new country on the plate every day. Punjab, Mali, Vietnam, Lebanon... the menu never stops travelling.',
+      'about-t2':'The terroir','about-p2':'The producers have names. Wines, beers and juices come from Pradons, Sécheras, Chirols — just a few kilometres away.',
+      'about-t3':'The spirit','about-p3':'An unfussy, generous, honest table. Where you come back because you never know what you\'ll find — and that\'s exactly the point.',
       'photos-label':'Our dishes','img-caption':'Menu renewed every day',
       'menu-section-label':"Today's menu",'menu-label-txt':'Updated every morning',
       'menu-title-txt':"Today's menu",'menu-cta-txt':'View on Facebook',
