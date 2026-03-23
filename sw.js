@@ -1,4 +1,4 @@
-const CACHE_NAME = 'nook-v123';
+const CACHE_NAME = 'nook-v150';
 const IMAGES = [
   './img/logo.png',
   './img/facade.jpg',
