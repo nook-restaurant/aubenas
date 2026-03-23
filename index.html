@@ -238,15 +238,39 @@ body {
 .btn-map:active { background: var(--ink); }
 
 /* ── FOOTER ── */
-.footer { padding: 2rem 1.25rem 5rem; text-align: center; border-top: 1px solid var(--border); }
-.footer-logo { width: 100px; margin: 0 auto 8px; }
-.footer-sub { font-size: 10px; color: var(--muted); letter-spacing: 0.18em; text-transform: uppercase; }
+.footer {
+  position: relative;
+  padding: 0;
+  overflow: hidden;
+  min-height: 220px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+}
+.footer-bg {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: 30% center;
+  opacity: 0.35;
+}
+.footer-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.75) 100%);
+}
+.footer-content {
+  position: relative; z-index: 1;
+  padding: 2.5rem 1.5rem 3rem;
+  width: 100%;
+}
+.footer-logo { width: 100px; margin: 0 auto 8px; filter: brightness(10) saturate(0); opacity: 0.9; }
+.footer-sub { font-size: 10px; color: rgba(255,255,255,0.6); letter-spacing: 0.18em; text-transform: uppercase; }
 .footer-line { width: 28px; height: 2px; background: var(--orange); opacity: 0.3; margin: 12px auto; }
 .footer-actions { display: flex; flex-direction: column; align-items: center; gap: 8px; margin-bottom: 12px; }
-.footer-phone { display: inline-flex; align-items: center; gap: 7px; padding: 10px 20px; border-radius: 40px; background: var(--surface); border: 1px solid var(--border2); font-size: 15px; font-weight: 500; color: var(--ink); text-decoration: none; -webkit-tap-highlight-color: transparent; }
+.footer-phone { display: inline-flex; align-items: center; gap: 7px; padding: 10px 20px; border-radius: 40px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25); font-size: 15px; font-weight: 500; color: #fff; text-decoration: none; -webkit-tap-highlight-color: transparent; }
 .btn-vcard { display: inline-flex; align-items: center; gap: 8px; padding: 11px 22px; border-radius: 40px; background: var(--blue); color: #fff; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; border: none; cursor: pointer; transition: background .2s; -webkit-tap-highlight-color: transparent; }
 .btn-vcard:active { background: var(--ink); }
-.footer-copy { font-size: 10px; color: rgba(0,0,0,0.22); }
+.footer-copy { font-size: 10px; color: rgba(255,255,255,0.3); }
 
 /* ── BOUTONS FIXES ── */
 #btn-lang { position: fixed; bottom: 24px; left: 16px; z-index: 999; padding: 9px 15px; border-radius: 40px; background: #fff; border: none; font-family: var(--sans); font-size: 11px; font-weight: 600; color: var(--ink); cursor: pointer; box-shadow: 0 3px 12px rgba(0,0,0,0.12); display: flex; align-items: center; gap: 6px; -webkit-tap-highlight-color: transparent; }
@@ -254,19 +278,81 @@ body {
 
 /* ── DESKTOP ── */
 @media (min-width: 768px) {
-  body { max-width: 860px; margin: 0 auto; }
-  .hero { height: 82vh; border-radius: 0 0 12px 12px; }
-  .hero-logo { width: 260px; }
-  .hero-tagline { font-size: 2.4rem; }
-  .cta-item { padding: 12px 36px; }
-  .section { padding: 2.5rem 2rem; }
-  .carousel-item img { height: 300px; }
-  .map-wrap iframe { height: 240px; }
-  .hours-adresse-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; padding: 2.5rem 2rem; border-top: 1px solid var(--border); }
-  .hours-adresse-grid .section { border-top: none; padding: 0; }
-  .footer { padding: 3rem 2rem 4rem; }
+  /* Conteneur centré */
+  body { max-width: 1100px; margin: 0 auto; background: #F0ECE4; }
+
+  /* Hero pleine largeur avec coins arrondis */
+  .hero {
+    height: 88vh; min-height: 560px;
+    border-radius: 0 0 24px 24px;
+    margin: 0;
+  }
+  .hero-logo { width: 280px; }
+  .hero-tagline { font-size: 2.6rem; }
+  .hero-tagline2 { font-size: 1.3rem; }
+  .hero-content { gap: 16px; padding-bottom: 6rem; }
+  .rating-stars svg { width: 18px; height: 18px; }
+  .rating-text { font-size: 16px; }
+  .rating-count { font-size: 14px; }
+
+  /* CTA plus large */
+  .cta-strip { padding: 28px 0 12px; }
+  .cta-item { padding: 10px 48px; font-size: 11px; }
+  .cta-icon { width: 60px; height: 60px; }
+  .cta-icon svg { width: 26px !important; height: 26px !important; }
+
+  /* Layout 2 colonnes pour about + photos */
+  .desktop-2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-top: 1px solid var(--border);
+  }
+  .desktop-2col .section { border-top: none; }
+
+  /* Sections plus aérées */
+  .section { padding: 3rem 2.5rem; }
+  .about-pull { font-size: 2.2rem; }
+  .about-body { font-size: 15px; }
+
+  /* Carousel plus grand */
+  .carousel-item { flex: 0 0 70%; }
+  .carousel-item img { height: 340px; }
+
+  /* Menu card */
+  .menu-title { font-size: 1.8rem; }
+
+  /* Horaires + adresse côte à côte */
+  .hours-adresse-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 0; border-top: 1px solid var(--border);
+  }
+  .hours-adresse-grid .section { border-top: none; padding: 3rem 2.5rem; }
+  .map-wrap iframe { height: 260px; }
+  .hours-table td { font-size: 15px; padding: 13px 4px; }
+
+  /* Image restaurant */
+  .restaurant-img { height: 380px !important; }
+
+  /* Footer */
+  .footer { min-height: 280px; }
+  .footer-content { padding: 3.5rem 2rem 4rem; }
+  .footer-logo { width: 130px; }
+  .footer-sub { font-size: 12px; }
+
+  /* Boutons fixes */
   #btn-lang  { bottom: 32px; left: 32px; }
   #btn-share { bottom: 32px; right: 32px; }
+
+  /* Scroll arrow plus bas */
+  .scroll-arrow { bottom: 30px; }
+}
+
+@media (min-width: 1024px) {
+  body { max-width: 1200px; }
+  .hero { height: 90vh; }
+  .section { padding: 3.5rem 3rem; }
+  .hours-adresse-grid .section { padding: 3.5rem 3rem; }
 }
 @media (orientation: landscape) and (max-height: 500px) {
   .hero { height: 100svh; max-height: none; }
@@ -355,6 +441,7 @@ body {
     </a>
   </div>
 
+  <div class="desktop-2col">
   <!-- LE RESTAURANT -->
   <div class="section r" style="border-top:none">
     <div class="label"><span data-i18n="about-label">Le restaurant</span></div>
@@ -377,6 +464,8 @@ body {
     </div>
     <p class="img-caption" data-i18n="img-caption">Menu renouvelé chaque jour</p>
   </div>
+
+  </div><!-- /desktop-2col -->
 
   <!-- MENU DU JOUR -->
   <div class="section r">
@@ -402,7 +491,7 @@ body {
   </div>
 
   <!-- IMAGE RESTAURANT -->
-  <div class="r"><img src="img/restaurant.jpg" alt="NOOK Restaurant Aubenas" style="width:100%;height:260px;object-fit:cover;"></div>
+  <div class="r"><img src="img/restaurant.jpg" alt="NOOK Restaurant Aubenas" class="restaurant-img" style="width:100%;height:260px;object-fit:cover;"></div>
 
   <!-- HORAIRES + ADRESSE -->
   <div class="hours-adresse-grid">
@@ -441,6 +530,9 @@ body {
 
   <!-- FOOTER -->
   <div class="footer r">
+    <img class="footer-bg" src="img/facade.jpg" alt="">
+    <div class="footer-overlay"></div>
+    <div class="footer-content">
     <img class="footer-logo" src="img/logo.png" alt="NOOK">
     <div class="footer-sub" data-i18n="footer-sub">Cuisine Nomade · Aubenas</div>
     <div class="footer-line"></div>
@@ -455,7 +547,8 @@ body {
       </button>
     </div>
     <div class="footer-copy" data-i18n="footer-copy">© NOOK Restaurant · 8 rue de la Prévoté, 07200 Aubenas</div>
-    <div style="font-size:9px;color:rgba(0,0,0,0.18);margin-top:6px;letter-spacing:0.08em;">Webdesigner : G.Mikael</div>
+    <div style="font-size:9px;color:rgba(255,255,255,0.2);margin-top:6px;letter-spacing:0.08em;">Webdesigner : G.Mikael</div>
+    </div><!-- /footer-content -->
   </div>
 
   <button id="btn-lang"><span id="lang-flag">🇬🇧</span><span id="lang-label">EN</span></button>
