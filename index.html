@@ -175,7 +175,7 @@ body {
 /* ── CTA STRIP ── */
 .cta-strip { display: flex; justify-content: center; align-items: flex-start; padding: 20px 0 8px; width: 100%; }
 .cta-item { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 8px 20px; text-decoration: none; color: var(--ink); font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap; -webkit-tap-highlight-color: transparent; }
-.cta-icon { width: 52px; height: 52px; border-radius: 50%; background: var(--blue); display: flex; align-items: center; justify-content: center; transition: background .2s, transform .15s; flex-shrink: 0; }
+.cta-icon { width: 52px; height: 52px; border-radius: 50%; background: var(--orange); display: flex; align-items: center; justify-content: center; transition: background .2s, transform .15s; flex-shrink: 0; }
 .cta-icon svg { stroke: #fff !important; fill: none; }
 .cta-item:active .cta-icon { background: var(--ink); transform: scale(0.9); }
 
@@ -201,13 +201,13 @@ body {
 .img-caption { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-top: 8px; text-align: center; padding: 0 1.25rem; }
 
 /* ── MENU CARD ── */
-.menu-feature { display: flex; align-items: stretch; border: 1px solid var(--border2); background: var(--surface); border-radius: 6px; overflow: hidden; text-decoration: none; color: inherit; margin-bottom: 10px; -webkit-tap-highlight-color: transparent; }
+.menu-feature { display: flex; align-items: stretch; border: none; background: var(--blue); border-radius: 6px; overflow: hidden; text-decoration: none; color: #fff; margin-bottom: 10px; -webkit-tap-highlight-color: transparent; }
 .menu-feature:active { opacity: .75; }
-.menu-accent { width: 5px; flex-shrink: 0; background: var(--blue); }
+.menu-accent { width: 5px; flex-shrink: 0; background: rgba(255,255,255,0.2); }
 .menu-body { padding: 14px 16px; flex: 1; }
-.menu-label { font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
-.menu-title { font-family: var(--hand); font-size: 1.5rem; font-weight: 600; color: var(--ink); margin-bottom: 5px; }
-.menu-cta { font-size: 12px; color: var(--blue); font-weight: 500; display: flex; align-items: center; gap: 4px; }
+.menu-label { font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 4px; }
+.menu-title { font-family: var(--hand); font-size: 1.5rem; font-weight: 600; color: #fff; margin-bottom: 5px; }
+.menu-cta { font-size: 12px; color: rgba(255,255,255,0.75); font-weight: 500; display: flex; align-items: center; gap: 4px; }
 
 /* ── SOCIAL BTNS ── */
 .social-row { display: flex; gap: 10px; justify-content: center; }
@@ -234,7 +234,7 @@ body {
 .addr-icon { width: 34px; height: 34px; flex-shrink: 0; background: rgba(67,111,150,0.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
 .addr-street { font-size: 14px; font-weight: 500; }
 .addr-city { font-size: 12px; color: var(--muted); }
-.btn-map { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 14px; background: var(--blue); color: #fff; border-radius: 10px; font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; transition: background .2s; -webkit-tap-highlight-color: transparent; }
+.btn-map { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 14px; background: var(--orange); color: #fff; border-radius: 10px; font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; transition: background .2s; -webkit-tap-highlight-color: transparent; }
 .btn-map:active { background: var(--ink); }
 
 /* ── FOOTER ── */
@@ -368,6 +368,49 @@ body {
   50%       { transform: translateX(-50%) translateY(6px); }
 }
 
+
+@media (min-width: 768px) {
+  /* Photos section full width sur desktop */
+  .section.photos-section {
+    padding-left: 0; padding-right: 0; max-width: 100%;
+    border-top: 1px solid var(--border);
+  }
+  .section.photos-section .label { padding: 0 clamp(2rem, 5vw, 6rem); }
+  .section.photos-section .img-caption { padding: 0 clamp(2rem, 5vw, 6rem); }
+
+  /* Grid 3 photos côte à côte */
+  .carousel-desktop {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    padding: 0 clamp(2rem, 5vw, 6rem);
+  }
+  .carousel-desktop .carousel-item {
+    flex: none;
+    scroll-snap-align: none;
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .carousel-desktop .carousel-item img {
+    width: 100%; height: clamp(200px, 22vw, 360px);
+    object-fit: cover;
+    transition: transform .4s ease;
+  }
+  .carousel-desktop .carousel-item:hover img { transform: scale(1.04); }
+
+  /* Cache le carousel mobile et les dots sur desktop */
+  .carousel-mobile { display: none; }
+  .carousel-dots   { display: none; }
+
+  /* Cache le carousel desktop sur mobile */
+  .carousel-desktop { display: none; }
+}
+
+@media (min-width: 768px) {
+  .carousel-desktop { display: grid; }
+  .carousel-mobile  { display: none; }
+}
+
 </style>
 </head>
 <body>
@@ -430,7 +473,6 @@ body {
     </a>
   </div>
 
-  <div class="desktop-2col">
   <!-- LE RESTAURANT -->
   <div class="section r" style="border-top:none">
     <div class="label"><span data-i18n="about-label">Le restaurant</span></div>
@@ -439,9 +481,10 @@ body {
   </div>
 
   <!-- PHOTOS -->
-  <div class="section r" style="border-top:none; padding-left:0; padding-right:0; padding-top:0">
+  <div class="section photos-section r" style="border-top:none; padding-left:0; padding-right:0; padding-top:0">
     <div class="label" style="padding:0 1.25rem"><span data-i18n="photos-label">Nos plats</span></div>
-    <div class="carousel-wrap">
+    <!-- Mobile carousel -->
+    <div class="carousel-wrap carousel-mobile">
       <div class="carousel" id="carousel">
         <div class="carousel-item"><img src="img/curry.jpg" alt="Curry NOOK"></div>
         <div class="carousel-item"><img src="img/dessert.jpg" alt="Dessert NOOK"></div>
@@ -451,10 +494,14 @@ body {
         <span class="dot active"></span><span class="dot"></span><span class="dot"></span>
       </div>
     </div>
+    <!-- Desktop grid 3 photos -->
+    <div class="carousel-desktop">
+      <div class="carousel-item"><img src="img/curry.jpg" alt="Curry NOOK"></div>
+      <div class="carousel-item"><img src="img/dessert.jpg" alt="Dessert NOOK"></div>
+      <div class="carousel-item"><img src="img/assiette.jpg" alt="Assiette NOOK"></div>
+    </div>
     <p class="img-caption" data-i18n="img-caption">Menu renouvelé chaque jour</p>
   </div>
-
-  </div><!-- /desktop-2col -->
 
   <!-- MENU DU JOUR -->
   <div class="section r">
