@@ -278,81 +278,70 @@ body {
 
 /* ── DESKTOP ── */
 @media (min-width: 768px) {
-  /* Conteneur centré */
-  body { max-width: 1100px; margin: 0 auto; background: #F0ECE4; }
+  body { width: 100%; max-width: 100%; }
 
-  /* Hero pleine largeur avec coins arrondis */
+  /* Hero pleine largeur */
   .hero {
-    height: 88vh; min-height: 560px;
-    border-radius: 0 0 24px 24px;
-    margin: 0;
+    width: 100%;
+    height: 90vh; min-height: 560px;
+    border-radius: 0 0 2vw 2vw;
   }
-  .hero-logo { width: 280px; }
-  .hero-tagline { font-size: 2.6rem; }
-  .hero-tagline2 { font-size: 1.3rem; }
-  .hero-content { gap: 16px; padding-bottom: 6rem; }
-  .rating-stars svg { width: 18px; height: 18px; }
-  .rating-text { font-size: 16px; }
-  .rating-count { font-size: 14px; }
+  .hero-logo    { width: clamp(200px, 18vw, 320px); }
+  .hero-tagline { font-size: clamp(1.8rem, 3.5vw, 3.2rem); }
+  .hero-tagline2{ font-size: clamp(1rem, 1.6vw, 1.4rem); }
+  .hero-content { gap: clamp(10px, 1.5vw, 20px); padding: 2rem 4vw 7vh; }
+  .rating-stars svg { width: clamp(14px, 1.5vw, 22px); height: clamp(14px, 1.5vw, 22px); }
+  .rating-text  { font-size: clamp(13px, 1.4vw, 18px); }
+  .rating-count { font-size: clamp(12px, 1.2vw, 16px); }
 
-  /* CTA plus large */
-  .cta-strip { padding: 28px 0 12px; }
-  .cta-item { padding: 10px 48px; font-size: 11px; }
-  .cta-icon { width: 60px; height: 60px; }
-  .cta-icon svg { width: 26px !important; height: 26px !important; }
+  /* CTA */
+  .cta-strip { padding: clamp(20px, 2.5vh, 40px) 0 clamp(10px, 1.5vh, 20px); max-width: 700px; margin: 0 auto; }
+  .cta-item  { padding: clamp(8px, 1vh, 16px) clamp(24px, 4vw, 64px); font-size: clamp(10px, 1vw, 13px); }
+  .cta-icon  { width: clamp(48px, 5vw, 72px); height: clamp(48px, 5vw, 72px); }
 
-  /* Layout 2 colonnes pour about + photos */
+  /* Wrapper contenu centré avec marges latérales */
+  .section        { padding: clamp(2rem, 3vw, 4rem) clamp(2rem, 5vw, 6rem); max-width: 1400px; margin: 0 auto; width: 100%; }
+  .about-pull     { font-size: clamp(1.8rem, 2.5vw, 2.8rem); }
+  .about-body     { font-size: clamp(14px, 1.1vw, 17px); }
+
+  /* 2 colonnes about + photos */
   .desktop-2col {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
-    border-top: 1px solid var(--border);
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 0; border-top: 1px solid var(--border);
+    max-width: 1400px; margin: 0 auto; width: 100%;
   }
-  .desktop-2col .section { border-top: none; }
+  .desktop-2col .section { border-top: none; margin: 0; max-width: 100%; }
 
-  /* Sections plus aérées */
-  .section { padding: 3rem 2.5rem; }
-  .about-pull { font-size: 2.2rem; }
-  .about-body { font-size: 15px; }
+  /* Carousel */
+  .carousel-item     { flex: 0 0 68%; }
+  .carousel-item img { height: clamp(260px, 25vw, 420px); }
 
-  /* Carousel plus grand */
-  .carousel-item { flex: 0 0 70%; }
-  .carousel-item img { height: 340px; }
+  /* Menu */
+  .menu-title { font-size: clamp(1.5rem, 2vw, 2.2rem); }
 
-  /* Menu card */
-  .menu-title { font-size: 1.8rem; }
-
-  /* Horaires + adresse côte à côte */
+  /* Horaires + adresse */
   .hours-adresse-grid {
     display: grid; grid-template-columns: 1fr 1fr;
     gap: 0; border-top: 1px solid var(--border);
+    max-width: 1400px; margin: 0 auto; width: 100%;
   }
-  .hours-adresse-grid .section { border-top: none; padding: 3rem 2.5rem; }
-  .map-wrap iframe { height: 260px; }
-  .hours-table td { font-size: 15px; padding: 13px 4px; }
+  .hours-adresse-grid .section { border-top: none; padding: clamp(2rem, 3vw, 4rem) clamp(2rem, 5vw, 6rem); margin: 0; max-width: 100%; }
+  .map-wrap iframe   { height: clamp(200px, 20vw, 320px); }
+  .hours-table td    { font-size: clamp(13px, 1.1vw, 16px); padding: clamp(8px, 1vw, 16px) 4px; }
 
   /* Image restaurant */
-  .restaurant-img { height: 380px !important; }
+  .restaurant-img    { height: clamp(280px, 28vw, 480px) !important; }
 
   /* Footer */
-  .footer { min-height: 280px; }
-  .footer-content { padding: 3.5rem 2rem 4rem; }
-  .footer-logo { width: 130px; }
-  .footer-sub { font-size: 12px; }
+  .footer         { min-height: clamp(240px, 25vh, 380px); }
+  .footer-content { padding: clamp(2.5rem, 4vh, 5rem) clamp(2rem, 5vw, 6rem); max-width: 1400px; margin: 0 auto; }
+  .footer-logo    { width: clamp(100px, 10vw, 160px); }
+  .footer-sub     { font-size: clamp(10px, 0.9vw, 13px); }
 
   /* Boutons fixes */
   #btn-lang  { bottom: 32px; left: 32px; }
   #btn-share { bottom: 32px; right: 32px; }
-
-  /* Scroll arrow plus bas */
   .scroll-arrow { bottom: 30px; }
-}
-
-@media (min-width: 1024px) {
-  body { max-width: 1200px; }
-  .hero { height: 90vh; }
-  .section { padding: 3.5rem 3rem; }
-  .hours-adresse-grid .section { padding: 3.5rem 3rem; }
 }
 @media (orientation: landscape) and (max-height: 500px) {
   .hero { height: 100svh; max-height: none; }
