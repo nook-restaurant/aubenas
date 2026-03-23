@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr-FR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -13,6 +13,7 @@
 <meta property="og:image" content="https://nook-restaurant.github.io/aubenas/img/facade.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://nook-restaurant.github.io/aubenas/img/facade.jpg">
+<link rel="canonical" href="https://nook-restaurant.github.io/aubenas">
 <link rel="icon" type="image/png" href="img/logo.png">
 <link rel="apple-touch-icon" href="img/logo.png">
 <script type="application/ld+json">
@@ -210,7 +211,7 @@ body {
 .menu-cta { font-size: 12px; color: rgba(255,255,255,0.75); font-weight: 500; display: flex; align-items: center; gap: 4px; }
 
 /* ── SOCIAL BTNS ── */
-.social-row { display: flex; gap: 10px; justify-content: center; }
+.social-row { display: flex; gap: 10px; justify-content: center; margin-top: 12px; }
 .social-btn { display: inline-flex; align-items: center; justify-content: center; gap: 7px; padding: 10px 20px; border-radius: 10px; font-size: 12px; font-weight: 600; text-decoration: none; transition: opacity .2s, transform .15s; -webkit-tap-highlight-color: transparent; color: #fff; }
 .social-btn:active { opacity: 0.8; transform: scale(0.97); }
 .social-btn.fb  { background: #1877F2; }
@@ -426,7 +427,8 @@ body {
       </svg>
     </div>
     <div class="hero-content">
-      <img class="hero-logo" src="img/logo.png" alt="NOOK">
+      <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none;">NOOK – Restaurant Cuisine Nomade à Aubenas, Ardèche</h1>
+      <img class="hero-logo" src="img/logo.png" alt="NOOK Restaurant Cuisine Nomade Aubenas">
       <div class="hero-tagline" data-i18n="hero-tagline">Saveurs du monde</div>
       <div class="hero-city">Aubenas · Ardèche</div>
       <div class="hero-rating" id="hero-rating">
@@ -465,20 +467,20 @@ body {
 
   <!-- LE RESTAURANT -->
   <div class="section r" style="border-top:none">
-    <div class="label"><span data-i18n="about-label">Le restaurant</span></div>
-    <p class="about-pull" data-i18n-html="about-pull">Une table qui <em>voyage</em> sans jamais quitter Aubenas.</p>
+    <div class="label"><h2 data-i18n="about-label" style="font:inherit;margin:0;padding:0;display:inline">Le restaurant</h2></div>
+    <h2 class="about-pull" data-i18n-html="about-pull" style="font:inherit;margin:0 0 .8rem;padding:0">Une table qui <em>voyage</em> sans jamais quitter Aubenas.</h2>
     <p class="about-body" data-i18n="about-body">Chaque jour un menu différent, une nouvelle escale. Des produits locaux, des épices lointaines, une cuisine franche et généreuse.</p>
   </div>
 
   <!-- PHOTOS -->
   <div class="section photos-section r" style="border-top:none; padding-left:0; padding-right:0; padding-top:0">
-    <div class="label" style="padding:0 1.25rem"><span data-i18n="photos-label">Nos plats</span></div>
+    <div class="label" style="padding:0 1.25rem"><h2 data-i18n="photos-label" style="font:inherit;margin:0;padding:0;display:inline">Nos plats</h2></div>
     <!-- Mobile carousel -->
     <div class="carousel-wrap carousel-mobile">
       <div class="carousel" id="carousel">
-        <div class="carousel-item"><img src="img/curry.jpg" alt="Curry NOOK"></div>
-        <div class="carousel-item"><img src="img/dessert.jpg" alt="Dessert NOOK"></div>
-        <div class="carousel-item"><img src="img/assiette.jpg" alt="Assiette NOOK"></div>
+        <div class="carousel-item"><img src="img/curry.jpg" alt="Plat curry NOOK restaurant Aubenas"></div>
+        <div class="carousel-item"><img src="img/dessert.jpg" alt="Dessert maison NOOK restaurant Aubenas"></div>
+        <div class="carousel-item"><img src="img/assiette.jpg" alt="Assiette du jour NOOK cuisine nomade Aubenas"></div>
       </div>
       <div class="carousel-dots" id="carousel-dots">
         <span class="dot active"></span><span class="dot"></span><span class="dot"></span>
@@ -486,43 +488,45 @@ body {
     </div>
     <!-- Desktop grid 3 photos -->
     <div class="carousel-desktop">
-      <div class="carousel-item"><img src="img/curry.jpg" alt="Curry NOOK"></div>
-      <div class="carousel-item"><img src="img/dessert.jpg" alt="Dessert NOOK"></div>
-      <div class="carousel-item"><img src="img/assiette.jpg" alt="Assiette NOOK"></div>
+      <div class="carousel-item"><img src="img/curry.jpg" alt="Plat curry NOOK restaurant Aubenas"></div>
+      <div class="carousel-item"><img src="img/dessert.jpg" alt="Dessert maison NOOK restaurant Aubenas"></div>
+      <div class="carousel-item"><img src="img/assiette.jpg" alt="Assiette du jour NOOK cuisine nomade Aubenas"></div>
     </div>
     <p class="img-caption" data-i18n="img-caption">Menu renouvelé chaque jour</p>
   </div>
 
   <!-- MENU DU JOUR -->
   <div class="section r">
-    <div class="label"><span data-i18n="menu-section-label">Menu du jour</span></div>
+    <div class="label"><h2 data-i18n="menu-section-label" style="font:inherit;margin:0;padding:0;display:inline">Menu du jour</h2></div>
     <a class="menu-feature" href="https://www.facebook.com/people/NOOK-Restaurant/61575514529548/" target="_blank" rel="noopener">
       <div class="menu-accent"></div>
       <div class="menu-body">
-        <div class="menu-label" data-i18n="menu-label-txt">Mis à jour chaque matin</div>
-        <div class="menu-title" data-i18n="menu-title-txt">Carte du jour</div>
+        <p class="menu-label" data-i18n="menu-label-txt">Mis à jour chaque matin</p>
+        <h3 class="menu-title" data-i18n="menu-title-txt" style="font:inherit;margin:0 0 5px;padding:0">Carte du jour</h3>
         <div class="menu-cta" id="menu-cta-link">Voir sur Facebook <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
       </div>
     </a>
-    <div class="social-row">
-      <a class="social-btn fb" href="https://www.facebook.com/people/NOOK-Restaurant/61575514529548/" target="_blank" rel="noopener">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
-        <span data-i18n="fb-btn">Facebook</span>
-      </a>
-      <a class="social-btn ig" href="https://www.instagram.com/nook.aubenas/" target="_blank" rel="noopener">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="#fff" stroke="none"/></svg>
-        <span data-i18n="ig-btn">Instagram</span>
-      </a>
-    </div>
+  </div>
+
+  <!-- SOCIAL -->
+  <div style="display:flex; justify-content:center; gap:10px; padding: 0 1.25rem 1.5rem;">
+    <a class="social-btn fb" href="https://www.facebook.com/people/NOOK-Restaurant/61575514529548/" target="_blank" rel="noopener">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+      <span data-i18n="fb-btn">Facebook</span>
+    </a>
+    <a class="social-btn ig" href="https://www.instagram.com/nook.aubenas/" target="_blank" rel="noopener">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="#fff" stroke="none"/></svg>
+      <span data-i18n="ig-btn">Instagram</span>
+    </a>
   </div>
 
   <!-- IMAGE RESTAURANT -->
-  <div class="r"><img src="img/restaurant.jpg" alt="NOOK Restaurant Aubenas" class="restaurant-img" style="width:100%;height:260px;object-fit:cover;"></div>
+  <div class="r"><img src="img/restaurant.jpg" alt="Intérieur du restaurant NOOK à Aubenas, Ardèche" class="restaurant-img" style="width:100%;height:260px;object-fit:cover;"></div>
 
   <!-- HORAIRES + ADRESSE -->
   <div class="hours-adresse-grid">
     <div class="section r" style="border-top:none">
-      <div class="label"><span data-i18n="hours-label">Horaires</span></div>
+      <div class="label"><h2 data-i18n="hours-label" style="font:inherit;margin:0;padding:0;display:inline">Horaires</h2></div>
       <table class="hours-table">
         <tr id="row-lun"><td class="day"><span data-i18n="day-lun">Lundi</span></td><td class="time">18h30 – 23h00</td></tr>
         <tr id="row-mar"><td class="day"><span data-i18n="day-mar">Mardi</span></td><td class="time">11h30 – 23h00</td></tr>
@@ -534,7 +538,7 @@ body {
       </table>
     </div>
     <div class="section r" style="border-top:none">
-      <div class="label"><span data-i18n="addr-label">Nous trouver</span></div>
+      <div class="label"><h2 data-i18n="addr-label" style="font:inherit;margin:0;padding:0;display:inline">Nous trouver</h2></div>
       <div class="map-wrap">
         <iframe loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"
           src="https://www.google.com/maps?q=8+rue+de+la+Prévôté,+07200+Aubenas&output=embed"
@@ -542,10 +546,10 @@ body {
       </div>
       <div class="addr-row">
         <div class="addr-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#436F96" stroke-width="1.8"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></div>
-        <div>
+        <address style="font-style:normal">
           <div class="addr-street" data-i18n="addr-street">8 rue de la Prévoté</div>
           <div class="addr-city" data-i18n="addr-city">07200 Aubenas</div>
-        </div>
+        </address>
       </div>
       <a class="btn-map" href="#" id="btn-directions">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
