@@ -20,7 +20,7 @@
 {"@context":"https://schema.org","@type":"Restaurant","name":"NOOK","telephone":"+33475360910","email":"nook.aubenas@gmail.com","address":{"@type":"PostalAddress","streetAddress":"8 rue de la Prévoté","addressLocality":"Aubenas","postalCode":"07200","addressCountry":"FR"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"5","reviewCount":"46","bestRating":"5"},"url":"https://nook-restaurant.github.io/aubenas","image":"https://nook-restaurant.github.io/aubenas/img/facade.jpg","sameAs":["https://www.facebook.com/people/NOOK-Restaurant/61575514529548/","https://www.instagram.com/nook.aubenas/"]}
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=Caveat:wght@400;600;700&family=DM+Sans:wght@300;400;500&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@900&family=Caveat:wght@400;600;700&family=DM+Sans:wght@300;400;500&family=Montserrat:wght@700&display=swap" rel="stylesheet">
 <style>
 /* ── RESET ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -186,25 +186,19 @@ body {
 /* ── SECTIONS ── */
 .section { padding: 2rem 1.25rem; border-top: 1px solid var(--border); }
 .label {
-  font-family: var(--jose);
-  font-size: clamp(1.5rem, 4vw, 2.4rem);
-  font-weight: 300;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 900;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ink);
-  margin-bottom: 1.4rem;
+  margin-bottom: 1.2rem;
   display: flex;
   align-items: center;
-  gap: 14px;
+  justify-content: center;
+  text-align: center;
   line-height: 1;
-}
-.label::before {
-  content: '';
-  width: 28px;
-  height: 2px;
-  background: #DEB853;
-  flex-shrink: 0;
-  border-radius: 2px;
+  line-height: 1;
 }
 
 /* ── ABOUT ── */
@@ -469,6 +463,20 @@ body {
   .about-card-text  { font-size: 14px; }
 }
 
+
+
+
+.label-line {
+  display: block;
+  width: 60px;
+  height: 8px;
+  flex-shrink: 0;
+  margin: 0 12px;
+  opacity: 0.85;
+}
+@media (min-width: 768px) {
+  .label-line { width: 90px; margin: 0 18px; }
+}
 </style>
 </head>
 <body>
@@ -534,7 +542,7 @@ body {
 
   <!-- LE RESTAURANT -->
   <div class="section r" style="border-top:none">
-    <div class="label"><h2 data-i18n="about-label" style="font:inherit;margin:0;padding:0;display:inline">Le restaurant</h2></div>
+    <div class="label"><svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M2 4 C12 2, 22 6, 32 4 C42 2, 52 5, 58 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg><h2 data-i18n="about-label" style="font:inherit;margin:0;padding:0;display:inline">Le restaurant</h2><svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M58 4 C48 2, 38 6, 28 4 C18 2, 8 5, 2 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg></div>
     <div class="about-cards">
       <div class="about-card">
         <div class="about-card-title" data-i18n="about-t1">La cuisine</div>
@@ -550,7 +558,7 @@ body {
 
   <!-- PHOTOS -->
   <div class="section photos-section r" style="border-top:none; padding-left:0; padding-right:0; padding-top:0">
-    <div class="label" style="padding:0 1.25rem"><h2 data-i18n="photos-label" style="font:inherit;margin:0;padding:0;display:inline">Nos plats</h2></div>
+    <div class="label" style="padding:0 1.25rem"><svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M2 4 C12 2, 22 6, 32 4 C42 2, 52 5, 58 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg><h2 data-i18n="photos-label" style="font:inherit;margin:0;padding:0;display:inline">Nos plats</h2><svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M58 4 C48 2, 38 6, 28 4 C18 2, 8 5, 2 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg></div>
     <!-- Mobile carousel -->
     <div class="carousel-wrap carousel-mobile">
       <div class="carousel" id="carousel">
@@ -573,7 +581,7 @@ body {
 
   <!-- MENU DU JOUR -->
   <div class="section r">
-    <div class="label"><h2 data-i18n="menu-section-label" style="font:inherit;margin:0;padding:0;display:inline">Menu du jour</h2></div>
+    <div class="label"><svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M2 4 C12 2, 22 6, 32 4 C42 2, 52 5, 58 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg><h2 data-i18n="menu-section-label" style="font:inherit;margin:0;padding:0;display:inline">Menu du jour</h2><svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M58 4 C48 2, 38 6, 28 4 C18 2, 8 5, 2 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg></div>
     <a class="menu-feature" href="https://www.facebook.com/people/NOOK-Restaurant/61575514529548/" target="_blank" rel="noopener">
       <div class="menu-accent"></div>
       <div class="menu-body">
@@ -602,7 +610,7 @@ body {
   <!-- HORAIRES + ADRESSE -->
   <div class="hours-adresse-grid">
     <div class="section r" style="border-top:none">
-      <div class="label"><h2 data-i18n="hours-label" style="font:inherit;margin:0;padding:0;display:inline">Horaires</h2></div>
+      <div class="label"><svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M2 4 C12 2, 22 6, 32 4 C42 2, 52 5, 58 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg><h2 data-i18n="hours-label" style="font:inherit;margin:0;padding:0;display:inline">Horaires</h2><svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M58 4 C48 2, 38 6, 28 4 C18 2, 8 5, 2 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg></div>
       <table class="hours-table">
         <tr id="row-lun"><td class="day"><span data-i18n="day-lun">Lundi</span></td><td class="time">18h30 – 23h00</td></tr>
         <tr id="row-mar"><td class="day"><span data-i18n="day-mar">Mardi</span></td><td class="time">11h30 – 23h00</td></tr>
@@ -614,7 +622,7 @@ body {
       </table>
     </div>
     <div class="section r" style="border-top:none">
-      <div class="label"><h2 data-i18n="addr-label" style="font:inherit;margin:0;padding:0;display:inline">Nous trouver</h2></div>
+      <div class="label"><svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M2 4 C12 2, 22 6, 32 4 C42 2, 52 5, 58 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg><h2 data-i18n="addr-label" style="font:inherit;margin:0;padding:0;display:inline">Nous trouver</h2><svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M58 4 C48 2, 38 6, 28 4 C18 2, 8 5, 2 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg></div>
       <div class="map-wrap">
         <iframe loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"
           src="https://www.google.com/maps?q=8+rue+de+la+Prévôté,+07200+Aubenas&output=embed"
