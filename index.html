@@ -369,8 +369,11 @@ body {
 }
 
 
+/* Cache desktop grid sur mobile par défaut */
+.carousel-desktop { display: none; }
+
 @media (min-width: 768px) {
-  /* Photos section full width sur desktop */
+  /* Photos section full width */
   .section.photos-section {
     padding-left: 0; padding-right: 0; max-width: 100%;
     border-top: 1px solid var(--border);
@@ -378,7 +381,7 @@ body {
   .section.photos-section .label { padding: 0 clamp(2rem, 5vw, 6rem); }
   .section.photos-section .img-caption { padding: 0 clamp(2rem, 5vw, 6rem); }
 
-  /* Grid 3 photos côte à côte */
+  /* Affiche grid desktop, cache carousel mobile */
   .carousel-desktop {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -386,29 +389,16 @@ body {
     padding: 0 clamp(2rem, 5vw, 6rem);
   }
   .carousel-desktop .carousel-item {
-    flex: none;
-    scroll-snap-align: none;
-    border-radius: 14px;
-    overflow: hidden;
+    flex: none; scroll-snap-align: none;
+    border-radius: 14px; overflow: hidden;
   }
   .carousel-desktop .carousel-item img {
     width: 100%; height: clamp(200px, 22vw, 360px);
-    object-fit: cover;
-    transition: transform .4s ease;
+    object-fit: cover; transition: transform .4s ease;
   }
   .carousel-desktop .carousel-item:hover img { transform: scale(1.04); }
-
-  /* Cache le carousel mobile et les dots sur desktop */
   .carousel-mobile { display: none; }
   .carousel-dots   { display: none; }
-
-  /* Cache le carousel desktop sur mobile */
-  .carousel-desktop { display: none; }
-}
-
-@media (min-width: 768px) {
-  .carousel-desktop { display: grid; }
-  .carousel-mobile  { display: none; }
 }
 
 </style>
