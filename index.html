@@ -20,7 +20,7 @@
 {"@context":"https://schema.org","@type":"Restaurant","name":"NOOK","telephone":"+33475360910","email":"nook.aubenas@gmail.com","address":{"@type":"PostalAddress","streetAddress":"8 rue de la Prévoté","addressLocality":"Aubenas","postalCode":"07200","addressCountry":"FR"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"5","reviewCount":"46","bestRating":"5"},"url":"https://nook-restaurant.github.io/aubenas","image":"https://nook-restaurant.github.io/aubenas/img/facade.jpg","sameAs":["https://www.facebook.com/people/NOOK-Restaurant/61575514529548/","https://www.instagram.com/nook.aubenas/"]}
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=DM+Sans:wght@300;400;500&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=DM+Sans:wght@300;400;500&family=Montserrat:wght@700&family=Josefin+Sans:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
 /* ── RESET ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -39,6 +39,9 @@ img { display: block; max-width: 100%; }
   --hand:   'Caveat', cursive;
   --sans:   'DM Sans', system-ui, sans-serif;
   --mont:   'Montserrat', sans-serif;
+  --anton:  'Black Han Sans', sans-serif;
+  --josefin: 'Josefin Sans', sans-serif;
+  --jose:   'Josefin Sans', sans-serif;
 }
 
 html { scroll-behavior: smooth; }
@@ -182,8 +185,27 @@ body {
 
 /* ── SECTIONS ── */
 .section { padding: 2rem 1.25rem; border-top: 1px solid var(--border); }
-.label { font-family: var(--mont); font-size: 10px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--orange); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 10px; }
-.label::after { content: ''; flex: 1; height: 3px; border-radius: 2px; background: #DEB853; opacity: 0.75; }
+.label {
+  font-family: var(--jose);
+  font-size: clamp(1.5rem, 4vw, 2.4rem);
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  line-height: 1;
+}
+.label::before {
+  content: '';
+  width: 28px;
+  height: 2px;
+  background: #DEB853;
+  flex-shrink: 0;
+  border-radius: 2px;
+}
 
 /* ── ABOUT ── */
 .about-pull { font-family: var(--hand); font-size: 1.9rem; font-weight: 600; line-height: 1.2; color: var(--ink); margin-bottom: .8rem; }
@@ -303,6 +325,7 @@ body {
 
   /* Wrapper contenu centré avec marges latérales */
   .section        { padding: clamp(2rem, 3vw, 4rem) clamp(2rem, 5vw, 6rem); max-width: 1400px; margin: 0 auto; width: 100%; }
+  .label { font-size: clamp(1.6rem, 2.2vw, 2.6rem); }
   .about-pull     { font-size: clamp(1.8rem, 2.5vw, 2.8rem); }
   .about-body     { font-size: clamp(14px, 1.1vw, 17px); }
 
