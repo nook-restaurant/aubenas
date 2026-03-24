@@ -588,7 +588,7 @@ setTimeout(()=>{
   setTimeout(()=>document.getElementById('hero-rating')?.classList.add('on'),460);
   setTimeout(()=>document.querySelector('.hero-tagline2')?.classList.add('on'),570);
   document.querySelectorAll('.r').forEach((el,i)=>{ if(el.getBoundingClientRect().top<window.innerHeight) setTimeout(()=>el.classList.add('on'),80+i*55); });
-  setTimeout(()=>splash.remove(),800);
+  setTimeout(()=>{ splash.remove(); initNavObserver(); },800);
 },1500);
 
 /* SCROLL REVEAL + STICKY NAV */
@@ -601,15 +601,19 @@ const io=new IntersectionObserver(entries=>{
   });
 },{threshold:0.06});
 document.querySelectorAll('.r').forEach(el=>io.observe(el));
-// Nav only activates once CTA strip leaves viewport for the first time
-const ctaStrip = document.querySelector('.cta-strip');
-let navArmed = false;
-const navObserver = new IntersectionObserver(entries => {
-  const outOfView = !entries[0].isIntersecting;
-  if(outOfView && !navArmed) { navArmed = true; nav.classList.add('armed'); }
-  if(navArmed) nav.classList.toggle('visible', outOfView);
-}, { threshold: 0 });
-if(ctaStrip) navObserver.observe(ctaStrip);
+// Nav appears/disappears based on CTA strip pixel position
+function initNavObserver() {
+  const ctaStrip = document.querySelector('.cta-strip');
+  if(!ctaStrip) return;
+  let armed = false;
+  function checkNav() {
+    const bottom = ctaStrip.getBoundingClientRect().bottom;
+    const pastCTA = bottom < 0;
+    if(pastCTA && !armed) { armed = true; nav.classList.add('armed'); }
+    if(armed) nav.classList.toggle('visible', pastCTA);
+  }
+  window.addEventListener('scroll', checkNav, { passive: true });
+}
 
 /* STATUS BADGE */
 (function(){
