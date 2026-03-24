@@ -1,4 +1,4 @@
-const CACHE_NAME = 'nook-v230';
+const CACHE_NAME = 'nook-v250';
 const ASSETS = [
   './',
   './index.html',
