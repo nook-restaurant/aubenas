@@ -62,7 +62,7 @@ body {
 #s-logo.in { opacity: 1; transform: scale(1); }
 #s-rule { width: 0; height: 1px; background: rgba(222,184,83,0.5); margin-top: 20px; transition: width .6s .3s ease; }
 #s-rule.in { width: 48px; }
-#s-city { font-family: var(--hand); font-size: 32px; font-weight: 700; color: rgba(255,255,255,0.7); margin-top: 10px; opacity: 0; transform: translateY(4px); transition: opacity .5s .45s ease, transform .5s .45s ease; }
+#s-city { font-family: var(--hand); font-size: 38px; font-weight: 700; color: #fff; margin-top: 10px; opacity: 0; transform: translateY(4px); transition: opacity .5s .45s ease, transform .5s .45s ease; }
 #s-city.in { opacity: 1; transform: translateY(0); }
 
 /* ── PAGE ── */
@@ -81,12 +81,13 @@ body {
   border-bottom: none;
   display: flex; align-items: center; justify-content: center; gap: 0;
   padding: 0;
+  display: none;
   transform: translateY(-100%);
-  opacity: 0;
-  transition: transform .4s cubic-bezier(.4,0,.2,1), opacity .3s ease;
+  transition: transform .4s cubic-bezier(.4,0,.2,1);
   pointer-events: none;
 }
-#sticky-nav.visible { transform: translateY(0); opacity: 1; pointer-events: all; }
+#sticky-nav.armed { display: flex; }
+#sticky-nav.visible { transform: translateY(0); pointer-events: all; }
 .nav-item {
   flex: 1; text-align: center;
   padding: 14px 8px;
@@ -176,7 +177,7 @@ body {
 .hero-city {
   font-family: var(--sans); font-size: 11px; font-weight: 700;
   letter-spacing: 0.16em; text-transform: uppercase;
-  color: rgba(255,255,255,0.5);
+  color: #fff;
   opacity: 0; transform: translateY(6px);
   transition: opacity .5s .38s ease, transform .5s .38s ease;
 }
@@ -192,7 +193,7 @@ body {
 .rating-count { font-size: 12px; color: rgba(255,255,255,0.5); }
 .hero-tagline2 {
   font-family: var(--hand); font-size: 1.1rem; font-weight: 400;
-  color: rgba(255,255,255,0.5); font-style: italic;
+  color: rgba(255,255,255,0.85); font-style: italic;
   opacity: 0; transform: translateY(6px);
   transition: opacity .5s .58s ease, transform .5s .58s ease;
 }
@@ -302,11 +303,11 @@ body {
 .menu-cta { font-size: 12px; color: rgba(255,255,255,0.7); font-weight: 500; display: flex; align-items: center; gap: 4px; }
 
 /* ── SOCIAL ── */
-.social-wrap { display: flex; justify-content: center; align-items: center; gap: 12px; padding: 1.5rem; }
-.social-btn { display: inline-flex; align-items: center; gap: 7px; padding: 10px 20px; border-radius: 10px; font-size: 12px; font-weight: 600; text-decoration: none; color: #fff; transition: opacity .2s; -webkit-tap-highlight-color: transparent; }
-.social-btn:active { opacity: .8; }
-.social-btn.fb  { background: #1877F2; }
-.social-btn.ig  { background: linear-gradient(45deg, #f09433, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888); }
+.social-wrap { display: flex; justify-content: center; align-items: center; gap: 20px; padding: 2rem 1.5rem; background: var(--dark2); }
+.social-icon-btn { width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: transform .2s, opacity .2s; -webkit-tap-highlight-color: transparent; }
+.social-icon-btn:active { transform: scale(0.92); opacity: .8; }
+.social-icon-btn.fb { background: #1877F2; }
+.social-icon-btn.ig { background: linear-gradient(45deg, #f09433, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888); }
 
 /* ── HORAIRES ── */
 .hours-table { width: 100%; border-collapse: collapse; }
@@ -316,13 +317,13 @@ body {
 .hours-table .day { color: rgba(255,255,255,0.5); width: 50%; }
 .hours-table .time { font-weight: 500; color: #fff; text-align: right; }
 .hours-table .closed { color: rgba(255,255,255,0.2); font-style: italic; text-align: right; }
-.today-row .day { color: var(--gold) !important; }
-.today-badge { display: inline-block; background: rgba(222,184,83,0.12); color: var(--gold); font-size: 9px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 6px; border-radius: 40px; margin-left: 6px; vertical-align: middle; border: 1px solid rgba(222,184,83,0.25); }
+.today-row .day { color: var(--orange) !important; }
+.today-badge { display: inline-block; background: rgba(212,120,26,0.15); color: var(--orange); font-size: 9px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 6px; border-radius: 40px; margin-left: 6px; vertical-align: middle; border: 1px solid rgba(212,120,26,0.3); }
 
 /* ── ADRESSE ── */
 .map-wrap { border-radius: 12px; overflow: hidden; margin-bottom: 10px; }
 .map-wrap iframe { display: block; width: 100%; height: 180px; border: none; }
-.addr-row { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; background: var(--dark3); margin-bottom: 10px; }
+.addr-row { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 12px 14px; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; background: var(--dark3); margin-bottom: 10px; text-align: center; }
 .addr-icon { width: 34px; height: 34px; flex-shrink: 0; background: rgba(67,111,150,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
 .addr-street { font-size: 14px; font-weight: 500; color: #fff; }
 .addr-city { font-size: 12px; color: rgba(255,255,255,0.45); }
@@ -497,14 +498,12 @@ body {
   <div class="r"><img src="img/restaurant.jpg" alt="Intérieur du restaurant NOOK à Aubenas, Ardèche" class="restaurant-img" style="width:100%;height:260px;object-fit:cover;"></div>
 
   <!-- SOCIAL -->
-  <div class="social-wrap" style="background:var(--dark2);">
-    <a class="social-btn fb" href="https://www.facebook.com/people/NOOK-Restaurant/61575514529548/" target="_blank" rel="noopener">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
-      <span data-i18n="fb-btn">Facebook</span>
+  <div class="social-wrap">
+    <a class="social-icon-btn fb" href="https://www.facebook.com/people/NOOK-Restaurant/61575514529548/" target="_blank" rel="noopener" aria-label="Facebook">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
     </a>
-    <a class="social-btn ig" href="https://www.instagram.com/nook.aubenas/" target="_blank" rel="noopener">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="#fff" stroke="none"/></svg>
-      <span data-i18n="ig-btn">Instagram</span>
+    <a class="social-icon-btn ig" href="https://www.instagram.com/nook.aubenas/" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="#fff" stroke="none"/></svg>
     </a>
   </div>
 
@@ -559,12 +558,7 @@ body {
       <img class="footer-logo" src="img/logo.png" alt="NOOK">
       <div class="footer-sub" data-i18n="footer-sub">Cuisine Nomade · Aubenas</div>
       <div class="footer-line"></div>
-      <div class="footer-actions">
-        <a class="footer-phone" href="tel:+33475360910">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 012 1.18 2 2 0 013.99 0h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg>
-          04 75 36 09 10
-        </a>
-      </div>
+
       <div class="footer-copy" data-i18n="footer-copy">© NOOK Restaurant · 8 rue de la Prévoté, 07200 Aubenas</div>
       <div style="font-size:9px;color:rgba(255,255,255,0.15);margin-top:6px;letter-spacing:0.08em;">Webdesigner : G.Mikael</div>
     </div>
@@ -607,11 +601,14 @@ const io=new IntersectionObserver(entries=>{
   });
 },{threshold:0.06});
 document.querySelectorAll('.r').forEach(el=>io.observe(el));
-// Show nav only when CTA strip has fully left the viewport
+// Nav only activates once CTA strip leaves viewport for the first time
 const ctaStrip = document.querySelector('.cta-strip');
+let navArmed = false;
 const navObserver = new IntersectionObserver(entries => {
-  nav.classList.toggle('visible', !entries[0].isIntersecting);
-}, { threshold: 0, rootMargin: '0px 0px 0px 0px' });
+  const outOfView = !entries[0].isIntersecting;
+  if(outOfView && !navArmed) { navArmed = true; nav.classList.add('armed'); }
+  if(navArmed) nav.classList.toggle('visible', outOfView);
+}, { threshold: 0 });
 if(ctaStrip) navObserver.observe(ctaStrip);
 
 /* STATUS BADGE */
