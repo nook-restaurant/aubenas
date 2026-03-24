@@ -18,6 +18,44 @@
 <link rel="apple-touch-icon" href="img/logo.png">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Restaurant","name":"NOOK","telephone":"+33475360910","email":"nook.aubenas@gmail.com","address":{"@type":"PostalAddress","streetAddress":"8 rue de la Prévoté","addressLocality":"Aubenas","postalCode":"07200","addressCountry":"FR"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"5","reviewCount":"46","bestRating":"5"},"url":"https://nook-restaurant.github.io/aubenas","image":"https://nook-restaurant.github.io/aubenas/img/facade.jpg","sameAs":["https://www.facebook.com/people/NOOK-Restaurant/61575514529548/","https://www.instagram.com/nook.aubenas/"]}
+
+/* ── PARALLAX HERO ── */
+(function(){
+  const img = document.querySelector('.hero-img');
+  if(!img) return;
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if(!ticking) {
+      requestAnimationFrame(() => {
+        const scrollY = window.scrollY;
+        const heroH = document.querySelector('.hero').offsetHeight;
+        if(scrollY < heroH) {
+          img.style.transform = 'translateY(' + (scrollY * 0.35) + 'px)';
+        }
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+})();
+
+/* ── RIPPLE CTA ── */
+(function(){
+  document.querySelectorAll('.cta-item').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      const r = document.createElement('span');
+      r.className = 'ripple';
+      const rect = btn.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height);
+      r.style.width = r.style.height = size + 'px';
+      r.style.left = (e.clientX - rect.left - size/2) + 'px';
+      r.style.top  = (e.clientY - rect.top  - size/2) + 'px';
+      btn.appendChild(r);
+      setTimeout(() => r.remove(), 700);
+    });
+  });
+})();
+
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@900&family=Caveat:wght@400;600;700&family=DM+Sans:wght@300;400;500&family=Montserrat:wght@700&display=swap" rel="stylesheet">
@@ -218,9 +256,9 @@ body {
 .img-caption { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-top: 8px; text-align: center; padding: 0 1.25rem; }
 
 /* ── MENU CARD ── */
-.menu-feature { display: flex; align-items: stretch; border: none; background: var(--blue); border-radius: 6px; overflow: hidden; text-decoration: none; color: #fff; margin-bottom: 10px; -webkit-tap-highlight-color: transparent; }
+.menu-feature { display: flex; align-items: stretch; border: none; background: var(--orange); border-radius: 6px; overflow: hidden; text-decoration: none; color: #fff; margin-bottom: 10px; -webkit-tap-highlight-color: transparent; }
 .menu-feature:active { opacity: .75; }
-.menu-accent { width: 5px; flex-shrink: 0; background: rgba(255,255,255,0.2); }
+.menu-accent { width: 5px; flex-shrink: 0; background: rgba(255,255,255,0.25); }
 .menu-body { padding: 14px 16px; flex: 1; }
 .menu-label { font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 4px; }
 .menu-title { font-family: var(--hand); font-size: 1.5rem; font-weight: 600; color: #fff; margin-bottom: 5px; }
@@ -477,6 +515,27 @@ body {
 @media (min-width: 768px) {
   .label-line { width: 90px; margin: 0 18px; }
 }
+
+/* ── PARALLAX ── */
+.hero-img {
+  will-change: transform;
+  transform: translateY(0);
+}
+
+/* ── RIPPLE ── */
+.cta-item { position: relative; overflow: hidden; }
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.35);
+  transform: scale(0);
+  animation: ripple-anim 0.6s ease-out forwards;
+  pointer-events: none;
+}
+@keyframes ripple-anim {
+  to { transform: scale(4); opacity: 0; }
+}
+
 </style>
 </head>
 <body>
@@ -895,6 +954,44 @@ function saveContact(){
 if('serviceWorker' in navigator&&location.hostname!=='www.claudeusercontent.com'){
   window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
 }
+
+/* ── PARALLAX HERO ── */
+(function(){
+  const img = document.querySelector('.hero-img');
+  if(!img) return;
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if(!ticking) {
+      requestAnimationFrame(() => {
+        const scrollY = window.scrollY;
+        const heroH = document.querySelector('.hero').offsetHeight;
+        if(scrollY < heroH) {
+          img.style.transform = 'translateY(' + (scrollY * 0.35) + 'px)';
+        }
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+})();
+
+/* ── RIPPLE CTA ── */
+(function(){
+  document.querySelectorAll('.cta-item').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      const r = document.createElement('span');
+      r.className = 'ripple';
+      const rect = btn.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height);
+      r.style.width = r.style.height = size + 'px';
+      r.style.left = (e.clientX - rect.left - size/2) + 'px';
+      r.style.top  = (e.clientY - rect.top  - size/2) + 'px';
+      btn.appendChild(r);
+      setTimeout(() => r.remove(), 700);
+    });
+  });
+})();
+
 </script>
 </body>
 </html>
