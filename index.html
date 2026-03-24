@@ -56,6 +56,26 @@
   });
 })();
 
+
+/* ── PARALLAX INTERIOR ── */
+(function(){
+  const wrap = document.querySelector('.parallax-wrap');
+  const img  = document.querySelector('.parallax-interior');
+  if(!wrap || !img) return;
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if(!ticking) {
+      requestAnimationFrame(() => {
+        const rect   = wrap.getBoundingClientRect();
+        const center = rect.top + rect.height / 2 - window.innerHeight / 2;
+        img.style.transform = 'translateY(' + (center * 0.25) + 'px)';
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+})();
+
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@900&family=Caveat:wght@400;600;700&family=DM+Sans:wght@300;400;500&family=Montserrat:wght@700&display=swap" rel="stylesheet">
@@ -536,6 +556,27 @@ body {
   to { transform: scale(4); opacity: 0; }
 }
 
+
+/* ── PARALLAX INTERIOR ── */
+.parallax-wrap {
+  width: 100%;
+  height: 260px;
+  overflow: hidden;
+  position: relative;
+}
+.parallax-interior {
+  width: 100%;
+  height: 140%;
+  object-fit: cover;
+  object-position: center;
+  transform: translateY(0);
+  will-change: transform;
+  display: block;
+}
+@media (min-width: 768px) {
+  .parallax-wrap { height: clamp(300px, 35vw, 500px); }
+}
+
 </style>
 </head>
 <body>
@@ -602,6 +643,7 @@ body {
   <!-- LE RESTAURANT -->
   <div class="section r" style="border-top:none">
     <div class="label"><svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M2 4 C12 2, 22 6, 32 4 C42 2, 52 5, 58 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg><h2 data-i18n="about-label" style="font:inherit;margin:0;padding:0;display:inline">Le restaurant</h2><svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M58 4 C48 2, 38 6, 28 4 C18 2, 8 5, 2 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg></div>
+    <img src="img/logo2.png" alt="NOOK décoration" style="width:120px;display:block;margin:0 auto 1.5rem;opacity:0.9;">
     <div class="about-cards">
       <div class="about-card">
         <div class="about-card-title" data-i18n="about-t1">La cuisine</div>
@@ -613,6 +655,11 @@ body {
       </div>
 
     </div>
+  </div>
+
+  <!-- INTERIEUR -->
+  <div class="parallax-wrap">
+    <img class="parallax-interior" src="img/interieur.jpg" alt="Intérieur NOOK Restaurant Aubenas">
   </div>
 
   <!-- PHOTOS -->
@@ -990,6 +1037,26 @@ if('serviceWorker' in navigator&&location.hostname!=='www.claudeusercontent.com'
       setTimeout(() => r.remove(), 700);
     });
   });
+})();
+
+
+/* ── PARALLAX INTERIOR ── */
+(function(){
+  const wrap = document.querySelector('.parallax-wrap');
+  const img  = document.querySelector('.parallax-interior');
+  if(!wrap || !img) return;
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if(!ticking) {
+      requestAnimationFrame(() => {
+        const rect   = wrap.getBoundingClientRect();
+        const center = rect.top + rect.height / 2 - window.innerHeight / 2;
+        img.style.transform = 'translateY(' + (center * 0.25) + 'px)';
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
 })();
 
 </script>
