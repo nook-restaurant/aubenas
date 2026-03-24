@@ -362,92 +362,180 @@ body {
   .scroll-arrow { bottom: 16px; }
 }
 
-/* ── DESKTOP ── */
+
+
+/* ════════════════════════════════════════
+   DESKTOP — vrai site web pro restaurant
+════════════════════════════════════════ */
 @media (min-width: 768px) {
-  body { background: #060606; }
 
-  #page {
-    display: grid;
-    grid-template-columns: 380px 1fr;
-    min-height: 100vh;
-    max-width: 100%;
+  /* ── BASE ── */
+  body { background: #0a0a0a; font-size: 16px; }
+  #page { padding-top: 72px; max-width: 100%; }
+
+  /* ── TOPBAR ── */
+  #desk-nav {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 clamp(2rem, 5vw, 6rem);
+    height: 72px;
+    position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+    background: rgba(10,10,10,0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
   }
+  .desk-logo { height: 38px; opacity: 0.9; }
+  .desk-links { display: flex; align-items: center; gap: 2.5rem; }
+  .desk-links a {
+    font-family: var(--sans); font-size: 11px; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(255,255,255,0.5); text-decoration: none;
+    transition: color .2s;
+  }
+  .desk-links a:hover { color: #fff; }
+  .desk-links .desk-cta {
+    background: var(--orange); color: #fff !important;
+    padding: 9px 22px; border-radius: 6px; font-weight: 600;
+    letter-spacing: 0.08em;
+    transition: background .2s;
+  }
+  .desk-links .desk-cta:hover { background: #bf6a14; }
+  .desk-lang {
+    font-family: var(--sans); font-size: 11px; font-weight: 600;
+    color: rgba(255,255,255,0.4); cursor: pointer;
+    background: none; border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 4px; padding: 6px 12px;
+    letter-spacing: 0.1em; transition: all .2s;
+  }
+  .desk-lang:hover { color: #fff; border-color: rgba(255,255,255,0.3); }
 
-  /* Hero sticky gauche */
+  /* Hide mobile elements */
+  #btn-lang { display: none; }
+  #btn-share { display: none; }
+  #sticky-nav { display: none !important; }
+  .scroll-arrow { bottom: 32px; }
+
+  /* ── HERO — pleine largeur, grand ── */
   .hero {
-    grid-column: 1;
-    grid-row: 1 / 99;
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    max-height: 100vh;
-    border-radius: 0;
+    width: 100%; height: 94vh;
+    min-height: 600px; max-height: none;
   }
-  .hero-logo { width: 200px; }
-  .hero-tagline { font-size: 2.2rem; }
-  .hero-tagline2 { font-size: 1rem; }
-  .hero-content { gap: 12px; padding: 2rem 2rem 5rem; }
+  .hero-img { opacity: 0.5; }
+  .hero-logo { width: 260px; }
+  .hero-tagline { font-size: clamp(2.4rem, 4vw, 4rem); }
+  .hero-tagline2 { font-size: clamp(1rem, 1.5vw, 1.3rem); }
+  .hero-city { font-size: 13px; letter-spacing: 0.18em; }
+  .hero-content { gap: 18px; padding-bottom: 8vh; }
+  .rating-stars svg { width: 18px; height: 18px; }
+  .rating-text { font-size: 15px; }
+  .rating-count { font-size: 13px; }
 
-  /* Colonne droite */
-  .cta-strip, .section, .carousel-section,
-  .interior-wrap, .social-wrap,
-  .hours-adresse-desktop, .footer { grid-column: 2; }
+  /* ── CTA STRIP ── */
+  .cta-strip {
+    background: var(--dark2);
+    padding: 2.5rem clamp(2rem, 5vw, 6rem);
+    justify-content: center; gap: 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .cta-item { padding: 10px clamp(2rem, 4vw, 5rem); font-size: 11px; }
+  .cta-icon { width: 62px; height: 62px; }
 
-  /* CTA */
-  .cta-strip { background: var(--dark2); border-left: 1px solid rgba(255,255,255,0.05); padding: 2rem 2rem 1.5rem; justify-content: flex-start; }
-  .cta-item { padding: 8px 28px 8px 0; }
-  .cta-icon { width: 52px; height: 52px; }
+  /* ── WRAPPER CENTRÉ ── */
+  .desk-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 clamp(2rem, 5vw, 6rem);
+  }
 
-  /* Sections */
-  .section { padding: 3rem 2.5rem; border-left: 1px solid rgba(255,255,255,0.04); }
-  .carousel-section { padding: 3rem 0 2rem; border-left: 1px solid rgba(255,255,255,0.04); }
-  .carousel-section .carousel-label { padding: 0 2.5rem; }
-  .carousel-section .img-caption { padding: 0 2.5rem; }
+  /* ── SECTION ── */
+  .section { padding: 5rem clamp(2rem, 5vw, 6rem); }
+  .label { font-size: 1.05rem; margin-bottom: 2rem; }
 
-  /* About cards */
-  .about-cards { flex-direction: row; gap: 2rem; }
-  .about-card { flex: 1; }
-  .about-card-title { text-align: left; font-size: 1.3rem; }
-  .about-card-text { text-align: left; }
+  /* ── ABOUT — 2 colonnes ── */
+  .section#section-about {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .section#section-about .desk-left {
+    display: flex; flex-direction: column; align-items: center; gap: 1.5rem;
+  }
+  .logo2-img { width: 180px; }
+  .about-cards { flex-direction: row; gap: 2.5rem; }
+  .about-card { flex: 1; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 24px; }
+  .about-card-title { text-align: left; font-size: 1.3rem; color: var(--gold); }
+  .about-card-text  { text-align: left; font-size: 14px; }
 
-  /* Interior */
-  .interior-wrap { height: 300px; border-left: 1px solid rgba(255,255,255,0.04); }
+  /* ── INTERIOR ── */
+  .interior-wrap { height: 480px; }
 
-  /* Carousel */
-  .carousel { padding: 0 2.5rem; gap: 14px; }
-  .carousel-item { flex: 0 0 55%; }
-  .carousel-item img { height: 260px; }
+  /* ── CAROUSEL — 3 photos côte à côte ── */
+  .carousel-section { padding: 5rem 0 3rem; }
+  .carousel-section .carousel-label {
+    padding: 0 clamp(2rem, 5vw, 6rem);
+    max-width: 1200px; margin: 0 auto 0.5rem;
+    display: flex;
+  }
+  .carousel-section .img-caption {
+    padding: 0 clamp(2rem, 5vw, 6rem);
+    max-width: 1200px; margin: 0 auto;
+    text-align: left;
+  }
+  .carousel { padding: 0 clamp(2rem, 5vw, 6rem); gap: 16px; scroll-snap-type: none; overflow: visible; flex-wrap: nowrap; }
+  .carousel-item { flex: 0 0 calc(33.33% - 11px); scroll-snap-align: none; }
+  .carousel-item img { height: 320px; border-radius: 14px; transition: transform .4s ease; }
+  .carousel-item:hover img { transform: scale(1.02); }
+  .carousel-dots { display: none; }
 
-  /* Horaires + adresse */
-  .hours-adresse-desktop {
-    grid-column: 2;
+  /* ── MENU + SOCIAL — grille côte à côte ── */
+  .desk-menu-social {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    border-left: 1px solid rgba(255,255,255,0.04);
+    gap: 0;
   }
-  .hours-adresse-desktop .section { border-left: none; border-right: 1px solid rgba(255,255,255,0.05); }
+  .desk-menu-social .section { border-right: 1px solid rgba(255,255,255,0.05); }
+  .desk-menu-social .section:last-child { border-right: none; }
+  .menu-feature { max-width: 480px; }
+  .menu-title { font-size: 1.8rem; }
+
+  /* Social dans grille */
+  .social-in-grid {
+    display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+    padding: 5rem clamp(2rem, 5vw, 6rem);
+  }
+  .social-in-grid .label { margin-bottom: 2rem; }
+  .social-icons-row { display: flex; gap: 16px; margin-top: 1.5rem; }
+  .social-icon-btn { width: 64px; height: 64px; border-radius: 16px; }
+
+  /* ── HORAIRES + ADRESSE — 2 colonnes ── */
+  .hours-adresse-desktop {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .hours-adresse-desktop .section {
+    border-top: none;
+    border-right: 1px solid rgba(255,255,255,0.06);
+  }
   .hours-adresse-desktop .section:last-child { border-right: none; }
-  .map-wrap iframe { height: 200px; }
+  .map-wrap iframe { height: 240px; }
+  .hours-table td { font-size: 15px; padding: 13px 4px; }
 
-  /* Social */
-  .social-wrap { border-left: 1px solid rgba(255,255,255,0.04); padding: 2rem 2.5rem; justify-content: flex-start; gap: 16px; }
-
-  /* Footer */
-  .footer { border-left: 1px solid rgba(255,255,255,0.04); min-height: 200px; }
-  .footer-content { padding: 2.5rem; }
-  .footer-logo { width: 90px; }
-
-  #sticky-nav { grid-column: 1 / 3; }
-  #btn-lang  { bottom: 32px; left: 32px; }
-  #btn-share { bottom: 32px; right: 32px; }
+  /* ── FOOTER ── */
+  .footer { min-height: 320px; }
+  .footer-content {
+    padding: 4rem clamp(2rem, 5vw, 6rem);
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .footer-logo { width: 130px; }
+  .footer-sub { font-size: 12px; letter-spacing: 0.2em; }
 }
 
-@media (min-width: 1200px) {
-  #page { grid-template-columns: 440px 1fr; }
-  .section { padding: 3.5rem 3rem; }
-  .carousel { padding: 0 3rem; }
-  .carousel-section .carousel-label { padding: 0 3rem; }
-  .social-wrap { padding: 2rem 3rem; }
+@media (min-width: 1400px) {
+  .cta-item { padding: 10px 7rem; }
+  .carousel-item img { height: 380px; }
 }
 </style>
 </head>
@@ -461,6 +549,18 @@ body {
 </div>
 
 <div id="page">
+
+  <!-- DESKTOP NAV -->
+  <nav id="desk-nav" style="display:none">
+    <img class="desk-logo" src="img/logo.png" alt="NOOK">
+    <div class="desk-links">
+      <a href="#section-about" data-i18n-desk="about-label">Le restaurant</a>
+      <a href="#section-menu" data-i18n-desk="menu-section-label">Menu du jour</a>
+      <a href="#section-hours" data-i18n-desk="hours-label">Horaires</a>
+      <a href="tel:+33475360910" class="desk-cta" data-i18n-desk="reserve-txt">Réserver</a>
+    </div>
+    <button class="desk-lang" id="desk-lang-btn">🇬🇧 EN</button>
+  </nav>
 
   <!-- STICKY NAV -->
   <nav id="sticky-nav">
@@ -524,7 +624,10 @@ body {
       <h2 data-i18n="about-label" style="font:inherit;margin:0;padding:0">Le restaurant</h2>
       <svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M58 4 C48 2, 38 6, 28 4 C18 2, 8 5, 2 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg>
     </div>
-    <img src="img/logo2.png" alt="NOOK décoration" class="logo2-img">
+    <div class="desk-left">
+      <img src="img/logo2.png" alt="NOOK décoration" class="logo2-img">
+    </div>
+    <div class="desk-right">
     <div class="about-cards">
       <div class="about-card">
         <div class="about-card-title" data-i18n="about-t1">La cuisine</div>
@@ -534,7 +637,8 @@ body {
         <div class="about-card-title" data-i18n="about-t2">Le terroir</div>
         <p class="about-card-text" data-i18n="about-p2">Les producteurs ont des prénoms. Les vins, bières et jus viennent de Pradons, Sécheras, Chirols — à quelques kilomètres d'ici.</p>
       </div>
-    </div>
+    </div><!-- /about-cards -->
+    </div><!-- /desk-right -->
   </div>
 
   <!-- INTERIEUR -->
@@ -560,6 +664,7 @@ body {
     <p class="img-caption" data-i18n="img-caption">Menu renouvelé chaque jour</p>
   </div>
 
+  <div class="desk-menu-social">
   <!-- MENU DU JOUR -->
   <div class="section dark r" id="section-menu">
     <div class="label">
@@ -581,7 +686,13 @@ body {
   <div class="r"><img src="img/restaurant.jpg" alt="Intérieur du restaurant NOOK à Aubenas, Ardèche" class="restaurant-img" style="width:100%;height:260px;object-fit:cover;"></div>
 
   <!-- SOCIAL -->
-  <div class="social-wrap">
+  <div class="section dark social-in-grid">
+    <div class="label">
+      <svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M2 4 C12 2, 22 6, 32 4 C42 2, 52 5, 58 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg>
+      <span data-i18n="social-label" style="font:inherit">Retrouvez-nous</span>
+      <svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M58 4 C48 2, 38 6, 28 4 C18 2, 8 5, 2 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg>
+    </div>
+    <div class="social-icons-row">
     <a class="social-icon-btn fb" href="https://www.facebook.com/people/NOOK-Restaurant/61575514529548/" target="_blank" rel="noopener" aria-label="Facebook">
       <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
     </a>
@@ -590,7 +701,6 @@ body {
     </a>
   </div>
 
-  <div class="hours-adresse-desktop">
   <!-- HORAIRES -->
   <div class="section dark r" id="section-hours">
     <div class="label">
@@ -633,8 +743,6 @@ body {
       <span data-i18n="btn-map-txt">Ouvrir dans Google Maps</span>
     </a>
   </div>
-
-  </div><!-- /hours-adresse-desktop -->
 
   <!-- FOOTER -->
   <div class="footer r">
@@ -779,14 +887,30 @@ document.getElementById('btn-share')?.addEventListener('click',()=>{
   else window.open('https://wa.me/?text='+encodeURIComponent('Découvrez le restaurant NOOK à Aubenas 🍽️ https://nook-restaurant.github.io/aubenas'),'_blank');
 });
 
+/* DESKTOP NAV */
+(function(){
+  const dn = document.getElementById('desk-nav');
+  if(!dn) return;
+  if(window.innerWidth >= 768) dn.style.display = 'flex';
+  window.addEventListener('resize', () => {
+    dn.style.display = window.innerWidth >= 768 ? 'flex' : 'none';
+  });
+  // Desk lang button
+  const dlb = document.getElementById('desk-lang-btn');
+  if(dlb) dlb.addEventListener('click', () => {
+    document.getElementById('btn-lang').click();
+    dlb.textContent = dlb.textContent.includes('EN') ? '🇫🇷 FR' : '🇬🇧 EN';
+  });
+})();
+
 /* TRADUCTION */
 (function(){
   const btn=document.getElementById('btn-lang'),flag=document.getElementById('lang-flag'),lbl=document.getElementById('lang-label');
   if(!btn) return;
   let lang='fr';
   const T={
-    fr:{ 'hero-tagline':'Cuisine du monde','rating-txt':'(46 avis)','reserve-txt':'Réserver','menu-txt':'Menu','yaller-txt':'Y aller','about-label':'Le restaurant','about-t1':'La cuisine','about-p1':"Un nouveau pays dans l'assiette chaque jour. Penjab, Mali, Vietnam, Liban... la carte ne s'arrête jamais.",'about-t2':'Le terroir','about-p2':"Les producteurs ont des prénoms. Les vins, bières et jus viennent de Pradons, Sécheras, Chirols — à quelques kilomètres d'ici.",'photos-label':'Nos plats','img-caption':'Menu renouvelé chaque jour','menu-section-label':'Menu du jour','menu-label-txt':'Mis à jour chaque matin','menu-title-txt':'Carte du jour','menu-cta-txt':'Voir sur Facebook','fb-btn':'Facebook','ig-btn':'Instagram','hours-label':'Horaires','day-lun':'Lundi','day-mar':'Mardi','day-mer':'Mercredi','day-jeu':'Jeudi','day-ven':'Vendredi','day-sam':'Samedi','day-dim':'Dimanche','closed-txt':'Fermé','today-txt':"Aujourd'hui",'addr-label':'Nous trouver','addr-street':'8 rue de la Prévoté','addr-city':'07200 Aubenas','btn-map-txt':'Ouvrir dans Google Maps','tagline2':'Alex & Isabelle — deux passionnés, une table, mille saveurs','footer-sub':'Cuisine Nomade · Aubenas','footer-copy':'© NOOK Restaurant · 8 rue de la Prévoté, 07200 Aubenas' },
-    en:{ 'hero-tagline':'World cuisine','rating-txt':'(46 reviews)','reserve-txt':'Book','menu-txt':'Menu','yaller-txt':'Directions','about-label':'The restaurant','about-t1':'The cuisine','about-p1':"A new country on the plate every day. Punjab, Mali, Vietnam, Lebanon... the menu never stops travelling.",'about-t2':'The terroir','about-p2':"The producers have names. Wines, beers and juices come from Pradons, Sécheras, Chirols — just a few kilometres away.",'photos-label':'Our dishes','img-caption':'Menu renewed every day','menu-section-label':"Today's menu",'menu-label-txt':'Updated every morning','menu-title-txt':"Today's menu",'menu-cta-txt':'View on Facebook','fb-btn':'Facebook','ig-btn':'Instagram','hours-label':'Opening hours','day-lun':'Monday','day-mar':'Tuesday','day-mer':'Wednesday','day-jeu':'Thursday','day-ven':'Friday','day-sam':'Saturday','day-dim':'Sunday','closed-txt':'Closed','today-txt':'Today','addr-label':'Find us','addr-street':'8 rue de la Prévoté','addr-city':'07200 Aubenas, France','btn-map-txt':'Open in Google Maps','tagline2':'Alex & Isabelle — two passionate souls, one table, a thousand flavours','footer-sub':'Nomadic Cuisine · Aubenas','footer-copy':'© NOOK Restaurant · 8 rue de la Prévoté, 07200 Aubenas' }
+    fr:{ 'hero-tagline':'Cuisine du monde','rating-txt':'(46 avis)','reserve-txt':'Réserver','menu-txt':'Menu','yaller-txt':'Y aller','about-label':'Le restaurant','about-t1':'La cuisine','about-p1':"Un nouveau pays dans l'assiette chaque jour. Penjab, Mali, Vietnam, Liban... la carte ne s'arrête jamais.",'about-t2':'Le terroir','about-p2':"Les producteurs ont des prénoms. Les vins, bières et jus viennent de Pradons, Sécheras, Chirols — à quelques kilomètres d'ici.",'photos-label':'Nos plats','img-caption':'Menu renouvelé chaque jour','menu-section-label':'Menu du jour','menu-label-txt':'Mis à jour chaque matin','menu-title-txt':'Carte du jour','menu-cta-txt':'Voir sur Facebook','fb-btn':'Facebook','ig-btn':'Instagram','hours-label':'Horaires','day-lun':'Lundi','day-mar':'Mardi','day-mer':'Mercredi','day-jeu':'Jeudi','day-ven':'Vendredi','day-sam':'Samedi','day-dim':'Dimanche','closed-txt':'Fermé','today-txt':"Aujourd'hui",'addr-label':'Nous trouver','addr-street':'8 rue de la Prévoté','addr-city':'07200 Aubenas','btn-map-txt':'Ouvrir dans Google Maps','tagline2':'Alex & Isabelle — deux passionnés, une table, mille saveurs','footer-sub':'Cuisine Nomade · Aubenas','footer-copy':'© NOOK Restaurant · 8 rue de la Prévoté, 07200 Aubenas','social-label':'Retrouvez-nous' },
+    en:{ 'hero-tagline':'World cuisine','rating-txt':'(46 reviews)','reserve-txt':'Book','menu-txt':'Menu','yaller-txt':'Directions','about-label':'The restaurant','about-t1':'The cuisine','about-p1':"A new country on the plate every day. Punjab, Mali, Vietnam, Lebanon... the menu never stops travelling.",'about-t2':'The terroir','about-p2':"The producers have names. Wines, beers and juices come from Pradons, Sécheras, Chirols — just a few kilometres away.",'photos-label':'Our dishes','img-caption':'Menu renewed every day','menu-section-label':"Today's menu",'menu-label-txt':'Updated every morning','menu-title-txt':"Today's menu",'menu-cta-txt':'View on Facebook','fb-btn':'Facebook','ig-btn':'Instagram','hours-label':'Opening hours','day-lun':'Monday','day-mar':'Tuesday','day-mer':'Wednesday','day-jeu':'Thursday','day-ven':'Friday','day-sam':'Saturday','day-dim':'Sunday','closed-txt':'Closed','today-txt':'Today','addr-label':'Find us','addr-street':'8 rue de la Prévoté','addr-city':'07200 Aubenas, France','btn-map-txt':'Open in Google Maps','tagline2':'Alex & Isabelle — two passionate souls, one table, a thousand flavours','footer-sub':'Nomadic Cuisine · Aubenas','footer-copy':'© NOOK Restaurant · 8 rue de la Prévoté, 07200 Aubenas','social-label':'Find us online' }
   };
   window._applyLang=function(l){
     const t=T[l];
