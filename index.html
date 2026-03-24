@@ -17,362 +17,211 @@
 <link rel="icon" type="image/png" href="img/logo.png">
 <link rel="apple-touch-icon" href="img/logo.png">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Restaurant","name":"NOOK","telephone":"+33475360910","email":"nook.aubenas@gmail.com","address":{"@type":"PostalAddress","streetAddress":"8 rue de la Prévoté","addressLocality":"Aubenas","postalCode":"07200","addressCountry":"FR"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"5","reviewCount":"46","bestRating":"5"},"url":"https://nook-restaurant.github.io/aubenas","image":"https://nook-restaurant.github.io/aubenas/img/facade.jpg","sameAs":["https://www.facebook.com/people/NOOK-Restaurant/61575514529548/","https://www.instagram.com/nook.aubenas/"]}
+{"@context":"https://schema.org","@type":"Restaurant","name":"NOOK","telephone":"+33475360910","email":"nook.aubenas@gmail.com","address":{"@type":"PostalAddress","streetAddress":"8 rue de la Prévoté","addressLocality":"Aubenas","postalCode":"07200","addressCountry":"FR"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"5","reviewCount":"46","bestRating":"5"},"url":"https://nook-restaurant.github.io/aubenas","sameAs":["https://www.facebook.com/people/NOOK-Restaurant/61575514529548/","https://www.instagram.com/nook.aubenas/"]}
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@900&family=Caveat:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
+
+/* ══════════════════════════════════════
+   BASE
+══════════════════════════════════════ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 img { display: block; max-width: 100%; }
-
 :root {
   --dark:   #0D0D0D;
   --dark2:  #161616;
   --dark3:  #1E1E1E;
-  --light:  #F5F0E8;
-  --gold:   #DEB853;
   --orange: #D4781A;
-  --blue:   #436F96;
-  --muted-dark: rgba(255,255,255,0.55);
-  --muted-light: rgba(13,13,13,0.55);
+  --gold:   #DEB853;
   --hand:   'Caveat', cursive;
-  --sans:   'DM Sans', system-ui, sans-serif;
   --title:  'Nunito', sans-serif;
+  --sans:   'DM Sans', system-ui, sans-serif;
 }
-
 html { scroll-behavior: smooth; }
-body {
-  font-family: var(--sans);
-  background: var(--dark);
-  color: #fff;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-}
+body { font-family: var(--sans); background: var(--dark); color: #fff; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+#page { opacity: 0; }
+#page.on { opacity: 1; }
+.r { opacity: 0; transform: translateY(20px); transition: opacity .7s ease, transform .7s ease; }
+.r.on { opacity: 1; transform: translateY(0); }
 
-/* ── SPLASH ── */
-#splash {
-  position: fixed; inset: 0; z-index: 9999;
-  background: var(--orange);
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  transition: opacity 0.6s ease;
-}
+/* ══════════════════════════════════════
+   SPLASH
+══════════════════════════════════════ */
+#splash { position: fixed; inset: 0; z-index: 9999; background: var(--orange); display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity .6s ease; }
 #splash.out { opacity: 0; pointer-events: none; }
-#s-logo { width: 160px; opacity: 0; transform: scale(0.9); transition: opacity .7s ease, transform .7s ease; }
+#s-logo { width: 160px; opacity: 0; transform: scale(.9); transition: opacity .7s ease, transform .7s ease; }
 #s-logo.in { opacity: 1; transform: scale(1); }
-#s-rule { width: 0; height: 1px; background: rgba(222,184,83,0.5); margin-top: 20px; transition: width .6s .3s ease; }
+#s-rule { width: 0; height: 1px; background: rgba(255,255,255,.6); margin-top: 20px; transition: width .6s .3s ease; }
 #s-rule.in { width: 48px; }
 #s-city { font-family: var(--hand); font-size: 38px; font-weight: 700; color: #fff; margin-top: 10px; opacity: 0; transform: translateY(4px); transition: opacity .5s .45s ease, transform .5s .45s ease; }
 #s-city.in { opacity: 1; transform: translateY(0); }
 
-/* ── PAGE ── */
-#page { opacity: 0; }
-#page.on { opacity: 1; }
+/* ══════════════════════════════════════
+   MOBILE — base styles (< 768px)
+══════════════════════════════════════ */
 
-/* ── REVEAL ── */
-.r { opacity: 0; transform: translateY(20px); transition: opacity .7s ease, transform .7s ease; }
-.r.on { opacity: 1; transform: translateY(0); }
-
-/* ── STICKY NAV ── */
-#sticky-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: var(--orange);
-  backdrop-filter: none;
-  border-bottom: none;
-  display: flex; align-items: center; justify-content: center; gap: 0;
-  padding: 0;
-  display: none;
-  transform: translateY(-100%);
-  transition: transform .4s cubic-bezier(.4,0,.2,1);
-  pointer-events: none;
-}
+/* STICKY NAV MOBILE */
+#sticky-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: var(--orange); display: none; flex-direction: row; opacity: 0; transform: translateY(-100%); transition: transform .4s cubic-bezier(.4,0,.2,1); pointer-events: none; }
 #sticky-nav.armed { display: flex; }
-#sticky-nav.visible { transform: translateY(0); pointer-events: all; }
-.nav-item {
-  flex: 1; text-align: center;
-  padding: 14px 8px;
-  font-family: var(--title); font-size: 10px; font-weight: 900;
-  letter-spacing: 0.12em; text-transform: uppercase;
-  color: rgba(255,255,255,0.85);
-  text-decoration: none;
-  border-right: 1px solid rgba(255,255,255,0.15);
-  transition: color .2s;
-}
+#sticky-nav.visible { transform: translateY(0); opacity: 1; pointer-events: all; }
+.nav-item { flex: 1; text-align: center; padding: 14px 8px; font-family: var(--title); font-size: 10px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.85); text-decoration: none; border-right: 1px solid rgba(255,255,255,.15); }
 .nav-item:last-child { border-right: none; }
-.nav-item:active { color: #fff; background: rgba(0,0,0,0.1); }
 
-/* ── HERO ── */
-.hero {
-  position: relative; width: 100%;
-  height: 100svh; min-height: 500px;
-  overflow: hidden;
-  background: var(--dark);
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-}
-.hero-img {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover; object-position: 30% center;
-  opacity: 0.55;
-  filter: saturate(1.3) contrast(1.05);
-  will-change: transform;
-}
-.hero-gradient {
-  position: absolute; inset: 0;
-  background: linear-gradient(to bottom, rgba(13,13,13,0.2) 0%, rgba(13,13,13,0) 40%, rgba(13,13,13,0.85) 100%);
-}
-.hero-topbar {
-  position: absolute; top: 0; left: 0; right: 0; height: 2px;
-  background: linear-gradient(to right, transparent, var(--gold) 30%, var(--gold) 70%, transparent);
-  opacity: 0; transition: opacity .8s .2s;
-}
+/* HERO */
+.hero { position: relative; width: 100%; height: 100svh; min-height: 500px; overflow: hidden; background: var(--dark); display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 30% center; opacity: .5; filter: saturate(1.3) contrast(1.05); will-change: transform; }
+.hero-gradient { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(13,13,13,.2) 0%, rgba(13,13,13,0) 40%, rgba(13,13,13,.85) 100%); }
+.hero-topbar { position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(to right, transparent, var(--gold) 30%, var(--gold) 70%, transparent); opacity: 0; transition: opacity .8s .2s; }
 .hero-topbar.on { opacity: 1; }
 
-#status-badge {
-  position: absolute; top: 56px; left: 50%; transform: translateX(-50%);
-  z-index: 5;
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 6px 14px 6px 10px; border-radius: 999px;
-  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-  font-family: var(--sans); font-size: 12px; font-weight: 600;
-  letter-spacing: 0.04em; white-space: nowrap;
-}
-#status-badge.open   { background: rgba(22,163,74,0.2);  border: 1px solid rgba(74,222,128,0.4);  color: #4ade80; }
-#status-badge.soon   { background: rgba(234,179,8,0.2);  border: 1px solid rgba(250,204,21,0.4);  color: #fde047; }
-#status-badge.closed { background: rgba(220,38,38,0.2);  border: 1px solid rgba(248,113,113,0.35); color: #f87171; }
+#status-badge { position: absolute; top: 56px; left: 50%; transform: translateX(-50%); z-index: 5; display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px 6px 10px; border-radius: 999px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); font-family: var(--sans); font-size: 12px; font-weight: 600; letter-spacing: .04em; white-space: nowrap; }
+#status-badge.open   { background: rgba(22,163,74,.2);  border: 1px solid rgba(74,222,128,.4);  color: #4ade80; }
+#status-badge.soon   { background: rgba(234,179,8,.2);  border: 1px solid rgba(250,204,21,.4);  color: #fde047; }
+#status-badge.closed { background: rgba(220,38,38,.2);  border: 1px solid rgba(248,113,113,.35); color: #f87171; }
 #status-badge .dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; position: relative; }
-#status-badge.open   .dot { background: #4ade80; animation: breathe-g 1.6s ease-in-out infinite; }
-#status-badge.soon   .dot { background: #fde047; animation: breathe-y 1.6s ease-in-out infinite; }
+#status-badge.open  .dot { background: #4ade80; animation: breathe-g 1.6s ease-in-out infinite; }
+#status-badge.soon  .dot { background: #fde047; animation: breathe-y 1.6s ease-in-out infinite; }
 #status-badge.closed .dot { background: #f87171; }
-#status-badge.open .dot::before, #status-badge.soon .dot::before {
-  content: ''; position: absolute; inset: -5px; border-radius: 50%;
-  background: inherit; opacity: 0; animation: halo 2s ease-out infinite;
-}
-#status-badge.open .dot::after, #status-badge.soon .dot::after {
-  content: ''; position: absolute; inset: -5px; border-radius: 50%;
-  background: inherit; opacity: 0; animation: halo 2s ease-out .7s infinite;
-}
-@keyframes breathe-g { 0%,100%{ transform:scale(1); box-shadow:0 0 0 0 rgba(74,222,128,0.6); } 50%{ transform:scale(1.2); box-shadow:0 0 0 5px rgba(74,222,128,0); } }
-@keyframes breathe-y { 0%,100%{ transform:scale(1); box-shadow:0 0 0 0 rgba(253,224,71,0.6); } 50%{ transform:scale(1.2); box-shadow:0 0 0 5px rgba(253,224,71,0); } }
+#status-badge.open .dot::before, #status-badge.soon .dot::before { content: ''; position: absolute; inset: -5px; border-radius: 50%; background: inherit; opacity: 0; animation: halo 2s ease-out infinite; }
+#status-badge.open .dot::after,  #status-badge.soon .dot::after  { content: ''; position: absolute; inset: -5px; border-radius: 50%; background: inherit; opacity: 0; animation: halo 2s ease-out .7s infinite; }
+@keyframes breathe-g { 0%,100%{ transform:scale(1); box-shadow:0 0 0 0 rgba(74,222,128,.6); } 50%{ transform:scale(1.2); box-shadow:0 0 0 5px rgba(74,222,128,0); } }
+@keyframes breathe-y { 0%,100%{ transform:scale(1); box-shadow:0 0 0 0 rgba(253,224,71,.6); } 50%{ transform:scale(1.2); box-shadow:0 0 0 5px rgba(253,224,71,0); } }
 @keyframes halo { 0%{ transform:scale(1); opacity:.5; } 100%{ transform:scale(3.2); opacity:0; } }
 
-.hero-content {
-  position: relative; z-index: 2;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  text-align: center; gap: 14px;
-  padding: 2rem 1.5rem 7rem;
-  width: 100%;
-}
+.hero-content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 14px; padding: 2rem 1.5rem 7rem; width: 100%; }
 .hero-logo { width: 180px; opacity: 0; transform: translateY(10px); transition: opacity .7s .1s ease, transform .7s .1s ease; }
 .hero-logo.on { opacity: 1; transform: translateY(0); }
-.hero-tagline {
-  font-family: var(--hand); font-size: 2.2rem; font-weight: 700;
-  color: #fff; line-height: 1;
-  opacity: 0; transform: translateY(8px);
-  transition: opacity .6s .25s ease, transform .6s .25s ease;
-}
+.hero-tagline { font-family: var(--hand); font-size: 2.2rem; font-weight: 700; color: #fff; line-height: 1; opacity: 0; transform: translateY(8px); transition: opacity .6s .25s ease, transform .6s .25s ease; }
 .hero-tagline.on { opacity: 1; transform: translateY(0); }
-.hero-city {
-  font-family: var(--sans); font-size: 11px; font-weight: 700;
-  letter-spacing: 0.16em; text-transform: uppercase;
-  color: #fff;
-  opacity: 0; transform: translateY(6px);
-  transition: opacity .5s .38s ease, transform .5s .38s ease;
-}
+.hero-city { font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: #fff; opacity: 0; transform: translateY(6px); transition: opacity .5s .38s ease, transform .5s .38s ease; }
 .hero-city.on { opacity: 1; transform: translateY(0); }
-.hero-rating {
-  display: inline-flex; align-items: center; gap: 6px;
-  opacity: 0; transform: translateY(6px);
-  transition: opacity .5s .5s ease, transform .5s .5s ease;
-}
+.hero-rating { display: inline-flex; align-items: center; gap: 6px; opacity: 0; transform: translateY(6px); transition: opacity .5s .5s ease, transform .5s .5s ease; }
 .hero-rating.on { opacity: 1; transform: translateY(0); }
 .rating-stars svg { width: 15px; height: 15px; }
 .rating-text { font-size: 13px; font-weight: 600; color: #fff; }
-.rating-count { font-size: 12px; color: rgba(255,255,255,0.5); }
-.hero-tagline2 {
-  font-family: var(--hand); font-size: 1.1rem; font-weight: 400;
-  color: rgba(255,255,255,0.85); font-style: italic;
-  opacity: 0; transform: translateY(6px);
-  transition: opacity .5s .58s ease, transform .5s .58s ease;
-}
+.rating-count { font-size: 12px; color: rgba(255,255,255,.5); }
+.hero-tagline2 { font-family: var(--hand); font-size: 1.1rem; color: rgba(255,255,255,.85); font-style: italic; opacity: 0; transform: translateY(6px); transition: opacity .5s .58s ease, transform .5s .58s ease; }
 .hero-tagline2.on { opacity: 1; transform: translateY(0); }
-
-/* Scroll arrow */
-.scroll-arrow {
-  position: absolute; bottom: 55px; left: 50%;
-  transform: translateX(-50%);
-  z-index: 5; display: flex; flex-direction: column; align-items: center;
-  opacity: 0;
-  animation: arrow-fade 2s ease 2s forwards, arrow-bounce 1.8s ease-in-out 2s infinite;
-}
+.scroll-arrow { position: absolute; bottom: 55px; left: 50%; transform: translateX(-50%); z-index: 5; display: flex; align-items: center; opacity: 0; animation: arrow-fade 2s ease 2s forwards, arrow-bounce 1.8s ease-in-out 2s infinite; }
 .scroll-arrow svg { width: 36px; height: 36px; }
-@keyframes arrow-fade { 0%{ opacity:0; } 100%{ opacity:0.5; } }
+@keyframes arrow-fade { 0%{ opacity:0; } 100%{ opacity:.5; } }
 @keyframes arrow-bounce { 0%,100%{ transform:translateX(-50%) translateY(0); } 50%{ transform:translateX(-50%) translateY(6px); } }
 
-/* ── CTA STRIP ── */
-.cta-strip {
-  background: var(--dark2);
-  display: flex; justify-content: center; align-items: flex-start;
-  padding: 24px 0 12px; width: 100%;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-}
-.cta-item {
-  display: flex; flex-direction: column; align-items: center; gap: 8px;
-  padding: 8px 22px; text-decoration: none;
-  color: rgba(255,255,255,0.7); font-size: 10px; font-weight: 500;
-  letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap;
-  position: relative; overflow: hidden;
-  -webkit-tap-highlight-color: transparent;
-}
-.cta-icon {
-  width: 52px; height: 52px; border-radius: 50%;
-  background: var(--orange);
-  display: flex; align-items: center; justify-content: center;
-  transition: background .2s, transform .15s;
-}
+/* CTA STRIP */
+.cta-strip { background: var(--dark2); display: flex; justify-content: center; align-items: flex-start; padding: 24px 0 12px; border-bottom: 1px solid rgba(255,255,255,.05); }
+.cta-item { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 8px 22px; text-decoration: none; color: rgba(255,255,255,.7); font-size: 10px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; position: relative; overflow: hidden; -webkit-tap-highlight-color: transparent; }
+.cta-icon { width: 52px; height: 52px; border-radius: 50%; background: var(--orange); display: flex; align-items: center; justify-content: center; transition: background .2s, transform .15s; }
 .cta-icon svg { stroke: #fff !important; fill: none; }
-.cta-item:active .cta-icon { background: var(--gold); transform: scale(0.9); }
-.ripple {
-  position: absolute; border-radius: 50%;
-  background: rgba(255,255,255,0.15);
-  transform: scale(0);
-  animation: ripple-anim 0.6s ease-out forwards;
-  pointer-events: none;
-}
+.cta-item:active .cta-icon { background: var(--gold); transform: scale(.9); }
+.ripple { position: absolute; border-radius: 50%; background: rgba(255,255,255,.15); transform: scale(0); animation: ripple-anim .6s ease-out forwards; pointer-events: none; }
 @keyframes ripple-anim { to{ transform:scale(4); opacity:0; } }
 
-/* ── SECTION BASE ── */
+/* SECTIONS */
 .section { padding: 2.5rem 1.5rem; }
-.section.dark  { background: var(--dark2); color: #fff; }
-.section.light { background: var(--light); color: var(--dark); }
+.section.dark { background: var(--dark2); }
+.label { font-family: var(--title); font-size: 1.1rem; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 1.4rem; display: flex; align-items: center; justify-content: center; text-align: center; white-space: nowrap; line-height: 1; }
+.section.dark .label { color: #fff; }
+.label-line { display: block; width: 60px; height: 8px; flex-shrink: 0; margin: 0 12px; opacity: .7; }
 
-/* ── LABEL ── */
-.label {
-  font-family: var(--title);
-  font-size: 1.1rem; font-weight: 900;
-  letter-spacing: 0.12em; text-transform: uppercase;
-  margin-bottom: 1.4rem;
-  display: flex; align-items: center; justify-content: center;
-  text-align: center; white-space: nowrap; line-height: 1;
-}
-.section.dark  .label { color: #fff; }
-.section.light .label { color: var(--dark); }
-.label-line {
-  display: block; width: 60px; height: 8px;
-  flex-shrink: 0; margin: 0 12px; opacity: 0.7;
-}
-
-/* ── ABOUT ── */
-.about-cards { display: flex; flex-direction: column; gap: 16px; }
-.about-card { padding: 16px 0; background: none; border: none; }
-.about-card-title { font-family: var(--hand); font-size: 1.4rem; font-weight: 700; color: #fff; margin-bottom: 6px; text-align: center; }
-.about-card-text  { font-size: 13px; line-height: 1.75; color: rgba(255,255,255,0.6); text-align: center; margin: 0; }
+/* ABOUT */
 .logo2-img { width: 160px; display: block; margin: 0 auto 1.5rem; }
+.about-cards { display: flex; flex-direction: column; gap: 16px; }
+.about-card { padding: 20px; border: 1px solid rgba(255,255,255,.06); border-radius: 12px; }
+.about-card-title { font-family: var(--hand); font-size: 1.4rem; font-weight: 700; color: var(--gold); margin-bottom: 6px; text-align: center; }
+.about-card-text  { font-size: 13px; line-height: 1.75; color: rgba(255,255,255,.5); text-align: center; margin: 0; }
 
-/* ── INTERIOR IMAGE ── */
-.interior-wrap { width: 100%; height: 240px; overflow: hidden; margin-bottom: 0; }
-.interior-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* INTERIOR */
+.interior-wrap { width: 100%; height: 240px; overflow: hidden; }
+.interior-wrap img { width: 100%; height: 100%; object-fit: cover; }
 
-/* ── CAROUSEL ── */
+/* CAROUSEL */
 .carousel-section { background: var(--dark); padding: 2.5rem 0 2rem; }
 .carousel-label { padding: 0 1.5rem; margin-bottom: 1.4rem; }
 .carousel { display: flex; overflow-x: scroll; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; gap: 12px; padding: 0 1.5rem; }
 .carousel::-webkit-scrollbar { display: none; }
 .carousel-item { flex: 0 0 68%; scroll-snap-align: start; border-radius: 14px; overflow: hidden; }
-.carousel-item img { width: 100%; height: 200px; object-fit: cover; object-position: center; }
+.carousel-item img { width: 100%; height: 200px; object-fit: cover; }
 .carousel-dots { display: flex; justify-content: center; gap: 6px; margin-top: 12px; }
-.carousel-dots .dot { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,0.2); transition: background .3s, transform .3s; animation: none !important; }
+.carousel-dots .dot { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,.2); transition: background .3s, transform .3s; animation: none !important; }
 .carousel-dots .dot.active { background: var(--gold); transform: scale(1.4); }
-.img-caption { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-top: 10px; text-align: center; padding: 0 1.5rem; }
+.img-caption { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.3); margin-top: 10px; text-align: center; padding: 0 1.5rem; }
 
-/* ── MENU CARD ── */
-.menu-feature {
-  display: flex; align-items: stretch;
-  background: var(--orange); border-radius: 12px;
-  overflow: hidden; text-decoration: none; color: #fff;
-  margin-bottom: 12px; -webkit-tap-highlight-color: transparent;
-  transition: opacity .2s;
-}
+/* MENU CARD */
+.menu-feature { display: flex; align-items: stretch; background: var(--orange); border-radius: 12px; overflow: hidden; text-decoration: none; color: #fff; margin-bottom: 12px; -webkit-tap-highlight-color: transparent; transition: opacity .2s; }
 .menu-feature:active { opacity: .8; }
-.menu-accent { width: 5px; flex-shrink: 0; background: rgba(255,255,255,0.25); }
+.menu-accent { width: 5px; flex-shrink: 0; background: rgba(255,255,255,.25); }
 .menu-body { padding: 16px 18px; flex: 1; }
-.menu-label { font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.65); margin-bottom: 4px; }
+.menu-label { font-size: 10px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.65); margin-bottom: 4px; }
 .menu-title { font-family: var(--hand); font-size: 1.5rem; font-weight: 600; color: #fff; margin-bottom: 5px; }
-.menu-cta { font-size: 12px; color: rgba(255,255,255,0.7); font-weight: 500; display: flex; align-items: center; gap: 4px; }
+.menu-cta { font-size: 12px; color: rgba(255,255,255,.7); font-weight: 500; display: flex; align-items: center; gap: 4px; }
 
-/* ── SOCIAL ── */
+/* SOCIAL */
 .social-wrap { display: flex; justify-content: center; align-items: center; gap: 20px; padding: 2rem 1.5rem; background: var(--dark2); }
 .social-icon-btn { width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: transform .2s, opacity .2s; -webkit-tap-highlight-color: transparent; }
-.social-icon-btn:active { transform: scale(0.92); opacity: .8; }
+.social-icon-btn:active { transform: scale(.92); opacity: .8; }
 .social-icon-btn.fb { background: #1877F2; }
 .social-icon-btn.ig { background: linear-gradient(45deg, #f09433, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888); }
 
-/* ── HORAIRES ── */
+/* HORAIRES */
 .hours-table { width: 100%; border-collapse: collapse; }
-.hours-table tr { border-bottom: 1px solid rgba(255,255,255,0.06); }
+.hours-table tr { border-bottom: 1px solid rgba(255,255,255,.06); }
 .hours-table tr:last-child { border-bottom: none; }
 .hours-table td { padding: 11px 4px; font-size: 14px; vertical-align: middle; }
-.hours-table .day { color: rgba(255,255,255,0.5); width: 50%; }
+.hours-table .day { color: rgba(255,255,255,.5); width: 50%; }
 .hours-table .time { font-weight: 500; color: #fff; text-align: right; }
-.hours-table .closed { color: rgba(255,255,255,0.2); font-style: italic; text-align: right; }
+.hours-table .closed { color: rgba(255,255,255,.2); font-style: italic; text-align: right; }
 .today-row .day { color: var(--orange) !important; }
-.today-badge { display: inline-block; background: rgba(212,120,26,0.15); color: var(--orange); font-size: 9px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 6px; border-radius: 40px; margin-left: 6px; vertical-align: middle; border: 1px solid rgba(212,120,26,0.3); }
+.today-badge { display: inline-block; background: rgba(212,120,26,.15); color: var(--orange); font-size: 9px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; padding: 2px 6px; border-radius: 40px; margin-left: 6px; vertical-align: middle; border: 1px solid rgba(212,120,26,.3); }
 
-/* ── ADRESSE ── */
+/* ADRESSE */
 .map-wrap { border-radius: 12px; overflow: hidden; margin-bottom: 10px; }
 .map-wrap iframe { display: block; width: 100%; height: 180px; border: none; }
-.addr-row { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 12px 14px; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; background: var(--dark3); margin-bottom: 10px; text-align: center; }
-.addr-icon { width: 34px; height: 34px; flex-shrink: 0; background: rgba(67,111,150,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.addr-row { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border: 1px solid rgba(255,255,255,.08); border-radius: 10px; background: var(--dark3); margin-bottom: 10px; }
+.addr-icon { width: 34px; height: 34px; flex-shrink: 0; background: rgba(67,111,150,.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
 .addr-street { font-size: 14px; font-weight: 500; color: #fff; }
-.addr-city { font-size: 12px; color: rgba(255,255,255,0.45); }
-.btn-map { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 14px; background: var(--orange); color: #fff; border-radius: 10px; font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; transition: background .2s; -webkit-tap-highlight-color: transparent; }
+.addr-city { font-size: 12px; color: rgba(255,255,255,.45); }
+.btn-map { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 14px; background: var(--orange); color: #fff; border-radius: 10px; font-size: 12px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; transition: background .2s; -webkit-tap-highlight-color: transparent; }
 .btn-map:active { background: var(--gold); }
 
-/* ── FOOTER ── */
-.footer {
-  position: relative; overflow: hidden; min-height: 220px;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  background: #000;
-}
-.footer-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 30% center; opacity: 0.3; }
-.footer-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.8) 100%); }
+/* FOOTER */
+.footer { position: relative; overflow: hidden; min-height: 220px; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #000; }
+.footer-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 30% center; opacity: .45; }
+.footer-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,.5), rgba(0,0,0,.85)); }
 .footer-content { position: relative; z-index: 1; padding: 2.5rem 1.5rem 3rem; width: 100%; text-align: center; }
 .footer-logo { width: 100px; margin: 0 auto 8px; }
-.footer-sub { font-size: 10px; color: rgba(255,255,255,0.4); letter-spacing: 0.18em; text-transform: uppercase; }
-.footer-line { width: 28px; height: 1px; background: var(--gold); opacity: 0.3; margin: 12px auto; }
-.footer-left, .footer-center, .footer-right { display: none; }
-.footer-actions { display: flex; flex-direction: column; align-items: center; gap: 8px; margin-bottom: 12px; }
-.footer-phone { display: inline-flex; align-items: center; gap: 7px; padding: 10px 20px; border-radius: 40px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); font-size: 15px; font-weight: 500; color: #fff; text-decoration: none; }
-.footer-copy { font-size: 10px; color: rgba(255,255,255,0.2); }
+.footer-sub { font-size: 10px; color: rgba(255,255,255,.4); letter-spacing: .18em; text-transform: uppercase; }
+.footer-line { width: 28px; height: 1px; background: var(--gold); opacity: .3; margin: 12px auto; }
+.footer-copy { font-size: 10px; color: rgba(255,255,255,.2); }
 
-/* ── BOUTONS FIXES ── */
-#btn-lang { position: fixed; bottom: 24px; left: 16px; z-index: 999; padding: 9px 15px; border-radius: 40px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); backdrop-filter: blur(10px); font-family: var(--sans); font-size: 11px; font-weight: 600; color: #fff; cursor: pointer; display: flex; align-items: center; gap: 6px; -webkit-tap-highlight-color: transparent; }
-#btn-share { position: fixed; bottom: 24px; right: 16px; z-index: 999; width: 46px; height: 46px; border-radius: 50%; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+/* BOUTONS FIXES */
+#btn-lang { position: fixed; bottom: 24px; left: 16px; z-index: 999; padding: 9px 15px; border-radius: 40px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.15); backdrop-filter: blur(10px); font-family: var(--sans); font-size: 11px; font-weight: 600; color: #fff; cursor: pointer; display: flex; align-items: center; gap: 6px; -webkit-tap-highlight-color: transparent; }
+#btn-share { position: fixed; bottom: 24px; right: 16px; z-index: 999; width: 46px; height: 46px; border-radius: 50%; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.15); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; cursor: pointer; -webkit-tap-highlight-color: transparent; }
 
-/* ── LANDSCAPE MOBILE ── */
+/* LANDSCAPE MOBILE */
 @media (orientation: landscape) and (max-height: 500px) {
   .hero { height: 100svh; min-height: 0; }
   .hero-content { gap: 8px; padding-bottom: 3rem; }
   .hero-logo { width: 130px; }
   .hero-tagline { font-size: 1.6rem; }
-  .hero-tagline2 { font-size: 0.9rem; }
-  .rating-stars svg { width: 12px; height: 12px; }
   #status-badge { font-size: 10px; top: 10px; }
   .scroll-arrow { bottom: 16px; }
 }
 
-
-
-
-/* ════════════════════════════════════
-   DESKTOP PRO
-════════════════════════════════════ */
+/* ══════════════════════════════════════
+   DESKTOP — layout site restaurant pro
+   >= 768px
+══════════════════════════════════════ */
 @media (min-width: 768px) {
 
   body { background: #0a0a0a; }
   #page { padding-top: 72px; }
+
+  /* Cache éléments mobile */
+  #btn-lang, #btn-share { display: none; }
+  #sticky-nav { display: none !important; }
+  .mobile-only { display: none !important; }
+  .scroll-arrow { bottom: 32px; }
 
   /* ── TOPBAR ── */
   #desk-nav {
@@ -381,24 +230,25 @@ body {
     padding: 0 clamp(2rem, 5vw, 5rem);
     height: 72px;
     position: fixed; top: 0; left: 0; right: 0; z-index: 500;
-    background: rgba(10,10,10,0.96);
+    background: rgba(10,10,10,.96);
     backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255,255,255,0.07);
+    border-bottom: 1px solid rgba(255,255,255,.07);
   }
   .desk-logo { height: 36px; }
   .desk-links { display: flex; align-items: center; gap: 2rem; }
-  .desk-links a { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.45); text-decoration: none; transition: color .2s; }
+  .desk-links a { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.45); text-decoration: none; transition: color .2s; }
   .desk-links a:hover { color: #fff; }
-  .desk-links .desk-cta { background: var(--orange); color: #fff !important; padding: 9px 22px; border-radius: 6px; font-weight: 600; }
+  .desk-links .desk-cta { background: var(--orange); color: #fff !important; padding: 9px 22px; border-radius: 6px; font-weight: 600; transition: background .2s; }
   .desk-links .desk-cta:hover { background: #bf6a14; }
-  .desk-lang { font-family: var(--sans); font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.35); cursor: pointer; background: none; border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 6px 12px; letter-spacing: 0.1em; transition: all .2s; }
-  .desk-lang:hover { color: #fff; border-color: rgba(255,255,255,0.3); }
-  #btn-lang, #btn-share { display: none; }
-  #sticky-nav { display: none !important; }
+  .desk-right-nav { display: flex; align-items: center; gap: 12px; }
+  .desk-social-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: opacity .2s; }
+  .desk-social-icon:hover { opacity: .75; }
+  .desk-lang { font-family: var(--sans); font-size: 11px; font-weight: 600; color: rgba(255,255,255,.35); cursor: pointer; background: none; border: 1px solid rgba(255,255,255,.1); border-radius: 4px; padding: 6px 12px; letter-spacing: .1em; transition: all .2s; }
+  .desk-lang:hover { color: #fff; border-color: rgba(255,255,255,.3); }
 
   /* ── HERO ── */
   .hero { height: calc(100vh - 72px); min-height: 600px; max-height: none; }
-  .hero-img { opacity: 0.5; }
+  .hero-img { opacity: .5; }
   .hero-logo { width: 260px; }
   .hero-tagline { font-size: clamp(2.4rem, 4vw, 4.5rem); }
   .hero-tagline2 { font-size: clamp(1rem, 1.4vw, 1.3rem); }
@@ -406,96 +256,79 @@ body {
   .rating-stars svg { width: 18px; height: 18px; }
   .rating-text { font-size: 15px; }
   .rating-count { font-size: 13px; }
-  .scroll-arrow { bottom: 32px; }
 
-  /* ── CTA ── */
-  .cta-strip { padding: 2.5rem clamp(2rem, 5vw, 5rem); justify-content: center; gap: 0; background: var(--dark2); }
-  .cta-item { padding: 10px clamp(2rem, 5vw, 6rem); font-size: 11px; }
-  .cta-icon { width: 62px; height: 62px; }
+  /* ── CTA caché ── */
+  .cta-strip { display: none; }
 
-  /* ── ABOUT — titre centré, logo sous le titre, textes côte à côte ── */
+  /* ── SECTIONS ── */
   .section { padding: 5rem clamp(2rem, 5vw, 5rem); }
+  .section.dark { background: var(--dark2); }
+  .label { font-size: .75rem; letter-spacing: .35em; opacity: .45; margin-bottom: 1rem; justify-content: flex-start; text-align: left; white-space: nowrap; }
+  .label-line { display: none; }
+
+  /* ── ABOUT ── */
   .section#section-about { text-align: center; }
   .section#section-about .label { justify-content: center; }
-  .label { font-size: 1.4rem; }
-  .logo2-img { width: 160px; margin: 0 auto 2.5rem; }
-  .about-cards { flex-direction: row; gap: 3rem; margin-top: 0; }
-  .about-card { flex: 1; text-align: left; border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 28px; }
-  .about-card-title { text-align: left; font-size: 1.25rem; color: var(--gold); }
-  .about-card-text  { text-align: left; font-size: 14px; }
+  .desk-big-title { font-family: var(--hand); font-size: clamp(2.8rem, 5vw, 5rem); font-weight: 700; line-height: 1.1; color: #fff; margin-bottom: 1.2rem; }
+  .desk-intro { font-size: clamp(14px, 1.3vw, 17px); line-height: 1.9; color: rgba(255,255,255,.45); max-width: 600px; margin: 0 auto 3rem; }
+  .logo2-img { width: 140px; margin: 0 auto 1.5rem; }
+  .about-cards { flex-direction: row; gap: 2.5rem; }
+  .about-card { flex: 1; text-align: left; border: 1px solid rgba(255,255,255,.08); border-radius: 14px; padding: 28px; }
+  .about-card-title { font-size: 1.3rem !important; color: #fff !important; text-align: left; margin-bottom: 10px; }
+  .about-card-text  { font-size: 14px !important; line-height: 1.85; color: rgba(255,255,255,.4) !important; text-align: left; }
 
   /* ── INTERIOR ── */
-  .interior-wrap { height: 500px; }
+  .interior-wrap { height: 480px; }
 
-  /* ── CAROUSEL — 3 photos fixes côte à côte ── */
+  /* ── CAROUSEL ── */
   .carousel-section { padding: 5rem 0 3rem; }
-  .carousel-section .carousel-label { padding: 0 clamp(2rem, 5vw, 5rem); max-width: none; display: flex; }
-  .carousel-section .img-caption { padding: 0 clamp(2rem, 5vw, 5rem); text-align: left; margin-top: 12px; }
+  .desk-section-header { padding: 0 clamp(2rem, 5vw, 5rem); margin-bottom: 2rem; display: block !important; }
+  .desk-section-title { font-family: var(--hand); font-size: clamp(2rem, 3.5vw, 3.5rem); font-weight: 700; color: #fff; margin-bottom: .4rem; line-height: 1.1; }
+  .desk-section-sub { font-size: 14px; color: rgba(255,255,255,.3); line-height: 1.6; }
+  .carousel-section .carousel-label { display: none; }
   .carousel { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding: 0 clamp(2rem, 5vw, 5rem); overflow: visible; }
   .carousel-item { flex: none; width: 100%; scroll-snap-align: none; border-radius: 14px; overflow: hidden; }
   .carousel-item img { height: 320px; width: 100%; object-fit: cover; transition: transform .4s ease; }
   .carousel-item:hover img { transform: scale(1.03); }
   .carousel-dots { display: none; }
+  .img-caption { padding: 0 clamp(2rem, 5vw, 5rem); text-align: left; margin-top: 14px; }
 
   /* ── MENU + INTERIOR SIDE BY SIDE ── */
-  .desk-menu-interior {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: stretch;
-    border-top: 1px solid rgba(255,255,255,0.06);
-  }
-  .desk-menu-interior .section#section-menu {
-    border-top: none; max-width: 100%;
-    display: flex; flex-direction: column; justify-content: center;
-  }
-  .desk-menu-interior .interior-wrap {
-    height: 100%; min-height: 380px; margin-bottom: 0;
-  }
+  .desk-menu-interior { display: grid; grid-template-columns: 1fr 1fr; align-items: stretch; border-top: 1px solid rgba(255,255,255,.06); }
+  .desk-menu-interior .section#section-menu { border-top: none; display: flex; flex-direction: column; justify-content: center; }
+  .desk-menu-interior .interior-wrap.desk-only { display: block !important; height: 100%; min-height: 420px; margin-bottom: 0; }
   .menu-feature { max-width: 100%; }
   .menu-title { font-size: 1.8rem; }
 
-  /* ── SOCIAL — dans topbar uniquement ── */
+  /* ── SOCIAL caché — dans topbar ── */
   .social-wrap { display: none; }
 
   /* ── HORAIRES + ADRESSE ── */
-  .hours-adresse-desktop { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid rgba(255,255,255,0.06); }
-  .hours-adresse-desktop .section { border-top: none; border-right: 1px solid rgba(255,255,255,0.06); }
+  .hours-adresse-desktop { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid rgba(255,255,255,.06); }
+  .hours-adresse-desktop .section { border-top: none; border-right: 1px solid rgba(255,255,255,.06); }
   .hours-adresse-desktop .section:last-child { border-right: none; }
   .map-wrap iframe { height: 240px; }
   .hours-table td { font-size: 15px; padding: 13px 4px; }
 
-  /* ── FOOTER — full width cinématique ── */
-  .footer {
-    min-height: 380px;
-    background: #000;
-  }
-  .footer-bg { opacity: 0.4; filter: saturate(0.8); }
-  .footer-overlay { background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.85) 100%); }
-  .footer-content {
-    padding: 5rem clamp(2rem, 5vw, 5rem);
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: center;
-    gap: 2rem;
-    max-width: 100%;
-  }
-  .footer-left { display: flex; flex-direction: column; gap: 6px; text-align: left; }
-  .footer-left .footer-sub { letter-spacing: 0.2em; font-size: 11px; }
-  .footer-center { display: flex; flex-direction: column; align-items: center; gap: 10px; }
-  .footer-logo { width: 120px; margin: 0; }
-  .footer-right { text-align: right; }
-  .footer-line { display: none; }
+  /* ── FOOTER 3 colonnes full width ── */
+  .footer { min-height: 320px; }
+  .footer-bg { opacity: .4; }
+  .footer-content { padding: 5rem clamp(2rem, 5vw, 5rem); display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 3rem; text-align: left; }
   .footer-mobile-only { display: none; }
-  .footer-left, .footer-center, .footer-right { display: flex; flex-direction: column; }
-  .footer-center { align-items: center; }
-  .footer-right { align-items: flex-end; }
-  .footer-actions { display: none; }
+  .footer-col-left,
+  .footer-col-center,
+  .footer-col-right { display: flex !important; flex-direction: column; }
+  .footer-col-center { align-items: center; }
+  .footer-col-right { align-items: flex-end; }
+  .footer-logo { width: 120px; margin: 0; }
+  .footer-sub { font-size: 11px; letter-spacing: .2em; }
+  .footer-line { display: none; }
 }
 
 @media (min-width: 1300px) {
-  .cta-item { padding: 10px 8rem; }
   .carousel-item img { height: 380px; }
-  .interior-wrap { height: 560px; }
+  .interior-wrap { height: 540px; }
+  .desk-menu-interior .interior-wrap.desk-only { min-height: 480px; }
 }
 </style>
 </head>
@@ -510,27 +343,27 @@ body {
 
 <div id="page">
 
-  <!-- DESKTOP NAV -->
+  <!-- DESKTOP TOPBAR -->
   <nav id="desk-nav" style="display:none">
     <img class="desk-logo" src="img/logo.png" alt="NOOK">
     <div class="desk-links">
       <a href="#section-about" data-i18n-desk="about-label">Le restaurant</a>
       <a href="#section-menu" data-i18n-desk="menu-section-label">Menu du jour</a>
       <a href="#section-hours" data-i18n-desk="hours-label">Horaires</a>
-      <a href="mailto:nook.aubenas@gmail.com?subject=Réservation%20NOOK&body=Bonjour%2C%0A%0AJe%20souhaite%20réserver%20une%20table%20chez%20NOOK.%0A%0ADate%20souhaitée%20%3A%0ANombre%20de%20personnes%20%3A%0ANom%20%3A%0ATéléphone%20%3A%0A%0AMerci%20!" class="desk-cta" data-i18n-desk="reserve-txt">Réserver</a>
+      <a href="mailto:nook.aubenas@gmail.com?subject=Réservation%20NOOK&body=Bonjour%2C%0A%0AJe%20souhaite%20réserver%20une%20table.%0A%0ADate%20%3A%0ANombre%20de%20personnes%20%3A%0ANom%20%3A%0ATél%20%3A%0A%0AMerci%20!" class="desk-cta" data-i18n-desk="reserve-txt">Réserver</a>
     </div>
-    <div style="display:flex;align-items:center;gap:12px;">
-      <a href="https://www.facebook.com/people/NOOK-Restaurant/61575514529548/" target="_blank" rel="noopener" style="width:32px;height:32px;border-radius:8px;background:#1877F2;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:opacity .2s;" onmouseover="this.style.opacity='.75'" onmouseout="this.style.opacity='1'">
+    <div class="desk-right-nav">
+      <a href="https://www.facebook.com/people/NOOK-Restaurant/61575514529548/" target="_blank" rel="noopener" class="desk-social-icon" style="background:#1877F2" aria-label="Facebook">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
       </a>
-      <a href="https://www.instagram.com/nook.aubenas/" target="_blank" rel="noopener" style="width:32px;height:32px;border-radius:8px;background:linear-gradient(45deg,#f09433,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:opacity .2s;" onmouseover="this.style.opacity='.75'" onmouseout="this.style.opacity='1'">
+      <a href="https://www.instagram.com/nook.aubenas/" target="_blank" rel="noopener" class="desk-social-icon" style="background:linear-gradient(45deg,#f09433,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888)" aria-label="Instagram">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="#fff" stroke="none"/></svg>
       </a>
       <button class="desk-lang" id="desk-lang-btn">🇬🇧 EN</button>
     </div>
   </nav>
 
-  <!-- STICKY NAV -->
+  <!-- MOBILE STICKY NAV -->
   <nav id="sticky-nav">
     <a class="nav-item" href="tel:+33475360910" data-i18n="reserve-txt">Réserver</a>
     <a class="nav-item" href="#section-menu" data-i18n="menu-txt">Menu</a>
@@ -538,17 +371,15 @@ body {
   </nav>
 
   <!-- HERO -->
-  <div class="hero" id="top">
+  <div class="hero">
     <img class="hero-img" src="img/facade.jpg" alt="NOOK Aubenas">
     <div class="hero-gradient"></div>
     <div class="hero-topbar"></div>
     <div id="status-badge"><span class="dot"></span><span id="badge-text"></span></div>
-    <div class="scroll-arrow">
-      <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-    </div>
+    <div class="scroll-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
     <div class="hero-content">
       <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;">NOOK – Restaurant Cuisine Nomade à Aubenas, Ardèche</h1>
-      <img class="hero-logo" src="img/logo.png" alt="NOOK Restaurant Cuisine Nomade Aubenas">
+      <img class="hero-logo" src="img/logo.png" alt="NOOK">
       <div class="hero-tagline" data-i18n="hero-tagline">Cuisine du monde</div>
       <div class="hero-city">Aubenas · Ardèche</div>
       <div class="hero-rating" id="hero-rating">
@@ -561,7 +392,7 @@ body {
         </div>
         <span class="rating-text">5.0</span>
         <span class="rating-count" data-i18n="rating-txt">(46 avis)</span>
-        <a href="https://www.google.com/search?q=NOOK+Avis&sa=X" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;">
+        <a href="https://www.google.com/search?q=NOOK+Aubenas+avis" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;margin-left:2px;">
           <svg width="14" height="14" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
         </a>
       </div>
@@ -569,7 +400,7 @@ body {
     </div>
   </div>
 
-  <!-- CTA -->
+  <!-- CTA MOBILE -->
   <div class="cta-strip r">
     <a class="cta-item" href="tel:+33475360910">
       <div class="cta-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 012 1.18 2 2 0 013.99 0h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg></div>
@@ -592,6 +423,9 @@ body {
       <h2 data-i18n="about-label" style="font:inherit;margin:0;padding:0">Le restaurant</h2>
       <svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M58 4 C48 2, 38 6, 28 4 C18 2, 8 5, 2 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg>
     </div>
+    <!-- Desktop only -->
+    <p class="desk-big-title" style="display:none" data-i18n="desk-about-title">Une cuisine qui ne s'arrête jamais de voyager.</p>
+    <p class="desk-intro" style="display:none" data-i18n="desk-about-intro">Chez NOOK, le menu change chaque jour. Ce soir c'est le Penjab, demain le Mali, après-demain le Vietnam. Alex et Isabelle composent une table généreuse, ancrée dans son terroir ardéchois, tournée vers les saveurs du monde entier.</p>
     <img src="img/logo2.png" alt="NOOK décoration" class="logo2-img">
     <div class="about-cards">
       <div class="about-card">
@@ -605,22 +439,26 @@ body {
     </div>
   </div>
 
-  <!-- INTERIEUR -->
-  <div class="interior-wrap r">
-    <img src="img/interieur.jpg" alt="Intérieur NOOK Restaurant Aubenas">
+  <!-- INTERIOR MOBILE -->
+  <div class="interior-wrap r mobile-only">
+    <img src="img/interieur.jpg" alt="Intérieur NOOK">
   </div>
 
   <!-- PHOTOS -->
   <div class="carousel-section r">
+    <div class="desk-section-header" style="display:none">
+      <div class="desk-section-title" data-i18n="desk-photos-title">Nos plats du moment</div>
+      <div class="desk-section-sub" data-i18n="desk-photos-sub">Chaque assiette est une nouvelle destination — le menu change chaque jour.</div>
+    </div>
     <div class="label carousel-label">
       <svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M2 4 C12 2, 22 6, 32 4 C42 2, 52 5, 58 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg>
       <h2 data-i18n="photos-label" style="font:inherit;margin:0;padding:0;color:#fff">Nos plats</h2>
       <svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M58 4 C48 2, 38 6, 28 4 C18 2, 8 5, 2 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg>
     </div>
     <div class="carousel" id="carousel">
-      <div class="carousel-item"><img src="img/curry.jpg" alt="Plat curry NOOK restaurant Aubenas"></div>
-      <div class="carousel-item"><img src="img/dessert.jpg" alt="Dessert maison NOOK restaurant Aubenas"></div>
-      <div class="carousel-item"><img src="img/assiette.jpg" alt="Assiette du jour NOOK cuisine nomade Aubenas"></div>
+      <div class="carousel-item"><img src="img/curry.jpg" alt="Plat curry NOOK"></div>
+      <div class="carousel-item"><img src="img/dessert.jpg" alt="Dessert NOOK"></div>
+      <div class="carousel-item"><img src="img/assiette.jpg" alt="Assiette NOOK"></div>
     </div>
     <div class="carousel-dots" id="carousel-dots">
       <span class="dot active"></span><span class="dot"></span><span class="dot"></span>
@@ -628,30 +466,37 @@ body {
     <p class="img-caption" data-i18n="img-caption">Menu renouvelé chaque jour</p>
   </div>
 
+  <!-- MENU + INTERIOR DESKTOP -->
   <div class="desk-menu-interior">
-  <!-- MENU DU JOUR -->
-  <div class="section dark r" id="section-menu">
-    <div class="label">
-      <svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M2 4 C12 2, 22 6, 32 4 C42 2, 52 5, 58 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg>
-      <h2 data-i18n="menu-section-label" style="font:inherit;margin:0;padding:0">Menu du jour</h2>
-      <svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M58 4 C48 2, 38 6, 28 4 C18 2, 8 5, 2 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg>
-    </div>
-    <a class="menu-feature" href="https://www.facebook.com/people/NOOK-Restaurant/61575514529548/" target="_blank" rel="noopener">
-      <div class="menu-accent"></div>
-      <div class="menu-body">
-        <div class="menu-label" data-i18n="menu-label-txt">Mis à jour chaque matin</div>
-        <h3 class="menu-title" data-i18n="menu-title-txt" style="font:inherit;margin:0 0 5px;padding:0;font-family:var(--hand);font-size:1.5rem;font-weight:600">Carte du jour</h3>
-        <div class="menu-cta" id="menu-cta-link">Voir sur Facebook <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    <div class="section dark r" id="section-menu">
+      <div class="desk-section-header" style="display:none">
+        <div class="desk-section-title" data-i18n="desk-menu-title">Menu du jour</div>
+        <div class="desk-section-sub" data-i18n="desk-menu-sub">Renouvelé chaque matin. Retrouvez la carte complète sur Facebook.</div>
       </div>
-    </a>
+      <div class="label">
+        <svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M2 4 C12 2, 22 6, 32 4 C42 2, 52 5, 58 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg>
+        <h2 data-i18n="menu-section-label" style="font:inherit;margin:0;padding:0">Menu du jour</h2>
+        <svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M58 4 C48 2, 38 6, 28 4 C18 2, 8 5, 2 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg>
+      </div>
+      <a class="menu-feature" href="https://www.facebook.com/people/NOOK-Restaurant/61575514529548/" target="_blank" rel="noopener">
+        <div class="menu-accent"></div>
+        <div class="menu-body">
+          <div class="menu-label" data-i18n="menu-label-txt">Mis à jour chaque matin</div>
+          <h3 class="menu-title" data-i18n="menu-title-txt" style="font:inherit;margin:0 0 5px;font-family:var(--hand);font-size:1.5rem;font-weight:600">Carte du jour</h3>
+          <div class="menu-cta" id="menu-cta-link">Voir sur Facebook <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+      </a>
+    </div>
+    <!-- Interior desktop only -->
+    <div class="interior-wrap desk-only r" style="display:none">
+      <img src="img/restaurant.jpg" alt="Salle du restaurant NOOK">
+    </div>
   </div>
 
-  <!-- IMAGE RESTAURANT -->
-  <div class="r"><img src="img/restaurant.jpg" alt="Intérieur du restaurant NOOK à Aubenas, Ardèche" class="restaurant-img" style="width:100%;height:260px;object-fit:cover;"></div>
+  <!-- IMAGE RESTAURANT MOBILE -->
+  <div class="r mobile-only"><img src="img/restaurant.jpg" alt="Salle NOOK" style="width:100%;height:260px;object-fit:cover;"></div>
 
-  </div><!-- /desk-menu-interior -->
-
-  <!-- SOCIAL -->
+  <!-- SOCIAL MOBILE -->
   <div class="social-wrap">
     <a class="social-icon-btn fb" href="https://www.facebook.com/people/NOOK-Restaurant/61575514529548/" target="_blank" rel="noopener" aria-label="Facebook">
       <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
@@ -661,47 +506,53 @@ body {
     </a>
   </div>
 
-  <!-- HORAIRES -->
-  <div class="section dark r" id="section-hours">
-    <div class="label">
-      <svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M2 4 C12 2, 22 6, 32 4 C42 2, 52 5, 58 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg>
-      <h2 data-i18n="hours-label" style="font:inherit;margin:0;padding:0">Horaires</h2>
-      <svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M58 4 C48 2, 38 6, 28 4 C18 2, 8 5, 2 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg>
+  <!-- HORAIRES + ADRESSE -->
+  <div class="hours-adresse-desktop">
+    <div class="section dark r" id="section-hours">
+      <div class="desk-section-header" style="display:none">
+        <div class="desk-section-title" data-i18n="desk-hours-title">Quand venir ?</div>
+        <div class="desk-section-sub" data-i18n="desk-hours-sub">Ouvert du lundi au vendredi. Fermé le week-end.</div>
+      </div>
+      <div class="label">
+        <svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M2 4 C12 2, 22 6, 32 4 C42 2, 52 5, 58 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg>
+        <h2 data-i18n="hours-label" style="font:inherit;margin:0;padding:0">Horaires</h2>
+        <svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M58 4 C48 2, 38 6, 28 4 C18 2, 8 5, 2 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg>
+      </div>
+      <table class="hours-table">
+        <tr id="row-lun"><td class="day"><span data-i18n="day-lun">Lundi</span></td><td class="time">18h30 – 23h00</td></tr>
+        <tr id="row-mar"><td class="day"><span data-i18n="day-mar">Mardi</span></td><td class="time">11h30 – 23h00</td></tr>
+        <tr id="row-mer"><td class="day"><span data-i18n="day-mer">Mercredi</span></td><td class="time">11h30 – 14h30</td></tr>
+        <tr id="row-jeu"><td class="day"><span data-i18n="day-jeu">Jeudi</span></td><td class="time">11h30 – 23h00</td></tr>
+        <tr id="row-ven"><td class="day"><span data-i18n="day-ven">Vendredi</span></td><td class="time">11h30 – 14h30</td></tr>
+        <tr id="row-sam"><td class="day"><span data-i18n="day-sam">Samedi</span></td><td class="closed" data-i18n="closed-txt">Fermé</td></tr>
+        <tr id="row-dim"><td class="day"><span data-i18n="day-dim">Dimanche</span></td><td class="closed" data-i18n="closed-txt">Fermé</td></tr>
+      </table>
     </div>
-    <table class="hours-table">
-      <tr id="row-lun"><td class="day"><span data-i18n="day-lun">Lundi</span></td><td class="time">18h30 – 23h00</td></tr>
-      <tr id="row-mar"><td class="day"><span data-i18n="day-mar">Mardi</span></td><td class="time">11h30 – 23h00</td></tr>
-      <tr id="row-mer"><td class="day"><span data-i18n="day-mer">Mercredi</span></td><td class="time">11h30 – 14h30</td></tr>
-      <tr id="row-jeu"><td class="day"><span data-i18n="day-jeu">Jeudi</span></td><td class="time">11h30 – 23h00</td></tr>
-      <tr id="row-ven"><td class="day"><span data-i18n="day-ven">Vendredi</span></td><td class="time">11h30 – 14h30</td></tr>
-      <tr id="row-sam"><td class="day"><span data-i18n="day-sam">Samedi</span></td><td class="closed" data-i18n="closed-txt">Fermé</td></tr>
-      <tr id="row-dim"><td class="day"><span data-i18n="day-dim">Dimanche</span></td><td class="closed" data-i18n="closed-txt">Fermé</td></tr>
-    </table>
-  </div>
-
-  <!-- ADRESSE -->
-  <div class="section dark r">
-    <div class="label">
-      <svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M2 4 C12 2, 22 6, 32 4 C42 2, 52 5, 58 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg>
-      <h2 data-i18n="addr-label" style="font:inherit;margin:0;padding:0">Nous trouver</h2>
-      <svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M58 4 C48 2, 38 6, 28 4 C18 2, 8 5, 2 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg>
+    <div class="section dark r">
+      <div class="desk-section-header" style="display:none">
+        <div class="desk-section-title" data-i18n="desk-addr-title">Nous trouver</div>
+        <div class="desk-section-sub" data-i18n="desk-addr-sub">Au cœur d'Aubenas, en Ardèche.</div>
+      </div>
+      <div class="label">
+        <svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M2 4 C12 2, 22 6, 32 4 C42 2, 52 5, 58 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg>
+        <h2 data-i18n="addr-label" style="font:inherit;margin:0;padding:0">Nous trouver</h2>
+        <svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M58 4 C48 2, 38 6, 28 4 C18 2, 8 5, 2 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg>
+      </div>
+      <div class="map-wrap">
+        <iframe loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=8+rue+de+la+Prévôté,+07200+Aubenas&output=embed" title="NOOK Aubenas"></iframe>
+      </div>
+      <div class="addr-row">
+        <div class="addr-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#436F96" stroke-width="1.8"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></div>
+        <address style="font-style:normal">
+          <div class="addr-street" data-i18n="addr-street">8 rue de la Prévoté</div>
+          <div class="addr-city" data-i18n="addr-city">07200 Aubenas</div>
+        </address>
+      </div>
+      <a class="btn-map" href="#" id="btn-directions">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+        <span data-i18n="btn-map-txt">Ouvrir dans Google Maps</span>
+      </a>
     </div>
-    <div class="map-wrap">
-      <iframe loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"
-        src="https://www.google.com/maps?q=8+rue+de+la+Prévôté,+07200+Aubenas&output=embed"
-        title="NOOK Aubenas"></iframe>
-    </div>
-    <div class="addr-row">
-      <div class="addr-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#436F96" stroke-width="1.8"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></div>
-      <address style="font-style:normal">
-        <div class="addr-street" data-i18n="addr-street">8 rue de la Prévoté</div>
-        <div class="addr-city" data-i18n="addr-city">07200 Aubenas</div>
-      </address>
-    </div>
-    <a class="btn-map" href="#" id="btn-directions">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
-      <span data-i18n="btn-map-txt">Ouvrir dans Google Maps</span>
-    </a>
   </div>
 
   <!-- FOOTER -->
@@ -715,23 +566,23 @@ body {
         <div class="footer-sub" data-i18n="footer-sub">Cuisine Nomade · Aubenas</div>
         <div class="footer-line"></div>
         <div class="footer-copy" data-i18n="footer-copy">© NOOK Restaurant · 8 rue de la Prévoté, 07200 Aubenas</div>
-        <div style="font-size:9px;color:rgba(255,255,255,0.15);margin-top:6px;letter-spacing:0.08em;">Webdesigner : G.Mikael</div>
+        <div style="font-size:9px;color:rgba(255,255,255,.15);margin-top:6px;letter-spacing:.08em;">Webdesigner : G.Mikael</div>
       </div>
-      <!-- Desktop 3 colonnes -->
-      <div class="footer-left">
+      <!-- Desktop -->
+      <div class="footer-col-left" style="display:none">
         <div class="footer-sub" data-i18n="footer-sub">Cuisine Nomade · Aubenas</div>
-        <div style="font-size:10px;color:rgba(255,255,255,0.22);margin-top:8px;letter-spacing:0.04em;" data-i18n="footer-copy">© NOOK Restaurant · 8 rue de la Prévoté, 07200 Aubenas</div>
-        <div style="font-size:9px;color:rgba(255,255,255,0.15);margin-top:6px;letter-spacing:0.08em;">Webdesigner : G.Mikael</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.22);margin-top:8px;" data-i18n="footer-copy">© NOOK Restaurant · 8 rue de la Prévoté, 07200 Aubenas</div>
+        <div style="font-size:9px;color:rgba(255,255,255,.15);margin-top:6px;letter-spacing:.08em;">Webdesigner : G.Mikael</div>
       </div>
-      <div class="footer-center">
+      <div class="footer-col-center" style="display:none">
         <img class="footer-logo" src="img/logo.png" alt="NOOK">
         <div class="footer-sub" style="margin-top:10px" data-i18n="footer-sub">Cuisine Nomade · Aubenas</div>
       </div>
-      <div class="footer-right">
-        <div style="font-size:12px;color:rgba(255,255,255,0.45);letter-spacing:0.1em;text-transform:uppercase;font-weight:500;">8 rue de la Prévoté</div>
-        <div style="font-size:12px;color:rgba(255,255,255,0.25);margin-top:5px;">07200 Aubenas · Ardèche</div>
-        <div style="font-size:13px;color:rgba(255,255,255,0.45);margin-top:12px;letter-spacing:0.05em;">04 75 36 09 10</div>
-        <div style="font-size:11px;color:rgba(255,255,255,0.2);margin-top:4px;">nook.aubenas@gmail.com</div>
+      <div class="footer-col-right" style="display:none">
+        <div style="font-size:12px;color:rgba(255,255,255,.45);letter-spacing:.1em;text-transform:uppercase;font-weight:500;">8 rue de la Prévoté</div>
+        <div style="font-size:12px;color:rgba(255,255,255,.25);margin-top:5px;">07200 Aubenas · Ardèche</div>
+        <div style="font-size:13px;color:rgba(255,255,255,.45);margin-top:14px;">04 75 36 09 10</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.2);margin-top:4px;">nook.aubenas@gmail.com</div>
       </div>
     </div>
   </div>
@@ -744,8 +595,23 @@ body {
 </div>
 
 <script>
+const isDesk = () => window.innerWidth >= 768;
+
+/* DESKTOP/MOBILE LAYOUT TOGGLE */
+function applyLayout() {
+  const desk = isDesk();
+  document.getElementById('desk-nav').style.display = desk ? 'flex' : 'none';
+  document.querySelectorAll('.desk-big-title,.desk-intro').forEach(el => el.style.display = desk ? 'block' : 'none');
+  document.querySelectorAll('.desk-section-header').forEach(el => el.style.display = desk ? 'block' : 'none');
+  document.querySelectorAll('.desk-only').forEach(el => el.style.display = desk ? 'block' : 'none');
+  document.querySelector('.footer-mobile-only').style.display = desk ? 'none' : 'block';
+  ['footer-col-left','footer-col-center','footer-col-right'].forEach(c => { const el=document.querySelector('.'+c); if(el) el.style.display = desk ? 'flex' : 'none'; });
+}
+applyLayout();
+window.addEventListener('resize', applyLayout);
+
 /* SPLASH */
-const splash=document.getElementById('splash'),page=document.getElementById('page');
+const splash=document.getElementById('splash'), page=document.getElementById('page');
 requestAnimationFrame(()=>requestAnimationFrame(()=>{
   document.getElementById('s-logo').classList.add('in');
   document.getElementById('s-rule').classList.add('in');
@@ -760,31 +626,23 @@ setTimeout(()=>{
   setTimeout(()=>document.getElementById('hero-rating')?.classList.add('on'),460);
   setTimeout(()=>document.querySelector('.hero-tagline2')?.classList.add('on'),570);
   document.querySelectorAll('.r').forEach((el,i)=>{ if(el.getBoundingClientRect().top<window.innerHeight) setTimeout(()=>el.classList.add('on'),80+i*55); });
-  setTimeout(()=>{ splash.remove(); initNavObserver(); },800);
+  setTimeout(()=>{ splash.remove(); if(!isDesk()) initNavObserver(); },800);
 },1500);
 
-/* SCROLL REVEAL + STICKY NAV */
-const nav=document.getElementById('sticky-nav');
+/* SCROLL REVEAL */
 const io=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target);
-      if(window._lang&&window._lang!=='fr') setTimeout(()=>window._applyLang(window._lang),50);
-    }
-  });
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); if(window._lang&&window._lang!=='fr') setTimeout(()=>window._applyLang(window._lang),50); } });
 },{threshold:0.06});
 document.querySelectorAll('.r').forEach(el=>io.observe(el));
-// Nav appears/disappears based on CTA strip pixel position
+
+/* STICKY NAV MOBILE */
 function initNavObserver() {
-  const ctaStrip = document.querySelector('.cta-strip');
-  if(!ctaStrip) return;
-  let armed = false;
-  function checkNav() {
-    const bottom = ctaStrip.getBoundingClientRect().bottom;
-    const pastCTA = bottom < 0;
-    if(pastCTA && !armed) { armed = true; nav.classList.add('armed'); }
-    if(armed) nav.classList.toggle('visible', pastCTA);
-  }
-  window.addEventListener('scroll', checkNav, { passive: true });
+  const nav=document.getElementById('sticky-nav');
+  const ctaStrip=document.querySelector('.cta-strip');
+  if(!nav||!ctaStrip) return;
+  let armed=false;
+  function checkNav(){ const bottom=ctaStrip.getBoundingClientRect().bottom, past=bottom<0; if(past&&!armed){ armed=true; nav.classList.add('armed'); } if(armed) nav.classList.toggle('visible',past); }
+  window.addEventListener('scroll',checkNav,{passive:true});
 }
 
 /* STATUS BADGE */
@@ -812,29 +670,21 @@ function initNavObserver() {
   if(!row) return;
   row.classList.add('today-row');
   const d=row.querySelector('.day');
-  if(d){const b=document.createElement('span');b.className='today-badge';b.setAttribute('data-i18n','today-txt');b.textContent="Aujourd'hui";d.appendChild(b);}
+  if(d){ const b=document.createElement('span'); b.className='today-badge'; b.setAttribute('data-i18n','today-txt'); b.textContent="Aujourd'hui"; d.appendChild(b); }
 })();
 
-/* CAROUSEL */
+/* CAROUSEL MOBILE */
 (function(){
   const c=document.getElementById('carousel'),dots=document.querySelectorAll('#carousel-dots .dot');
   if(!c||!dots.length) return;
-  c.addEventListener('scroll',()=>{ const i=Math.round(c.scrollLeft/(c.scrollWidth/dots.length)); dots.forEach((d,j)=>d.classList.toggle('active',j===i)); },{passive:true});
+  c.addEventListener('scroll',()=>{ if(isDesk()) return; const i=Math.round(c.scrollLeft/(c.scrollWidth/dots.length)); dots.forEach((d,j)=>d.classList.toggle('active',j===i)); },{passive:true});
 })();
 
 /* DIRECTIONS */
 (function(){
   const LAT='44.6195',LNG='4.3897',Q='8+rue+de+la+Prévôté,+07200+Aubenas';
   const iOS=/iPad|iPhone|iPod/.test(navigator.userAgent),Andr=/Android/.test(navigator.userAgent);
-  function go(e){ e.preventDefault();
-    if(navigator.geolocation){ navigator.geolocation.getCurrentPosition(
-      p=>{ const la=p.coords.latitude,lo=p.coords.longitude;
-        if(iOS) window.location.href=`maps://?saddr=${la},${lo}&daddr=${LAT},${LNG}`;
-        else if(Andr) window.location.href=`google.navigation:q=${LAT},${LNG}`;
-        else window.open(`https://www.google.com/maps/dir/${la},${lo}/${LAT},${LNG}`,'_blank');
-      },()=>{ if(iOS)window.location.href=`maps://?q=${Q}`;else window.open(`https://maps.google.com/?q=${Q}`,'_blank'); },{timeout:5000});
-    } else window.open(`https://maps.google.com/?q=${Q}`,'_blank');
-  }
+  function go(e){ e.preventDefault(); if(navigator.geolocation){ navigator.geolocation.getCurrentPosition(p=>{ const la=p.coords.latitude,lo=p.coords.longitude; if(iOS)window.location.href=`maps://?saddr=${la},${lo}&daddr=${LAT},${LNG}`; else if(Andr)window.location.href=`google.navigation:q=${LAT},${LNG}`; else window.open(`https://www.google.com/maps/dir/${la},${lo}/${LAT},${LNG}`,'_blank'); },()=>{ if(iOS)window.location.href=`maps://?q=${Q}`;else window.open(`https://maps.google.com/?q=${Q}`,'_blank'); },{timeout:5000}); } else window.open(`https://maps.google.com/?q=${Q}`,'_blank'); }
   document.getElementById('btn-directions')?.addEventListener('click',go);
   document.getElementById('cta-directions')?.addEventListener('click',go);
 })();
@@ -865,48 +715,64 @@ document.getElementById('btn-share')?.addEventListener('click',()=>{
   else window.open('https://wa.me/?text='+encodeURIComponent('Découvrez le restaurant NOOK à Aubenas 🍽️ https://nook-restaurant.github.io/aubenas'),'_blank');
 });
 
-/* DESKTOP NAV */
-(function(){
-  const dn = document.getElementById('desk-nav');
-  if(!dn) return;
-  if(window.innerWidth >= 768) dn.style.display = 'flex';
-  window.addEventListener('resize', () => {
-    dn.style.display = window.innerWidth >= 768 ? 'flex' : 'none';
-  });
-  // Desk lang button
-  const dlb = document.getElementById('desk-lang-btn');
-  if(dlb) dlb.addEventListener('click', () => {
-    document.getElementById('btn-lang').click();
-    dlb.textContent = dlb.textContent.includes('EN') ? '🇫🇷 FR' : '🇬🇧 EN';
-  });
-})();
-
 /* TRADUCTION */
 (function(){
   const btn=document.getElementById('btn-lang'),flag=document.getElementById('lang-flag'),lbl=document.getElementById('lang-label');
+  const dlb=document.getElementById('desk-lang-btn');
   if(!btn) return;
   let lang='fr';
   const T={
-    fr:{ 'hero-tagline':'Cuisine du monde','rating-txt':'(46 avis)','reserve-txt':'Réserver','menu-txt':'Menu','yaller-txt':'Y aller','about-label':'Le restaurant','about-t1':'La cuisine','about-p1':"Un nouveau pays dans l'assiette chaque jour. Penjab, Mali, Vietnam, Liban... la carte ne s'arrête jamais.",'about-t2':'Le terroir','about-p2':"Les producteurs ont des prénoms. Les vins, bières et jus viennent de Pradons, Sécheras, Chirols — à quelques kilomètres d'ici.",'photos-label':'Nos plats','img-caption':'Menu renouvelé chaque jour','menu-section-label':'Menu du jour','menu-label-txt':'Mis à jour chaque matin','menu-title-txt':'Carte du jour','menu-cta-txt':'Voir sur Facebook','fb-btn':'Facebook','ig-btn':'Instagram','hours-label':'Horaires','day-lun':'Lundi','day-mar':'Mardi','day-mer':'Mercredi','day-jeu':'Jeudi','day-ven':'Vendredi','day-sam':'Samedi','day-dim':'Dimanche','closed-txt':'Fermé','today-txt':"Aujourd'hui",'addr-label':'Nous trouver','addr-street':'8 rue de la Prévoté','addr-city':'07200 Aubenas','btn-map-txt':'Ouvrir dans Google Maps','tagline2':'Alex & Isabelle — deux passionnés, une table, mille saveurs','footer-sub':'Cuisine Nomade · Aubenas','footer-copy':'© NOOK Restaurant · 8 rue de la Prévoté, 07200 Aubenas','social-label':'Retrouvez-nous' },
-    en:{ 'hero-tagline':'World cuisine','rating-txt':'(46 reviews)','reserve-txt':'Book','menu-txt':'Menu','yaller-txt':'Directions','about-label':'The restaurant','about-t1':'The cuisine','about-p1':"A new country on the plate every day. Punjab, Mali, Vietnam, Lebanon... the menu never stops travelling.",'about-t2':'The terroir','about-p2':"The producers have names. Wines, beers and juices come from Pradons, Sécheras, Chirols — just a few kilometres away.",'photos-label':'Our dishes','img-caption':'Menu renewed every day','menu-section-label':"Today's menu",'menu-label-txt':'Updated every morning','menu-title-txt':"Today's menu",'menu-cta-txt':'View on Facebook','fb-btn':'Facebook','ig-btn':'Instagram','hours-label':'Opening hours','day-lun':'Monday','day-mar':'Tuesday','day-mer':'Wednesday','day-jeu':'Thursday','day-ven':'Friday','day-sam':'Saturday','day-dim':'Sunday','closed-txt':'Closed','today-txt':'Today','addr-label':'Find us','addr-street':'8 rue de la Prévoté','addr-city':'07200 Aubenas, France','btn-map-txt':'Open in Google Maps','tagline2':'Alex & Isabelle — two passionate souls, one table, a thousand flavours','footer-sub':'Nomadic Cuisine · Aubenas','footer-copy':'© NOOK Restaurant · 8 rue de la Prévoté, 07200 Aubenas','social-label':'Find us online' }
+    fr:{
+      'hero-tagline':'Cuisine du monde','rating-txt':'(46 avis)','reserve-txt':'Réserver','menu-txt':'Menu','yaller-txt':'Y aller',
+      'about-label':'Le restaurant','about-t1':'La cuisine','about-p1':"Un nouveau pays dans l'assiette chaque jour. Penjab, Mali, Vietnam, Liban... la carte ne s'arrête jamais.",
+      'about-t2':'Le terroir','about-p2':"Les producteurs ont des prénoms. Les vins, bières et jus viennent de Pradons, Sécheras, Chirols — à quelques kilomètres d'ici.",
+      'photos-label':'Nos plats','img-caption':'Menu renouvelé chaque jour',
+      'menu-section-label':'Menu du jour','menu-label-txt':'Mis à jour chaque matin','menu-title-txt':'Carte du jour','menu-cta-txt':'Voir sur Facebook',
+      'hours-label':'Horaires','day-lun':'Lundi','day-mar':'Mardi','day-mer':'Mercredi','day-jeu':'Jeudi','day-ven':'Vendredi','day-sam':'Samedi','day-dim':'Dimanche',
+      'closed-txt':'Fermé','today-txt':"Aujourd'hui",'addr-label':'Nous trouver','addr-street':'8 rue de la Prévoté','addr-city':'07200 Aubenas',
+      'btn-map-txt':'Ouvrir dans Google Maps','tagline2':'Alex & Isabelle — deux passionnés, une table, mille saveurs',
+      'footer-sub':'Cuisine Nomade · Aubenas','footer-copy':'© NOOK Restaurant · 8 rue de la Prévoté, 07200 Aubenas',
+      'desk-about-title':"Une cuisine qui ne s'arrête jamais de voyager.",'desk-about-intro':"Chez NOOK, le menu change chaque jour. Ce soir c'est le Penjab, demain le Mali, après-demain le Vietnam. Alex et Isabelle composent une table généreuse, ancrée dans son terroir ardéchois, tournée vers les saveurs du monde entier.",
+      'desk-photos-title':'Nos plats du moment','desk-photos-sub':"Chaque assiette est une nouvelle destination — le menu change chaque jour.",
+      'desk-menu-title':'Menu du jour','desk-menu-sub':'Renouvelé chaque matin. Retrouvez la carte complète sur Facebook.',
+      'desk-hours-title':'Quand venir ?','desk-hours-sub':'Ouvert du lundi au vendredi. Fermé le week-end.',
+      'desk-addr-title':'Nous trouver','desk-addr-sub':"Au cœur d'Aubenas, en Ardèche."
+    },
+    en:{
+      'hero-tagline':'World cuisine','rating-txt':'(46 reviews)','reserve-txt':'Book','menu-txt':'Menu','yaller-txt':'Directions',
+      'about-label':'The restaurant','about-t1':'The cuisine','about-p1':"A new country on the plate every day. Punjab, Mali, Vietnam, Lebanon... the menu never stops travelling.",
+      'about-t2':'The terroir','about-p2':"The producers have names. Wines, beers and juices come from Pradons, Sécheras, Chirols — just a few kilometres away.",
+      'photos-label':'Our dishes','img-caption':'Menu renewed every day',
+      'menu-section-label':"Today's menu",'menu-label-txt':'Updated every morning','menu-title-txt':"Today's menu",'menu-cta-txt':'View on Facebook',
+      'hours-label':'Opening hours','day-lun':'Monday','day-mar':'Tuesday','day-mer':'Wednesday','day-jeu':'Thursday','day-ven':'Friday','day-sam':'Saturday','day-dim':'Sunday',
+      'closed-txt':'Closed','today-txt':'Today','addr-label':'Find us','addr-street':'8 rue de la Prévoté','addr-city':'07200 Aubenas, France',
+      'btn-map-txt':'Open in Google Maps','tagline2':'Alex & Isabelle — two passionate souls, one table, a thousand flavours',
+      'footer-sub':'Nomadic Cuisine · Aubenas','footer-copy':'© NOOK Restaurant · 8 rue de la Prévoté, 07200 Aubenas',
+      'desk-about-title':'A cuisine that never stops travelling.','desk-about-intro':"At NOOK, the menu changes every day. Tonight it's Punjab, tomorrow Mali, the day after Vietnam. Alex and Isabelle craft a generous table, rooted in the Ardèche, open to the flavours of the entire world.",
+      'desk-photos-title':'Our dishes of the moment','desk-photos-sub':"Every plate is a new destination — the menu changes every day.",
+      'desk-menu-title':"Today's menu",'desk-menu-sub':'Renewed every morning. Find the full menu on Facebook.',
+      'desk-hours-title':'When to visit?','desk-hours-sub':'Open Monday to Friday. Closed weekends.',
+      'desk-addr-title':'Find us','desk-addr-sub':"In the heart of Aubenas, Ardèche."
+    }
   };
   window._applyLang=function(l){
     const t=T[l];
     document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n');if(t[k]!==undefined)el.textContent=t[k];});
-    document.querySelectorAll('[data-i18n-html]').forEach(el=>{const k=el.getAttribute('data-i18n-html');if(t[k]!==undefined)el.innerHTML=t[k];});
     const mc=document.getElementById('menu-cta-link');
     if(mc) mc.innerHTML=t['menu-cta-txt']+' <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
     document.querySelectorAll('.today-badge').forEach(el=>{el.textContent=t['today-txt'];});
-    const navItems=document.querySelectorAll('.nav-item[data-i18n]');
-    navItems.forEach(el=>{const k=el.getAttribute('data-i18n');if(t[k])el.textContent=t[k];});
+    document.querySelectorAll('[data-i18n-desk]').forEach(el=>{const k=el.getAttribute('data-i18n-desk');if(t[k])el.textContent=t[k];});
   };
-  btn.addEventListener('click',()=>{
+  function switchLang(){
     lang=lang==='fr'?'en':'fr';
     flag.textContent=lang==='fr'?'🇬🇧':'🇫🇷';
     lbl.textContent=lang==='fr'?'EN':'FR';
+    if(dlb) dlb.textContent=lang==='fr'?'🇬🇧 EN':'🇫🇷 FR';
     window._lang=lang;
     window._applyLang(lang);
-  });
+  }
+  btn.addEventListener('click',switchLang);
+  if(dlb) dlb.addEventListener('click',switchLang);
 })();
 
 /* SERVICE WORKER */
