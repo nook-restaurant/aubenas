@@ -487,9 +487,8 @@ body {
 }
 .about-card {
   padding: 16px 18px;
-  border-left: 3px solid var(--orange);
   background: var(--paper);
-  border-radius: 0 8px 8px 0;
+  border-radius: 8px;
 }
 .about-card-title {
   font-family: var(--hand);
@@ -497,12 +496,14 @@ body {
   font-weight: 700;
   color: var(--ink);
   margin-bottom: 6px;
+  text-align: center;
 }
 .about-card-text {
   font-size: 13px;
   line-height: 1.7;
   color: var(--muted);
   margin: 0;
+  text-align: center;
 }
 
 @media (min-width: 768px) {
@@ -512,13 +513,11 @@ body {
   }
   .about-card {
     flex: 1;
-    border-left: none;
-    border-top: 3px solid var(--orange);
-    border-radius: 0 0 8px 8px;
+    border-radius: 8px;
     padding: 20px;
   }
-  .about-card-title { font-size: 1.6rem; }
-  .about-card-text  { font-size: 14px; }
+  .about-card-title { font-size: 1.6rem; text-align: left; }
+  .about-card-text  { font-size: 14px; text-align: left; }
 }
 
 
