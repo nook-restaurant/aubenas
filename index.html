@@ -6,91 +6,45 @@
 <title>NOOK – Restaurant Cuisine Nomade à Aubenas (07) | Menu du jour</title>
 <meta name="description" content="NOOK, restaurant cuisine nomade à Aubenas en Ardèche. Menu du jour renouvelé chaque jour. 8 rue de la Prévoté, 07200 Aubenas. Tél : 04 75 36 09 10.">
 <meta name="robots" content="index, follow">
+<link rel="canonical" href="https://nook-restaurant.github.io/aubenas">
 <meta property="og:type" content="restaurant">
 <meta property="og:url" content="https://nook-restaurant.github.io/aubenas">
 <meta property="og:title" content="NOOK – Cuisine Nomade · Aubenas">
-<meta property="og:description" content="Menu du jour renouvelé chaque jour. Cuisine du monde, Aubenas, Ardèche.">
+<meta property="og:description" content="Menu du jour renouvelé chaque jour. Saveurs du monde, Aubenas, Ardèche.">
 <meta property="og:image" content="https://nook-restaurant.github.io/aubenas/img/facade.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://nook-restaurant.github.io/aubenas/img/facade.jpg">
-<link rel="canonical" href="https://nook-restaurant.github.io/aubenas">
 <link rel="icon" type="image/png" href="img/logo.png">
 <link rel="apple-touch-icon" href="img/logo.png">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Restaurant","name":"NOOK","telephone":"+33475360910","email":"nook.aubenas@gmail.com","address":{"@type":"PostalAddress","streetAddress":"8 rue de la Prévoté","addressLocality":"Aubenas","postalCode":"07200","addressCountry":"FR"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"5","reviewCount":"46","bestRating":"5"},"url":"https://nook-restaurant.github.io/aubenas","image":"https://nook-restaurant.github.io/aubenas/img/facade.jpg","sameAs":["https://www.facebook.com/people/NOOK-Restaurant/61575514529548/","https://www.instagram.com/nook.aubenas/"]}
-
-/* ── PARALLAX HERO ── */
-(function(){
-  const img = document.querySelector('.hero-img');
-  if(!img) return;
-  let ticking = false;
-  window.addEventListener('scroll', () => {
-    if(!ticking) {
-      requestAnimationFrame(() => {
-        const scrollY = window.scrollY;
-        const heroH = document.querySelector('.hero').offsetHeight;
-        if(scrollY < heroH) {
-          img.style.transform = 'translateY(' + (scrollY * 0.35) + 'px)';
-        }
-        ticking = false;
-      });
-      ticking = true;
-    }
-  }, { passive: true });
-})();
-
-/* ── RIPPLE CTA ── */
-(function(){
-  document.querySelectorAll('.cta-item').forEach(btn => {
-    btn.addEventListener('click', function(e) {
-      const r = document.createElement('span');
-      r.className = 'ripple';
-      const rect = btn.getBoundingClientRect();
-      const size = Math.max(rect.width, rect.height);
-      r.style.width = r.style.height = size + 'px';
-      r.style.left = (e.clientX - rect.left - size/2) + 'px';
-      r.style.top  = (e.clientY - rect.top  - size/2) + 'px';
-      btn.appendChild(r);
-      setTimeout(() => r.remove(), 700);
-    });
-  });
-})();
-
-
-
-
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@900&family=Caveat:wght@400;600;700&family=DM+Sans:wght@300;400;500&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@900&family=Caveat:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-/* ── RESET ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 img { display: block; max-width: 100%; }
 
-/* ── VARIABLES ── */
 :root {
+  --dark:   #0D0D0D;
+  --dark2:  #161616;
+  --dark3:  #1E1E1E;
+  --light:  #F5F0E8;
+  --gold:   #DEB853;
   --orange: #D4781A;
   --blue:   #436F96;
-  --ink:    #1A1612;
-  --paper:  #F8F5EF;
-  --surface:#EEEBE3;
-  --muted:  rgba(26,22,18,0.72);
-  --border: rgba(0,0,0,0.08);
-  --border2:rgba(0,0,0,0.14);
+  --muted-dark: rgba(255,255,255,0.55);
+  --muted-light: rgba(13,13,13,0.55);
   --hand:   'Caveat', cursive;
   --sans:   'DM Sans', system-ui, sans-serif;
-  --mont:   'Montserrat', sans-serif;
-  --anton:  'Syne', sans-serif;
-  --josefin: 'Josefin Sans', sans-serif;
-  --jose:   'Josefin Sans', sans-serif;
+  --title:  'Nunito', sans-serif;
 }
 
 html { scroll-behavior: smooth; }
 body {
   font-family: var(--sans);
-  background: var(--paper);
-  color: var(--ink);
-  min-height: 100vh;
+  background: var(--dark);
+  color: #fff;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
@@ -98,17 +52,17 @@ body {
 /* ── SPLASH ── */
 #splash {
   position: fixed; inset: 0; z-index: 9999;
-  background: var(--orange);
+  background: var(--dark);
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
-  transition: opacity 0.5s ease;
+  transition: opacity 0.6s ease;
 }
 #splash.out { opacity: 0; pointer-events: none; }
-#s-logo { width: 180px; opacity: 0; transform: scale(0.88) translateY(6px); transition: opacity .6s ease, transform .6s ease; }
-#s-logo.in { opacity: 1; transform: scale(1) translateY(0); }
-#s-rule { width: 0; height: 1px; background: rgba(255,255,255,0.6); margin-top: 18px; transition: width .6s .3s ease; }
-#s-rule.in { width: 52px; }
-#s-city { font-family: var(--hand); font-size: 34px; font-weight: 700; color: #fff; margin-top: 10px; opacity: 0; transform: translateY(4px); transition: opacity .5s .45s ease, transform .5s .45s ease; }
+#s-logo { width: 160px; opacity: 0; transform: scale(0.9); transition: opacity .7s ease, transform .7s ease; }
+#s-logo.in { opacity: 1; transform: scale(1); }
+#s-rule { width: 0; height: 1px; background: rgba(222,184,83,0.5); margin-top: 20px; transition: width .6s .3s ease; }
+#s-rule.in { width: 48px; }
+#s-city { font-family: var(--hand); font-size: 32px; font-weight: 700; color: rgba(255,255,255,0.7); margin-top: 10px; opacity: 0; transform: translateY(4px); transition: opacity .5s .45s ease, transform .5s .45s ease; }
 #s-city.in { opacity: 1; transform: translateY(0); }
 
 /* ── PAGE ── */
@@ -116,448 +70,298 @@ body {
 #page.on { opacity: 1; }
 
 /* ── REVEAL ── */
-.r { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+.r { opacity: 0; transform: translateY(20px); transition: opacity .7s ease, transform .7s ease; }
 .r.on { opacity: 1; transform: translateY(0); }
+
+/* ── STICKY NAV ── */
+#sticky-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: var(--orange);
+  backdrop-filter: none;
+  border-bottom: none;
+  display: flex; align-items: center; justify-content: center; gap: 0;
+  padding: 0;
+  transform: translateY(-100%);
+  transition: transform .4s cubic-bezier(.4,0,.2,1);
+}
+#sticky-nav.visible { transform: translateY(0); }
+.nav-item {
+  flex: 1; text-align: center;
+  padding: 14px 8px;
+  font-family: var(--title); font-size: 10px; font-weight: 900;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.85);
+  text-decoration: none;
+  border-right: 1px solid rgba(255,255,255,0.15);
+  transition: color .2s;
+}
+.nav-item:last-child { border-right: none; }
+.nav-item:active { color: #fff; background: rgba(0,0,0,0.1); }
 
 /* ── HERO ── */
 .hero {
-  position: relative;
-  width: 100%;
-  height: 100svh;
-  min-height: 480px;
-  max-height: 900px;
+  position: relative; width: 100%;
+  height: 100svh; min-height: 500px;
   overflow: hidden;
-  background: #000;
+  background: var(--dark);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
 }
 .hero-img {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
-  object-fit: cover;
-  object-position: 30% center;
-  opacity: 0.6;
+  object-fit: cover; object-position: 30% center;
+  opacity: 0.25;
+  will-change: transform;
 }
-.hero-overlay {
+.hero-gradient {
   position: absolute; inset: 0;
-  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.35) 100%);
+  background: linear-gradient(to bottom, rgba(13,13,13,0.2) 0%, rgba(13,13,13,0) 40%, rgba(13,13,13,0.85) 100%);
 }
 .hero-topbar {
-  position: absolute; top: 0; left: 0; right: 0; height: 3px;
-  background: linear-gradient(to right, transparent, var(--orange) 25%, var(--orange) 75%, transparent);
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(to right, transparent, var(--gold) 30%, var(--gold) 70%, transparent);
   opacity: 0; transition: opacity .8s .2s;
 }
-.hero-topbar.on { opacity: 0.7; }
+.hero-topbar.on { opacity: 1; }
 
-/* ── STATUS BADGE ── */
 #status-badge {
   position: absolute; top: 56px; left: 50%; transform: translateX(-50%);
   z-index: 5;
   display: inline-flex; align-items: center; gap: 8px;
-  padding: 6px 14px 6px 10px;
-  border-radius: 999px;
+  padding: 6px 14px 6px 10px; border-radius: 999px;
   backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
   font-family: var(--sans); font-size: 12px; font-weight: 600;
   letter-spacing: 0.04em; white-space: nowrap;
-  transition: background .4s, border-color .4s, color .4s;
 }
-/* Ouvert = vert */
-#status-badge.open   { background: rgba(22,163,74,0.28);  border: 1px solid rgba(74,222,128,0.55);  color: #4ade80; }
-/* Bientôt = jaune */
-#status-badge.soon   { background: rgba(234,179,8,0.25);  border: 1px solid rgba(250,204,21,0.55);  color: #fde047; }
-/* Fermé = rouge */
-#status-badge.closed { background: rgba(220,38,38,0.25);  border: 1px solid rgba(248,113,113,0.45); color: #f87171; }
-
-#status-badge .dot {
-  width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
-  position: relative;
-  animation: dot-breathe 1.8s ease-in-out infinite;
+#status-badge.open   { background: rgba(22,163,74,0.2);  border: 1px solid rgba(74,222,128,0.4);  color: #4ade80; }
+#status-badge.soon   { background: rgba(234,179,8,0.2);  border: 1px solid rgba(250,204,21,0.4);  color: #fde047; }
+#status-badge.closed { background: rgba(220,38,38,0.2);  border: 1px solid rgba(248,113,113,0.35); color: #f87171; }
+#status-badge .dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; position: relative; }
+#status-badge.open   .dot { background: #4ade80; animation: breathe-g 1.6s ease-in-out infinite; }
+#status-badge.soon   .dot { background: #fde047; animation: breathe-y 1.6s ease-in-out infinite; }
+#status-badge.closed .dot { background: #f87171; }
+#status-badge.open .dot::before, #status-badge.soon .dot::before {
+  content: ''; position: absolute; inset: -5px; border-radius: 50%;
+  background: inherit; opacity: 0; animation: halo 2s ease-out infinite;
 }
-
-#status-badge.open   .dot { background: #4ade80; }
-#status-badge.soon   .dot { background: #fde047; }
-#status-badge.closed .dot { background: #f87171; animation: none; }
-
-/* Halo pulsé (ouvert + bientôt uniquement) */
-#status-badge.open .dot::before,
-#status-badge.soon .dot::before {
-  content: ''; position: absolute; inset: -4px; border-radius: 50%;
-  background: inherit; opacity: 0;
-  animation: dot-halo 2s ease-out infinite;
+#status-badge.open .dot::after, #status-badge.soon .dot::after {
+  content: ''; position: absolute; inset: -5px; border-radius: 50%;
+  background: inherit; opacity: 0; animation: halo 2s ease-out .7s infinite;
 }
+@keyframes breathe-g { 0%,100%{ transform:scale(1); box-shadow:0 0 0 0 rgba(74,222,128,0.6); } 50%{ transform:scale(1.2); box-shadow:0 0 0 5px rgba(74,222,128,0); } }
+@keyframes breathe-y { 0%,100%{ transform:scale(1); box-shadow:0 0 0 0 rgba(253,224,71,0.6); } 50%{ transform:scale(1.2); box-shadow:0 0 0 5px rgba(253,224,71,0); } }
+@keyframes halo { 0%{ transform:scale(1); opacity:.5; } 100%{ transform:scale(3.2); opacity:0; } }
 
-@keyframes dot-breathe {
-  0%, 100% { transform: scale(1); }
-  50%       { transform: scale(1.35); }
-}
-@keyframes dot-halo {
-  0%   { transform: scale(1);   opacity: 0.5; }
-  100% { transform: scale(2.8); opacity: 0;   }
-}
-
-/* Hero content */
 .hero-content {
-  position: absolute; inset: 0;
+  position: relative; z-index: 2;
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
-  text-align: center;
-  padding: 2rem 1.5rem 5rem;
-  gap: 12px;
+  text-align: center; gap: 14px;
+  padding: 2rem 1.5rem 7rem;
+  width: 100%;
 }
-.hero-logo { width: 200px; opacity: 0; transform: translateY(10px); transition: opacity .7s .1s ease, transform .7s .1s ease; margin-bottom: 0; }
+.hero-logo { width: 180px; opacity: 0; transform: translateY(10px); transition: opacity .7s .1s ease, transform .7s .1s ease; }
 .hero-logo.on { opacity: 1; transform: translateY(0); }
-.hero-tagline { font-family: var(--hand); font-size: 1.9rem; font-weight: 600; color: rgba(255,255,255,0.92); margin: 0; opacity: 0; transform: translateY(8px); transition: opacity .6s .25s ease, transform .6s .25s ease; }
+.hero-tagline {
+  font-family: var(--hand); font-size: 2.2rem; font-weight: 700;
+  color: #fff; line-height: 1;
+  opacity: 0; transform: translateY(8px);
+  transition: opacity .6s .25s ease, transform .6s .25s ease;
+}
 .hero-tagline.on { opacity: 1; transform: translateY(0); }
-.hero-city { display: inline-flex; align-items: center; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.9); opacity: 0; transform: translateY(6px); transition: opacity .5s .38s ease, transform .5s .38s ease; }
+.hero-city {
+  font-family: var(--sans); font-size: 11px; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  opacity: 0; transform: translateY(6px);
+  transition: opacity .5s .38s ease, transform .5s .38s ease;
+}
 .hero-city.on { opacity: 1; transform: translateY(0); }
-.hero-tagline2 { font-family: var(--hand); font-size: 1.1rem; font-weight: 400; color: rgba(255,255,255,0.7); font-style: italic; opacity: 0; transform: translateY(6px); transition: opacity .5s .58s ease, transform .5s .58s ease; }
-.hero-tagline2.on { opacity: 1; transform: translateY(0); }
-.hero-rating { display: inline-flex; align-items: center; gap: 5px; margin-top: 0; opacity: 0; transform: translateY(6px); transition: opacity .5s .5s ease, transform .5s .5s ease; }
+.hero-rating {
+  display: inline-flex; align-items: center; gap: 6px;
+  opacity: 0; transform: translateY(6px);
+  transition: opacity .5s .5s ease, transform .5s .5s ease;
+}
 .hero-rating.on { opacity: 1; transform: translateY(0); }
-.rating-stars { display: flex; gap: 2px; }
-.rating-stars svg { width: 17px; height: 17px; }
-.rating-text { font-size: 14px; font-weight: 600; color: #fff; }
-.rating-count { font-size: 13px; color: rgba(255,255,255,0.7); }
+.rating-stars svg { width: 15px; height: 15px; }
+.rating-text { font-size: 13px; font-weight: 600; color: #fff; }
+.rating-count { font-size: 12px; color: rgba(255,255,255,0.5); }
+.hero-tagline2 {
+  font-family: var(--hand); font-size: 1.1rem; font-weight: 400;
+  color: rgba(255,255,255,0.5); font-style: italic;
+  opacity: 0; transform: translateY(6px);
+  transition: opacity .5s .58s ease, transform .5s .58s ease;
+}
+.hero-tagline2.on { opacity: 1; transform: translateY(0); }
+
+/* Scroll arrow */
+.scroll-arrow {
+  position: absolute; bottom: 55px; left: 50%;
+  transform: translateX(-50%);
+  z-index: 5; display: flex; flex-direction: column; align-items: center;
+  opacity: 0;
+  animation: arrow-fade 2s ease 2s forwards, arrow-bounce 1.8s ease-in-out 2s infinite;
+}
+.scroll-arrow svg { width: 36px; height: 36px; }
+@keyframes arrow-fade { 0%{ opacity:0; } 100%{ opacity:0.5; } }
+@keyframes arrow-bounce { 0%,100%{ transform:translateX(-50%) translateY(0); } 50%{ transform:translateX(-50%) translateY(6px); } }
 
 /* ── CTA STRIP ── */
-.cta-strip { display: flex; justify-content: center; align-items: flex-start; padding: 20px 0 8px; width: 100%; }
-.cta-item { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 8px 20px; text-decoration: none; color: var(--ink); font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap; -webkit-tap-highlight-color: transparent; }
-.cta-icon { width: 52px; height: 52px; border-radius: 50%; background: var(--orange); display: flex; align-items: center; justify-content: center; transition: background .2s, transform .15s; flex-shrink: 0; }
+.cta-strip {
+  background: var(--dark2);
+  display: flex; justify-content: center; align-items: flex-start;
+  padding: 24px 0 12px; width: 100%;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.cta-item {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  padding: 8px 22px; text-decoration: none;
+  color: rgba(255,255,255,0.7); font-size: 10px; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap;
+  position: relative; overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+.cta-icon {
+  width: 52px; height: 52px; border-radius: 50%;
+  background: var(--orange);
+  display: flex; align-items: center; justify-content: center;
+  transition: background .2s, transform .15s;
+}
 .cta-icon svg { stroke: #fff !important; fill: none; }
-.cta-item:active .cta-icon { background: var(--ink); transform: scale(0.9); }
+.cta-item:active .cta-icon { background: var(--gold); transform: scale(0.9); }
+.ripple {
+  position: absolute; border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  transform: scale(0);
+  animation: ripple-anim 0.6s ease-out forwards;
+  pointer-events: none;
+}
+@keyframes ripple-anim { to{ transform:scale(4); opacity:0; } }
 
-/* ── SECTIONS ── */
-.section { padding: 2rem 1.25rem; margin-top: 12px; border-top: none; }
+/* ── SECTION BASE ── */
+.section { padding: 2.5rem 1.5rem; }
+.section.dark  { background: var(--dark2); color: #fff; }
+.section.light { background: var(--light); color: var(--dark); }
+
+/* ── LABEL ── */
 .label {
-  font-family: 'Nunito', sans-serif;
-  font-size: 1.1rem;
-  font-weight: 900;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--ink);
-  margin-bottom: 1.2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  line-height: 1;
-  white-space: nowrap;
+  font-family: var(--title);
+  font-size: 1.1rem; font-weight: 900;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  margin-bottom: 1.4rem;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; white-space: nowrap; line-height: 1;
+}
+.section.dark  .label { color: #fff; }
+.section.light .label { color: var(--dark); }
+.label-line {
+  display: block; width: 60px; height: 8px;
+  flex-shrink: 0; margin: 0 12px; opacity: 0.7;
 }
 
 /* ── ABOUT ── */
-.about-pull { font-family: var(--hand); font-size: 1.9rem; font-weight: 600; line-height: 1.2; color: var(--ink); margin-bottom: .8rem; }
-.about-pull em { color: var(--orange); font-style: italic; }
-.about-body { font-size: 14px; line-height: 1.75; color: var(--muted); }
+.about-cards { display: flex; flex-direction: column; gap: 16px; }
+.about-card { padding: 16px 0; background: none; border: none; }
+.about-card-title { font-family: var(--hand); font-size: 1.4rem; font-weight: 700; color: #fff; margin-bottom: 6px; text-align: center; }
+.about-card-text  { font-size: 13px; line-height: 1.75; color: rgba(255,255,255,0.6); text-align: center; margin: 0; }
+.logo2-img { width: 160px; display: block; margin: 0 auto 1.5rem; }
+
+/* ── INTERIOR IMAGE ── */
+.interior-wrap { width: 100%; height: 240px; overflow: hidden; margin-bottom: 0; }
+.interior-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 /* ── CAROUSEL ── */
-.carousel-wrap { overflow: hidden; }
+.carousel-section { background: var(--dark); padding: 2.5rem 0 2rem; }
+.carousel-label { padding: 0 1.5rem; margin-bottom: 1.4rem; }
 .carousel { display: flex; overflow-x: scroll; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; gap: 12px; padding: 0 1.5rem; }
 .carousel::-webkit-scrollbar { display: none; }
-.carousel-item { flex: 0 0 68%; scroll-snap-align: start; border-radius: 12px; overflow: hidden; }
+.carousel-item { flex: 0 0 68%; scroll-snap-align: start; border-radius: 14px; overflow: hidden; }
 .carousel-item img { width: 100%; height: 200px; object-fit: cover; object-position: center; }
-.carousel-dots { display: flex; justify-content: center; gap: 6px; margin-top: 10px; }
-.carousel-dots .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(0,0,0,0.15); transition: background .3s, transform .3s; animation: none; }
-.carousel-dots .dot.active { background: var(--blue); transform: scale(1.3); }
-.img-caption { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-top: 8px; text-align: center; padding: 0 1.25rem; }
+.carousel-dots { display: flex; justify-content: center; gap: 6px; margin-top: 12px; }
+.carousel-dots .dot { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,0.2); transition: background .3s, transform .3s; animation: none !important; }
+.carousel-dots .dot.active { background: var(--gold); transform: scale(1.4); }
+.img-caption { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-top: 10px; text-align: center; padding: 0 1.5rem; }
 
 /* ── MENU CARD ── */
-.menu-feature { display: flex; align-items: stretch; border: none; background: var(--orange); border-radius: 6px; overflow: hidden; text-decoration: none; color: #fff; margin-bottom: 10px; -webkit-tap-highlight-color: transparent; }
-.menu-feature:active { opacity: .75; }
+.menu-feature {
+  display: flex; align-items: stretch;
+  background: var(--orange); border-radius: 12px;
+  overflow: hidden; text-decoration: none; color: #fff;
+  margin-bottom: 12px; -webkit-tap-highlight-color: transparent;
+  transition: opacity .2s;
+}
+.menu-feature:active { opacity: .8; }
 .menu-accent { width: 5px; flex-shrink: 0; background: rgba(255,255,255,0.25); }
-.menu-body { padding: 14px 16px; flex: 1; }
-.menu-label { font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 4px; }
+.menu-body { padding: 16px 18px; flex: 1; }
+.menu-label { font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.65); margin-bottom: 4px; }
 .menu-title { font-family: var(--hand); font-size: 1.5rem; font-weight: 600; color: #fff; margin-bottom: 5px; }
-.menu-cta { font-size: 12px; color: rgba(255,255,255,0.75); font-weight: 500; display: flex; align-items: center; gap: 4px; }
+.menu-cta { font-size: 12px; color: rgba(255,255,255,0.7); font-weight: 500; display: flex; align-items: center; gap: 4px; }
 
-/* ── SOCIAL BTNS ── */
-.social-row { display: flex; gap: 10px; justify-content: center; margin-top: 12px; }
-.social-btn { display: inline-flex; align-items: center; justify-content: center; gap: 7px; padding: 10px 20px; border-radius: 10px; font-size: 12px; font-weight: 600; text-decoration: none; transition: opacity .2s, transform .15s; -webkit-tap-highlight-color: transparent; color: #fff; }
-.social-btn:active { opacity: 0.8; transform: scale(0.97); }
+/* ── SOCIAL ── */
+.social-wrap { display: flex; justify-content: center; align-items: center; gap: 12px; padding: 1.5rem; }
+.social-btn { display: inline-flex; align-items: center; gap: 7px; padding: 10px 20px; border-radius: 10px; font-size: 12px; font-weight: 600; text-decoration: none; color: #fff; transition: opacity .2s; -webkit-tap-highlight-color: transparent; }
+.social-btn:active { opacity: .8; }
 .social-btn.fb  { background: #1877F2; }
 .social-btn.ig  { background: linear-gradient(45deg, #f09433, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888); }
 
 /* ── HORAIRES ── */
 .hours-table { width: 100%; border-collapse: collapse; }
-.hours-table tr { border-bottom: 1px solid var(--border); }
+.hours-table tr { border-bottom: 1px solid rgba(255,255,255,0.06); }
 .hours-table tr:last-child { border-bottom: none; }
-.hours-table td { padding: 10px 4px; font-size: 14px; vertical-align: middle; }
-.hours-table .day { color: var(--muted); width: 50%; }
-.hours-table .time { font-weight: 500; text-align: right; }
-.hours-table .closed { color: rgba(0,0,0,0.2); font-style: italic; text-align: right; }
-.today-row .day { color: var(--orange) !important; }
-.today-badge { display: inline-block; background: rgba(212,120,26,0.1); color: var(--orange); font-size: 9px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 6px; border-radius: 40px; margin-left: 6px; vertical-align: middle; border: 1px solid rgba(212,120,26,0.2); }
+.hours-table td { padding: 11px 4px; font-size: 14px; vertical-align: middle; }
+.hours-table .day { color: rgba(255,255,255,0.5); width: 50%; }
+.hours-table .time { font-weight: 500; color: #fff; text-align: right; }
+.hours-table .closed { color: rgba(255,255,255,0.2); font-style: italic; text-align: right; }
+.today-row .day { color: var(--gold) !important; }
+.today-badge { display: inline-block; background: rgba(222,184,83,0.12); color: var(--gold); font-size: 9px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 6px; border-radius: 40px; margin-left: 6px; vertical-align: middle; border: 1px solid rgba(222,184,83,0.25); }
 
 /* ── ADRESSE ── */
-.map-wrap { border-radius: 6px; overflow: hidden; border: 1px solid var(--border); margin-bottom: 10px; }
+.map-wrap { border-radius: 12px; overflow: hidden; margin-bottom: 10px; }
 .map-wrap iframe { display: block; width: 100%; height: 180px; border: none; }
-.addr-row { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border: 1px solid var(--border2); border-radius: 6px; background: var(--surface); margin-bottom: 10px; }
-.addr-icon { width: 34px; height: 34px; flex-shrink: 0; background: rgba(67,111,150,0.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-.addr-street { font-size: 14px; font-weight: 500; }
-.addr-city { font-size: 12px; color: var(--muted); }
+.addr-row { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; background: var(--dark3); margin-bottom: 10px; }
+.addr-icon { width: 34px; height: 34px; flex-shrink: 0; background: rgba(67,111,150,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.addr-street { font-size: 14px; font-weight: 500; color: #fff; }
+.addr-city { font-size: 12px; color: rgba(255,255,255,0.45); }
 .btn-map { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 14px; background: var(--orange); color: #fff; border-radius: 10px; font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; transition: background .2s; -webkit-tap-highlight-color: transparent; }
-.btn-map:active { background: var(--ink); }
+.btn-map:active { background: var(--gold); }
 
 /* ── FOOTER ── */
 .footer {
-  position: relative;
-  padding: 0;
-  overflow: hidden;
-  min-height: 220px;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  text-align: center;
+  position: relative; overflow: hidden; min-height: 220px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
   background: #000;
 }
-.footer-bg {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  object-position: 30% center;
-  opacity: 0.6;
-}
-.footer-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.75) 100%);
-}
-.footer-content {
-  position: relative; z-index: 1;
-  padding: 2.5rem 1.5rem 3rem;
-  width: 100%;
-}
+.footer-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 30% center; opacity: 0.3; }
+.footer-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.8) 100%); }
+.footer-content { position: relative; z-index: 1; padding: 2.5rem 1.5rem 3rem; width: 100%; text-align: center; }
 .footer-logo { width: 100px; margin: 0 auto 8px; }
-.footer-sub { font-size: 10px; color: rgba(255,255,255,0.6); letter-spacing: 0.18em; text-transform: uppercase; }
-.footer-line { width: 28px; height: 2px; background: var(--orange); opacity: 0.3; margin: 12px auto; }
+.footer-sub { font-size: 10px; color: rgba(255,255,255,0.4); letter-spacing: 0.18em; text-transform: uppercase; }
+.footer-line { width: 28px; height: 1px; background: var(--gold); opacity: 0.3; margin: 12px auto; }
 .footer-actions { display: flex; flex-direction: column; align-items: center; gap: 8px; margin-bottom: 12px; }
-.footer-phone { display: inline-flex; align-items: center; gap: 7px; padding: 10px 20px; border-radius: 40px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25); font-size: 15px; font-weight: 500; color: #fff; text-decoration: none; -webkit-tap-highlight-color: transparent; }
-.btn-vcard { display: inline-flex; align-items: center; gap: 8px; padding: 11px 22px; border-radius: 40px; background: var(--blue); color: #fff; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; border: none; cursor: pointer; transition: background .2s; -webkit-tap-highlight-color: transparent; }
-.btn-vcard:active { background: var(--ink); }
-.footer-copy { font-size: 10px; color: rgba(255,255,255,0.3); }
+.footer-phone { display: inline-flex; align-items: center; gap: 7px; padding: 10px 20px; border-radius: 40px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); font-size: 15px; font-weight: 500; color: #fff; text-decoration: none; }
+.footer-copy { font-size: 10px; color: rgba(255,255,255,0.2); }
 
 /* ── BOUTONS FIXES ── */
-#btn-lang { position: fixed; bottom: 24px; left: 16px; z-index: 999; padding: 9px 15px; border-radius: 40px; background: #fff; border: none; font-family: var(--sans); font-size: 11px; font-weight: 600; color: var(--ink); cursor: pointer; box-shadow: 0 3px 12px rgba(0,0,0,0.12); display: flex; align-items: center; gap: 6px; -webkit-tap-highlight-color: transparent; }
-#btn-share { position: fixed; bottom: 24px; right: 16px; z-index: 999; width: 46px; height: 46px; border-radius: 50%; background: #fff; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 3px 12px rgba(0,0,0,0.12); -webkit-tap-highlight-color: transparent; }
+#btn-lang { position: fixed; bottom: 24px; left: 16px; z-index: 999; padding: 9px 15px; border-radius: 40px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); backdrop-filter: blur(10px); font-family: var(--sans); font-size: 11px; font-weight: 600; color: #fff; cursor: pointer; display: flex; align-items: center; gap: 6px; -webkit-tap-highlight-color: transparent; }
+#btn-share { position: fixed; bottom: 24px; right: 16px; z-index: 999; width: 46px; height: 46px; border-radius: 50%; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; cursor: pointer; -webkit-tap-highlight-color: transparent; }
 
 /* ── DESKTOP ── */
 @media (min-width: 768px) {
-  body { width: 100%; max-width: 100%; }
-
-  /* Hero pleine largeur */
-  .hero {
-    width: 100%;
-    height: 90vh; min-height: 560px;
-    border-radius: 0 0 2vw 2vw;
-  }
-  .hero-logo    { width: clamp(200px, 18vw, 320px); }
-  .hero-tagline { font-size: clamp(1.8rem, 3.5vw, 3.2rem); }
-  .hero-tagline2{ font-size: clamp(1rem, 1.6vw, 1.4rem); }
-  .hero-content { gap: clamp(10px, 1.5vw, 20px); padding: 2rem 4vw 7vh; }
-  .rating-stars svg { width: clamp(14px, 1.5vw, 22px); height: clamp(14px, 1.5vw, 22px); }
-  .rating-text  { font-size: clamp(13px, 1.4vw, 18px); }
-  .rating-count { font-size: clamp(12px, 1.2vw, 16px); }
-
-  /* CTA */
-  .cta-strip { padding: clamp(20px, 2.5vh, 40px) 0 clamp(10px, 1.5vh, 20px); max-width: 700px; margin: 0 auto; }
-  .cta-item  { padding: clamp(8px, 1vh, 16px) clamp(24px, 4vw, 64px); font-size: clamp(10px, 1vw, 13px); }
-  .cta-icon  { width: clamp(48px, 5vw, 72px); height: clamp(48px, 5vw, 72px); }
-
-  /* Wrapper contenu centré avec marges latérales */
-  .section        { padding: clamp(2rem, 3vw, 4rem) clamp(2rem, 5vw, 6rem); max-width: 1400px; margin: 0 auto; width: 100%; }
-  .label { font-size: clamp(1.6rem, 2.2vw, 2.6rem); }
-  .about-pull     { font-size: clamp(1.8rem, 2.5vw, 2.8rem); }
-  .about-body     { font-size: clamp(14px, 1.1vw, 17px); }
-
-  /* 2 colonnes about + photos */
-  .desktop-2col {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 0; border-top: 1px solid var(--border);
-    max-width: 1400px; margin: 0 auto; width: 100%;
-  }
-  .desktop-2col .section { border-top: none; margin: 0; max-width: 100%; }
-
-  /* Carousel */
-  .carousel-item     { flex: 0 0 68%; }
-  .carousel-item img { height: clamp(260px, 25vw, 420px); }
-
-  /* Menu */
-  .menu-title { font-size: clamp(1.5rem, 2vw, 2.2rem); }
-
-  /* Horaires + adresse */
-  .hours-adresse-grid {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 0; border-top: 1px solid var(--border);
-    max-width: 1400px; margin: 0 auto; width: 100%;
-  }
-  .hours-adresse-grid .section { border-top: none; padding: clamp(2rem, 3vw, 4rem) clamp(2rem, 5vw, 6rem); margin: 0; max-width: 100%; }
-  .map-wrap iframe   { height: clamp(200px, 20vw, 320px); }
-  .hours-table td    { font-size: clamp(13px, 1.1vw, 16px); padding: clamp(8px, 1vw, 16px) 4px; }
-
-  /* Image restaurant */
-  .restaurant-img    { height: clamp(280px, 28vw, 480px) !important; }
-
-  /* Footer */
-  .footer         { min-height: clamp(240px, 25vh, 380px); }
-  .footer-content { padding: clamp(2.5rem, 4vh, 5rem) clamp(2rem, 5vw, 6rem); max-width: 1400px; margin: 0 auto; }
-  .footer-logo    { width: clamp(100px, 10vw, 160px); }
-  .footer-sub     { font-size: clamp(10px, 0.9vw, 13px); }
-
-  /* Boutons fixes */
+  body { background: #080808; }
+  #page { max-width: 780px; margin: 0 auto; box-shadow: 0 0 120px rgba(0,0,0,0.5); }
+  .hero { height: 88vh; }
+  .hero-logo { width: 240px; }
+  .hero-tagline { font-size: 2.6rem; }
+  .cta-strip { padding: 28px 0 14px; }
+  .cta-item { padding: 10px 36px; }
+  .section { padding: 3rem; }
+  .carousel-item img { height: 240px; }
+  .map-wrap iframe { height: 220px; }
+  .footer-content { padding: 3rem; }
   #btn-lang  { bottom: 32px; left: 32px; }
   #btn-share { bottom: 32px; right: 32px; }
-  .scroll-arrow { bottom: 30px; }
 }
-@media (orientation: landscape) and (max-height: 500px) {
-  .hero { height: 100svh; max-height: none; }
-}
-
-/* ── SCROLL ARROW ── */
-.scroll-arrow {
-  position: absolute;
-  bottom: 55px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 5;
-  display: flex; flex-direction: column; align-items: center;
-  opacity: 0;
-  animation: arrow-fade 2s ease 2s forwards, arrow-bounce 1.8s ease-in-out 2s infinite;
-}
-.scroll-arrow svg { width: 36px; height: 36px; }
-@keyframes arrow-fade {
-  0%   { opacity: 0; }
-  100% { opacity: 0.7; }
-}
-@keyframes arrow-bounce {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  50%       { transform: translateX(-50%) translateY(6px); }
-}
-
-
-/* Cache desktop grid sur mobile par défaut */
-.carousel-desktop { display: none; }
-
-@media (min-width: 768px) {
-  /* Photos section full width */
-  .section.photos-section {
-    padding-left: 0; padding-right: 0; max-width: 100%;
-    border-top: 1px solid var(--border);
-  }
-  .section.photos-section .label { padding: 0 clamp(2rem, 5vw, 6rem); }
-  .section.photos-section .img-caption { padding: 0 clamp(2rem, 5vw, 6rem); }
-
-  /* Affiche grid desktop, cache carousel mobile */
-  .carousel-desktop {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    padding: 0 clamp(2rem, 5vw, 6rem);
-  }
-  .carousel-desktop .carousel-item {
-    flex: none; scroll-snap-align: none;
-    border-radius: 14px; overflow: hidden;
-  }
-  .carousel-desktop .carousel-item img {
-    width: 100%; height: clamp(200px, 22vw, 360px);
-    object-fit: cover; transition: transform .4s ease;
-  }
-  .carousel-desktop .carousel-item:hover img { transform: scale(1.04); }
-  .carousel-mobile { display: none; }
-  .carousel-dots   { display: none; }
-}
-
-
-/* ── ABOUT CARDS ── */
-.about-cards {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-.about-card {
-  padding: 16px 18px;
-  background: var(--paper);
-  border-radius: 8px;
-}
-.about-card-title {
-  font-family: var(--hand);
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: var(--ink);
-  margin-bottom: 6px;
-  text-align: center;
-}
-.about-card-text {
-  font-size: 13px;
-  line-height: 1.7;
-  color: var(--muted);
-  margin: 0;
-  text-align: center;
-}
-
-@media (min-width: 768px) {
-  .about-cards {
-    flex-direction: row;
-    gap: 20px;
-  }
-  .about-card {
-    flex: 1;
-    border-radius: 8px;
-    padding: 20px;
-  }
-  .about-card-title { font-size: 1.6rem; text-align: left; }
-  .about-card-text  { font-size: 14px; text-align: left; }
-}
-
-
-
-
-.label-line {
-  display: block;
-  width: 60px;
-  height: 8px;
-  flex-shrink: 0;
-  margin: 0 12px;
-  opacity: 0.85;
-}
-@media (min-width: 768px) {
-  .label-line { width: 90px; margin: 0 18px; }
-}
-
-/* ── PARALLAX ── */
-.hero-img {
-  will-change: transform;
-  transform: translateY(0);
-}
-
-/* ── RIPPLE ── */
-.cta-item { position: relative; overflow: hidden; }
-.ripple {
-  position: absolute;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.35);
-  transform: scale(0);
-  animation: ripple-anim 0.6s ease-out forwards;
-  pointer-events: none;
-}
-@keyframes ripple-anim {
-  to { transform: scale(4); opacity: 0; }
-}
-
-
-/* ── PARALLAX INTERIOR ── */
-.parallax-wrap {
-  width: 100%;
-  height: 260px;
-  overflow: hidden;
-  position: relative;
-  margin-bottom: 2rem;
-}
-.parallax-interior {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-}
-@media (min-width: 768px) {
-  .parallax-wrap { height: clamp(300px, 35vw, 500px); }
-}
-
 </style>
 </head>
 <body>
@@ -566,24 +370,29 @@ body {
 <div id="splash">
   <img id="s-logo" src="img/logo.png" alt="NOOK">
   <div id="s-rule"></div>
-  <div id="s-city"><span style="font-size:1.15em">R</span>estaurant</div>
+  <div id="s-city"><span style="font-size:1.1em">R</span>estaurant</div>
 </div>
 
 <div id="page">
 
+  <!-- STICKY NAV -->
+  <nav id="sticky-nav">
+    <a class="nav-item" href="tel:+33475360910" data-i18n="reserve-txt">Réserver</a>
+    <a class="nav-item" href="#section-menu" data-i18n="menu-txt">Menu</a>
+    <a class="nav-item" href="#section-hours" data-i18n="yaller-txt">Y aller</a>
+  </nav>
+
   <!-- HERO -->
-  <div class="hero">
+  <div class="hero" id="top">
     <img class="hero-img" src="img/facade.jpg" alt="NOOK Aubenas">
-    <div class="hero-overlay"></div>
+    <div class="hero-gradient"></div>
     <div class="hero-topbar"></div>
     <div id="status-badge"><span class="dot"></span><span id="badge-text"></span></div>
     <div class="scroll-arrow">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="6 9 12 15 18 9"/>
-      </svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
     </div>
     <div class="hero-content">
-      <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none;">NOOK – Restaurant Cuisine Nomade à Aubenas, Ardèche</h1>
+      <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;">NOOK – Restaurant Cuisine Nomade à Aubenas, Ardèche</h1>
       <img class="hero-logo" src="img/logo.png" alt="NOOK Restaurant Cuisine Nomade Aubenas">
       <div class="hero-tagline" data-i18n="hero-tagline">Cuisine du monde</div>
       <div class="hero-city">Aubenas · Ardèche</div>
@@ -597,7 +406,7 @@ body {
         </div>
         <span class="rating-text">5.0</span>
         <span class="rating-count" data-i18n="rating-txt">(46 avis)</span>
-        <a href="https://www.google.com/search?sca_esv=14041948d1d25a20&sxsrf=ANbL-n5jwweF1VGkNpOYXVrtF26lk3A7aw:1774213064067&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOUWepRpofvmWslOeSQKQjpXSIYPKBEqDn7mwr_bHITHHo6BlkEu7X5Tysyv02LBCeXHv8Z2h4QaBjDqkxqUNmForJg_f&q=NOOK+Avis&sa=X&ved=2ahUKEwiy9cHbsrSTAxVqAfsDHawdLocQ0bkNegQIUBAH" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;-webkit-tap-highlight-color:transparent;">
+        <a href="https://www.google.com/search?q=NOOK+Avis&sa=X" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;">
           <svg width="14" height="14" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
         </a>
       </div>
@@ -622,9 +431,13 @@ body {
   </div>
 
   <!-- LE RESTAURANT -->
-  <div class="section r" style="border-top:none">
-    <div class="label"><svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M2 4 C12 2, 22 6, 32 4 C42 2, 52 5, 58 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg><h2 data-i18n="about-label" style="font:inherit;margin:0;padding:0;display:inline">Le restaurant</h2><svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M58 4 C48 2, 38 6, 28 4 C18 2, 8 5, 2 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg></div>
-    <img src="img/logo2.png" alt="NOOK décoration" style="width:200px;display:block;margin:0 auto 1.5rem;opacity:0.9;">
+  <div class="section dark r" id="section-about">
+    <div class="label">
+      <svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M2 4 C12 2, 22 6, 32 4 C42 2, 52 5, 58 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg>
+      <h2 data-i18n="about-label" style="font:inherit;margin:0;padding:0">Le restaurant</h2>
+      <svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M58 4 C48 2, 38 6, 28 4 C18 2, 8 5, 2 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg>
+    </div>
+    <img src="img/logo2.png" alt="NOOK décoration" class="logo2-img">
     <div class="about-cards">
       <div class="about-card">
         <div class="about-card-title" data-i18n="about-t1">La cuisine</div>
@@ -634,46 +447,44 @@ body {
         <div class="about-card-title" data-i18n="about-t2">Le terroir</div>
         <p class="about-card-text" data-i18n="about-p2">Les producteurs ont des prénoms. Les vins, bières et jus viennent de Pradons, Sécheras, Chirols — à quelques kilomètres d'ici.</p>
       </div>
-
     </div>
   </div>
 
   <!-- INTERIEUR -->
-  <div class="parallax-wrap">
-    <img class="parallax-interior" src="img/interieur.jpg" alt="Intérieur NOOK Restaurant Aubenas">
+  <div class="interior-wrap r">
+    <img src="img/interieur.jpg" alt="Intérieur NOOK Restaurant Aubenas">
   </div>
 
   <!-- PHOTOS -->
-  <div class="section photos-section r" style="border-top:none; padding-left:0; padding-right:0; padding-top:0">
-    <div class="label" style="padding:0 1.25rem"><svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M2 4 C12 2, 22 6, 32 4 C42 2, 52 5, 58 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg><h2 data-i18n="photos-label" style="font:inherit;margin:0;padding:0;display:inline">Nos plats</h2><svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M58 4 C48 2, 38 6, 28 4 C18 2, 8 5, 2 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg></div>
-    <!-- Mobile carousel -->
-    <div class="carousel-wrap carousel-mobile">
-      <div class="carousel" id="carousel">
-        <div class="carousel-item"><img src="img/curry.jpg" alt="Plat curry NOOK restaurant Aubenas"></div>
-        <div class="carousel-item"><img src="img/dessert.jpg" alt="Dessert maison NOOK restaurant Aubenas"></div>
-        <div class="carousel-item"><img src="img/assiette.jpg" alt="Assiette du jour NOOK cuisine nomade Aubenas"></div>
-      </div>
-      <div class="carousel-dots" id="carousel-dots">
-        <span class="dot active"></span><span class="dot"></span><span class="dot"></span>
-      </div>
+  <div class="carousel-section r">
+    <div class="label carousel-label">
+      <svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M2 4 C12 2, 22 6, 32 4 C42 2, 52 5, 58 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg>
+      <h2 data-i18n="photos-label" style="font:inherit;margin:0;padding:0;color:#fff">Nos plats</h2>
+      <svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M58 4 C48 2, 38 6, 28 4 C18 2, 8 5, 2 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg>
     </div>
-    <!-- Desktop grid 3 photos -->
-    <div class="carousel-desktop">
+    <div class="carousel" id="carousel">
       <div class="carousel-item"><img src="img/curry.jpg" alt="Plat curry NOOK restaurant Aubenas"></div>
       <div class="carousel-item"><img src="img/dessert.jpg" alt="Dessert maison NOOK restaurant Aubenas"></div>
       <div class="carousel-item"><img src="img/assiette.jpg" alt="Assiette du jour NOOK cuisine nomade Aubenas"></div>
+    </div>
+    <div class="carousel-dots" id="carousel-dots">
+      <span class="dot active"></span><span class="dot"></span><span class="dot"></span>
     </div>
     <p class="img-caption" data-i18n="img-caption">Menu renouvelé chaque jour</p>
   </div>
 
   <!-- MENU DU JOUR -->
-  <div class="section r" style="border-top:none">
-    <div class="label"><svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M2 4 C12 2, 22 6, 32 4 C42 2, 52 5, 58 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg><h2 data-i18n="menu-section-label" style="font:inherit;margin:0;padding:0;display:inline">Menu du jour</h2><svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M58 4 C48 2, 38 6, 28 4 C18 2, 8 5, 2 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg></div>
+  <div class="section dark r" id="section-menu">
+    <div class="label">
+      <svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M2 4 C12 2, 22 6, 32 4 C42 2, 52 5, 58 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg>
+      <h2 data-i18n="menu-section-label" style="font:inherit;margin:0;padding:0">Menu du jour</h2>
+      <svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M58 4 C48 2, 38 6, 28 4 C18 2, 8 5, 2 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg>
+    </div>
     <a class="menu-feature" href="https://www.facebook.com/people/NOOK-Restaurant/61575514529548/" target="_blank" rel="noopener">
       <div class="menu-accent"></div>
       <div class="menu-body">
-        <p class="menu-label" data-i18n="menu-label-txt">Mis à jour chaque matin</p>
-        <h3 class="menu-title" data-i18n="menu-title-txt" style="font:inherit;margin:0 0 5px;padding:0">Carte du jour</h3>
+        <div class="menu-label" data-i18n="menu-label-txt">Mis à jour chaque matin</div>
+        <h3 class="menu-title" data-i18n="menu-title-txt" style="font:inherit;margin:0 0 5px;padding:0;font-family:var(--hand);font-size:1.5rem;font-weight:600">Carte du jour</h3>
         <div class="menu-cta" id="menu-cta-link">Voir sur Facebook <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
       </div>
     </a>
@@ -683,7 +494,7 @@ body {
   <div class="r"><img src="img/restaurant.jpg" alt="Intérieur du restaurant NOOK à Aubenas, Ardèche" class="restaurant-img" style="width:100%;height:260px;object-fit:cover;"></div>
 
   <!-- SOCIAL -->
-  <div style="display:flex; justify-content:center; align-items:center; gap:12px; padding: 1.5rem 1.25rem;">
+  <div class="social-wrap" style="background:var(--dark2);">
     <a class="social-btn fb" href="https://www.facebook.com/people/NOOK-Restaurant/61575514529548/" target="_blank" rel="noopener">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
       <span data-i18n="fb-btn">Facebook</span>
@@ -694,39 +505,47 @@ body {
     </a>
   </div>
 
-  <!-- HORAIRES + ADRESSE -->
-  <div class="hours-adresse-grid">
-    <div class="section r" style="border-top:none">
-      <div class="label"><svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M2 4 C12 2, 22 6, 32 4 C42 2, 52 5, 58 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg><h2 data-i18n="hours-label" style="font:inherit;margin:0;padding:0;display:inline">Horaires</h2><svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M58 4 C48 2, 38 6, 28 4 C18 2, 8 5, 2 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg></div>
-      <table class="hours-table">
-        <tr id="row-lun"><td class="day"><span data-i18n="day-lun">Lundi</span></td><td class="time">18h30 – 23h00</td></tr>
-        <tr id="row-mar"><td class="day"><span data-i18n="day-mar">Mardi</span></td><td class="time">11h30 – 23h00</td></tr>
-        <tr id="row-mer"><td class="day"><span data-i18n="day-mer">Mercredi</span></td><td class="time">11h30 – 14h30</td></tr>
-        <tr id="row-jeu"><td class="day"><span data-i18n="day-jeu">Jeudi</span></td><td class="time">11h30 – 23h00</td></tr>
-        <tr id="row-ven"><td class="day"><span data-i18n="day-ven">Vendredi</span></td><td class="time">11h30 – 14h30</td></tr>
-        <tr id="row-sam"><td class="day"><span data-i18n="day-sam">Samedi</span></td><td class="closed" data-i18n="closed-txt">Fermé</td></tr>
-        <tr id="row-dim"><td class="day"><span data-i18n="day-dim">Dimanche</span></td><td class="closed" data-i18n="closed-txt">Fermé</td></tr>
-      </table>
+  <!-- HORAIRES -->
+  <div class="section dark r" id="section-hours">
+    <div class="label">
+      <svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M2 4 C12 2, 22 6, 32 4 C42 2, 52 5, 58 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg>
+      <h2 data-i18n="hours-label" style="font:inherit;margin:0;padding:0">Horaires</h2>
+      <svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M58 4 C48 2, 38 6, 28 4 C18 2, 8 5, 2 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg>
     </div>
-    <div class="section r" style="border-top:none">
-      <div class="label"><svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M2 4 C12 2, 22 6, 32 4 C42 2, 52 5, 58 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg><h2 data-i18n="addr-label" style="font:inherit;margin:0;padding:0;display:inline">Nous trouver</h2><svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M58 4 C48 2, 38 6, 28 4 C18 2, 8 5, 2 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg></div>
-      <div class="map-wrap">
-        <iframe loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"
-          src="https://www.google.com/maps?q=8+rue+de+la+Prévôté,+07200+Aubenas&output=embed"
-          title="NOOK Aubenas"></iframe>
-      </div>
-      <div class="addr-row">
-        <div class="addr-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#436F96" stroke-width="1.8"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></div>
-        <address style="font-style:normal">
-          <div class="addr-street" data-i18n="addr-street">8 rue de la Prévoté</div>
-          <div class="addr-city" data-i18n="addr-city">07200 Aubenas</div>
-        </address>
-      </div>
-      <a class="btn-map" href="#" id="btn-directions">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
-        <span data-i18n="btn-map-txt">Ouvrir dans Google Maps</span>
-      </a>
+    <table class="hours-table">
+      <tr id="row-lun"><td class="day"><span data-i18n="day-lun">Lundi</span></td><td class="time">18h30 – 23h00</td></tr>
+      <tr id="row-mar"><td class="day"><span data-i18n="day-mar">Mardi</span></td><td class="time">11h30 – 23h00</td></tr>
+      <tr id="row-mer"><td class="day"><span data-i18n="day-mer">Mercredi</span></td><td class="time">11h30 – 14h30</td></tr>
+      <tr id="row-jeu"><td class="day"><span data-i18n="day-jeu">Jeudi</span></td><td class="time">11h30 – 23h00</td></tr>
+      <tr id="row-ven"><td class="day"><span data-i18n="day-ven">Vendredi</span></td><td class="time">11h30 – 14h30</td></tr>
+      <tr id="row-sam"><td class="day"><span data-i18n="day-sam">Samedi</span></td><td class="closed" data-i18n="closed-txt">Fermé</td></tr>
+      <tr id="row-dim"><td class="day"><span data-i18n="day-dim">Dimanche</span></td><td class="closed" data-i18n="closed-txt">Fermé</td></tr>
+    </table>
+  </div>
+
+  <!-- ADRESSE -->
+  <div class="section dark r">
+    <div class="label">
+      <svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M2 4 C12 2, 22 6, 32 4 C42 2, 52 5, 58 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg>
+      <h2 data-i18n="addr-label" style="font:inherit;margin:0;padding:0">Nous trouver</h2>
+      <svg class="label-line" viewBox="0 0 60 8" preserveAspectRatio="none"><path d="M58 4 C48 2, 38 6, 28 4 C18 2, 8 5, 2 4" fill="none" stroke="#DEB853" stroke-width="2.8" stroke-linecap="round"/></svg>
     </div>
+    <div class="map-wrap">
+      <iframe loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"
+        src="https://www.google.com/maps?q=8+rue+de+la+Prévôté,+07200+Aubenas&output=embed"
+        title="NOOK Aubenas"></iframe>
+    </div>
+    <div class="addr-row">
+      <div class="addr-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#436F96" stroke-width="1.8"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></div>
+      <address style="font-style:normal">
+        <div class="addr-street" data-i18n="addr-street">8 rue de la Prévoté</div>
+        <div class="addr-city" data-i18n="addr-city">07200 Aubenas</div>
+      </address>
+    </div>
+    <a class="btn-map" href="#" id="btn-directions">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+      <span data-i18n="btn-map-txt">Ouvrir dans Google Maps</span>
+    </a>
   </div>
 
   <!-- FOOTER -->
@@ -734,31 +553,30 @@ body {
     <img class="footer-bg" src="img/facade.jpg" alt="">
     <div class="footer-overlay"></div>
     <div class="footer-content">
-    <img class="footer-logo" src="img/logo.png" alt="NOOK">
-    <div class="footer-sub" data-i18n="footer-sub">Cuisine Nomade · Aubenas</div>
-    <div class="footer-line"></div>
-    <div class="footer-actions">
-      <a class="footer-phone" href="tel:+33475360910">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 012 1.18 2 2 0 013.99 0h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg>
-        04 75 36 09 10
-      </a>
-
+      <img class="footer-logo" src="img/logo.png" alt="NOOK">
+      <div class="footer-sub" data-i18n="footer-sub">Cuisine Nomade · Aubenas</div>
+      <div class="footer-line"></div>
+      <div class="footer-actions">
+        <a class="footer-phone" href="tel:+33475360910">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 012 1.18 2 2 0 013.99 0h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg>
+          04 75 36 09 10
+        </a>
+      </div>
+      <div class="footer-copy" data-i18n="footer-copy">© NOOK Restaurant · 8 rue de la Prévoté, 07200 Aubenas</div>
+      <div style="font-size:9px;color:rgba(255,255,255,0.15);margin-top:6px;letter-spacing:0.08em;">Webdesigner : G.Mikael</div>
     </div>
-    <div class="footer-copy" data-i18n="footer-copy">© NOOK Restaurant · 8 rue de la Prévoté, 07200 Aubenas</div>
-    <div style="font-size:9px;color:rgba(255,255,255,0.2);margin-top:6px;letter-spacing:0.08em;">Webdesigner : G.Mikael</div>
-    </div><!-- /footer-content -->
   </div>
 
   <button id="btn-lang"><span id="lang-flag">🇬🇧</span><span id="lang-label">EN</span></button>
   <button id="btn-share">
-    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#1A1612" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
   </button>
 
 </div>
 
 <script>
-/* ══ SPLASH ══ */
-const splash=document.getElementById('splash'), page=document.getElementById('page');
+/* SPLASH */
+const splash=document.getElementById('splash'),page=document.getElementById('page');
 requestAnimationFrame(()=>requestAnimationFrame(()=>{
   document.getElementById('s-logo').classList.add('in');
   document.getElementById('s-rule').classList.add('in');
@@ -776,7 +594,8 @@ setTimeout(()=>{
   setTimeout(()=>splash.remove(),800);
 },1500);
 
-/* ══ SCROLL REVEAL ══ */
+/* SCROLL REVEAL + STICKY NAV */
+const nav=document.getElementById('sticky-nav');
 const io=new IntersectionObserver(entries=>{
   entries.forEach(e=>{
     if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target);
@@ -785,63 +604,33 @@ const io=new IntersectionObserver(entries=>{
   });
 },{threshold:0.06});
 document.querySelectorAll('.r').forEach(el=>io.observe(el));
+// Show nav when CTA strip leaves viewport
+const ctaStrip = document.querySelector('.cta-strip');
+const navObserver = new IntersectionObserver(entries => {
+  const isVisible = entries[0].isIntersecting;
+  nav.classList.toggle('visible', !isVisible);
+}, { threshold: 0 });
+if(ctaStrip) navObserver.observe(ctaStrip);
 
-/* ══ STATUS BADGE ══
-   Horaires réels :
-   Lundi    18h30–23h00
-   Mardi    11h30–23h00
-   Mercredi 11h30–14h30
-   Jeudi    11h30–23h00
-   Vendredi 11h30–14h30
-   Sam/Dim  Fermé
-══ */
+/* STATUS BADGE */
 (function(){
-  const H={
-    0:null,
-    1:[[18,30],[23,0]],
-    2:[[11,30],[23,0]],
-    3:[[11,30],[14,30]],
-    4:[[11,30],[23,0]],
-    5:[[11,30],[14,30]],
-    6:null
-  };
-  const badge=document.getElementById('status-badge');
-  const txt=document.getElementById('badge-text');
+  const H={0:null,1:[[18,30],[23,0]],2:[[11,30],[23,0]],3:[[11,30],[14,30]],4:[[11,30],[23,0]],5:[[11,30],[14,30]],6:null};
+  const badge=document.getElementById('status-badge'),txt=document.getElementById('badge-text');
   if(!badge||!txt) return;
   function pad(n){return String(n).padStart(2,'0');}
   function run(){
-    const now=new Date();
-    const day=now.getDay();
-    const cur=now.getHours()*60+now.getMinutes();
-    const slot=H[day];
-    if(slot){
-      const o=slot[0][0]*60+slot[0][1];
-      const c=slot[1][0]*60+slot[1][1];
-      if(cur>=o&&cur<c){
-        /* OUVERT → vert */
-        badge.className='open';
-        txt.textContent='Ouvert';
-      } else if(cur<o&&(o-cur)<=120){
-        /* BIENTÔT (moins de 2h avant ouverture) → jaune */
-        const d=o-cur, hh=Math.floor(d/60), mm=d%60;
-        badge.className='soon';
-        txt.textContent='Ouvre bientôt · '+(hh>0?`${hh}h${mm>0?pad(mm):''}`:`${mm} min`);
-      } else {
-        /* FERMÉ → rouge */
-        badge.className='closed';
-        txt.textContent='Fermé';
-      }
-    } else {
-      /* Jour fermé (sam/dim) → rouge */
-      badge.className='closed';
-      txt.textContent='Fermé';
-    }
+    const now=new Date(),day=now.getDay(),cur=now.getHours()*60+now.getMinutes(),slot=H[day];
+    if(slot){ const o=slot[0][0]*60+slot[0][1],c=slot[1][0]*60+slot[1][1];
+      if(cur>=o&&cur<c){ badge.className='open'; txt.textContent='Ouvert'; }
+      else if(cur<o&&(o-cur)<=120){ const d=o-cur,hh=Math.floor(d/60),mm=d%60; badge.className='soon'; txt.textContent='Ouvre bientôt · '+(hh>0?`${hh}h${mm>0?pad(mm):''}`:`${mm} min`); }
+      else{ badge.className='closed'; txt.textContent='Fermé'; }
+    } else { badge.className='closed'; txt.textContent='Fermé'; }
     setTimeout(run,30000);
   }
   run();
 })();
 
-/* ══ TODAY ══ */
+/* TODAY */
 (function(){
   const days=['dim','lun','mar','mer','jeu','ven','sam'];
   const row=document.getElementById('row-'+days[new Date().getDay()]);
@@ -851,115 +640,64 @@ document.querySelectorAll('.r').forEach(el=>io.observe(el));
   if(d){const b=document.createElement('span');b.className='today-badge';b.setAttribute('data-i18n','today-txt');b.textContent="Aujourd'hui";d.appendChild(b);}
 })();
 
-/* ══ CAROUSEL ══ */
+/* CAROUSEL */
 (function(){
-  const c=document.getElementById('carousel');
-  const dots=document.querySelectorAll('#carousel-dots .dot');
+  const c=document.getElementById('carousel'),dots=document.querySelectorAll('#carousel-dots .dot');
   if(!c||!dots.length) return;
-  c.addEventListener('scroll',()=>{
-    const i=Math.round(c.scrollLeft/(c.scrollWidth/dots.length));
-    dots.forEach((d,j)=>d.classList.toggle('active',j===i));
-  },{passive:true});
+  c.addEventListener('scroll',()=>{ const i=Math.round(c.scrollLeft/(c.scrollWidth/dots.length)); dots.forEach((d,j)=>d.classList.toggle('active',j===i)); },{passive:true});
 })();
 
-/* ══ DIRECTIONS ══ */
+/* DIRECTIONS */
 (function(){
   const LAT='44.6195',LNG='4.3897',Q='8+rue+de+la+Prévôté,+07200+Aubenas';
-  const iOS=/iPad|iPhone|iPod/.test(navigator.userAgent);
-  const Andr=/Android/.test(navigator.userAgent);
-  function go(e){
-    e.preventDefault();
-    if(navigator.geolocation){
-      navigator.geolocation.getCurrentPosition(
-        p=>{const la=p.coords.latitude,lo=p.coords.longitude;
-          if(iOS) window.location.href=`maps://?saddr=${la},${lo}&daddr=${LAT},${LNG}`;
-          else if(Andr) window.location.href=`google.navigation:q=${LAT},${LNG}`;
-          else window.open(`https://www.google.com/maps/dir/${la},${lo}/${LAT},${LNG}`,'_blank');
-        },
-        ()=>{if(iOS)window.location.href=`maps://?q=${Q}`;else window.open(`https://maps.google.com/?q=${Q}`,'_blank');},
-        {timeout:5000}
-      );
+  const iOS=/iPad|iPhone|iPod/.test(navigator.userAgent),Andr=/Android/.test(navigator.userAgent);
+  function go(e){ e.preventDefault();
+    if(navigator.geolocation){ navigator.geolocation.getCurrentPosition(
+      p=>{ const la=p.coords.latitude,lo=p.coords.longitude;
+        if(iOS) window.location.href=`maps://?saddr=${la},${lo}&daddr=${LAT},${LNG}`;
+        else if(Andr) window.location.href=`google.navigation:q=${LAT},${LNG}`;
+        else window.open(`https://www.google.com/maps/dir/${la},${lo}/${LAT},${LNG}`,'_blank');
+      },()=>{ if(iOS)window.location.href=`maps://?q=${Q}`;else window.open(`https://maps.google.com/?q=${Q}`,'_blank'); },{timeout:5000});
     } else window.open(`https://maps.google.com/?q=${Q}`,'_blank');
   }
   document.getElementById('btn-directions')?.addEventListener('click',go);
   document.getElementById('cta-directions')?.addEventListener('click',go);
 })();
 
-/* ══ COMPTEUR AVIS ══ */
+/* PARALLAX HERO */
 (function(){
-  const el=document.querySelector('.rating-count');
-  if(!el) return;
+  const img=document.querySelector('.hero-img'); if(!img) return;
+  let t=false;
+  window.addEventListener('scroll',()=>{ if(!t){ requestAnimationFrame(()=>{ const s=window.scrollY,h=document.querySelector('.hero').offsetHeight; if(s<h) img.style.transform='translateY('+(s*0.35)+'px)'; t=false; }); t=true; } },{passive:true});
+})();
+
+/* RIPPLE */
+document.querySelectorAll('.cta-item').forEach(btn=>{
+  btn.addEventListener('click',function(e){ const r=document.createElement('span'); r.className='ripple'; const rect=btn.getBoundingClientRect(),size=Math.max(rect.width,rect.height); r.style.width=r.style.height=size+'px'; r.style.left=(e.clientX-rect.left-size/2)+'px'; r.style.top=(e.clientY-rect.top-size/2)+'px'; btn.appendChild(r); setTimeout(()=>r.remove(),700); });
+});
+
+/* COMPTEUR AVIS */
+(function(){
+  const el=document.querySelector('.rating-count'); if(!el) return;
   let started=false;
-  function animate(){
-    if(started)return;started=true;
-    let cur=0;const step=46/(1200/16);
-    const t=setInterval(()=>{cur=Math.min(cur+step,46);el.textContent='('+Math.floor(cur)+' avis)';if(cur>=46)clearInterval(t);},16);
-  }
+  function animate(){ if(started)return; started=true; let cur=0; const step=46/(1200/16); const t=setInterval(()=>{ cur=Math.min(cur+step,46); el.textContent='('+Math.floor(cur)+' avis)'; if(cur>=46)clearInterval(t); },16); }
   new IntersectionObserver(e=>{if(e[0].isIntersecting)animate();},{threshold:.5}).observe(el);
 })();
 
-/* ══ PARTAGER ══ */
+/* PARTAGER */
 document.getElementById('btn-share')?.addEventListener('click',()=>{
   if(navigator.share) navigator.share({title:'NOOK – Cuisine Nomade · Aubenas',text:'Découvrez le restaurant NOOK à Aubenas 🍽️',url:'https://nook-restaurant.github.io/aubenas'});
   else window.open('https://wa.me/?text='+encodeURIComponent('Découvrez le restaurant NOOK à Aubenas 🍽️ https://nook-restaurant.github.io/aubenas'),'_blank');
 });
 
-/* ══ VCARD ══ */
-function saveContact(){
-  const v=['BEGIN:VCARD','VERSION:3.0','FN:NOOK Restaurant','ORG:NOOK','TEL;TYPE=WORK:+33475360910','ADR;TYPE=WORK:;;8 rue de la Prévoté;Aubenas;;07200;France','EMAIL:nook.aubenas@gmail.com','URL:https://nook-restaurant.github.io/aubenas','END:VCARD'].join('\n');
-  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([v],{type:'text/vcard'}));a.download='NOOK-Restaurant.vcf';a.click();
-}
-
-/* ══ TRADUCTION FR/EN ══ */
+/* TRADUCTION */
 (function(){
-  const btn=document.getElementById('btn-lang');
-  const flag=document.getElementById('lang-flag');
-  const lbl=document.getElementById('lang-label');
+  const btn=document.getElementById('btn-lang'),flag=document.getElementById('lang-flag'),lbl=document.getElementById('lang-label');
   if(!btn) return;
   let lang='fr';
   const T={
-    fr:{
-      'hero-tagline':'Cuisine du monde','rating-txt':'(46 avis)',
-      'reserve-txt':'Réserver','menu-txt':'Menu','yaller-txt':'Y aller',
-      'about-label':'Le restaurant',
-      'about-t1':'La cuisine','about-p1':"Un nouveau pays dans l'assiette chaque jour. Penjab, Mali, Vietnam, Liban... la carte ne s'arrête jamais.",
-      'about-t2':'Le terroir','about-p2':'Les producteurs ont des prénoms. Les vins, bières et jus viennent de Pradons, Sécheras, Chirols — à quelques kilomètres d\'ici.',
-      'about-t3':"L'esprit",'about-p3':"Une table sans chichi, généreuse et franche. Où l'on revient parce qu'on ne sait pas ce qu'on va trouver — et c'est exactement ça qui plaît.",
-      'photos-label':'Nos plats','img-caption':'Menu renouvelé chaque jour',
-      'menu-section-label':'Menu du jour','menu-label-txt':'Mis à jour chaque matin',
-      'menu-title-txt':'Carte du jour','menu-cta-txt':'Voir sur Facebook',
-      'fb-btn':'Facebook','ig-btn':'Instagram','hours-label':'Horaires',
-      'day-lun':'Lundi','day-mar':'Mardi','day-mer':'Mercredi',
-      'day-jeu':'Jeudi','day-ven':'Vendredi','day-sam':'Samedi','day-dim':'Dimanche',
-      'closed-txt':'Fermé','today-txt':"Aujourd'hui",
-      'addr-label':'Nous trouver','addr-street':'8 rue de la Prévoté',
-      'addr-city':'07200 Aubenas','btn-map-txt':'Ouvrir dans Google Maps',
-      'vcard-txt':'Sauvegarder le contact',
-      'footer-sub':'Cuisine Nomade · Aubenas',
-      'footer-copy':'© NOOK Restaurant · 8 rue de la Prévoté, 07200 Aubenas',
-      'tagline2':'Alex & Isabelle — deux passionnés, une table, mille saveurs',
-    },
-    en:{
-      'hero-tagline':'World flavours','rating-txt':'(46 reviews)',
-      'reserve-txt':'Book','menu-txt':'Menu','yaller-txt':'Directions',
-      'about-label':'The restaurant',
-      'about-t1':'The cuisine','about-p1':'A new country on the plate every day. Punjab, Mali, Vietnam, Lebanon... the menu never stops travelling.',
-      'about-t2':'The terroir','about-p2':'The producers have names. Wines, beers and juices come from Pradons, Sécheras, Chirols — just a few kilometres away.',
-      'about-t3':'The spirit','about-p3':'An unfussy, generous, honest table. Where you come back because you never know what you\'ll find — and that\'s exactly the point.',
-      'photos-label':'Our dishes','img-caption':'Menu renewed every day',
-      'menu-section-label':"Today's menu",'menu-label-txt':'Updated every morning',
-      'menu-title-txt':"Today's menu",'menu-cta-txt':'View on Facebook',
-      'fb-btn':'Facebook','ig-btn':'Instagram','hours-label':'Opening hours',
-      'day-lun':'Monday','day-mar':'Tuesday','day-mer':'Wednesday',
-      'day-jeu':'Thursday','day-ven':'Friday','day-sam':'Saturday','day-dim':'Sunday',
-      'closed-txt':'Closed','today-txt':'Today',
-      'addr-label':'Find us','addr-street':'8 rue de la Prévoté',
-      'addr-city':'07200 Aubenas, France','btn-map-txt':'Open in Google Maps',
-      'vcard-txt':'Save contact',
-      'footer-sub':'Nomadic Cuisine · Aubenas',
-      'footer-copy':'© NOOK Restaurant · 8 rue de la Prévoté, 07200 Aubenas',
-      'tagline2':'Alex & Isabelle — two passionate souls, one table, a thousand flavours',
-    }
+    fr:{ 'hero-tagline':'Cuisine du monde','rating-txt':'(46 avis)','reserve-txt':'Réserver','menu-txt':'Menu','yaller-txt':'Y aller','about-label':'Le restaurant','about-t1':'La cuisine','about-p1':"Un nouveau pays dans l'assiette chaque jour. Penjab, Mali, Vietnam, Liban... la carte ne s'arrête jamais.",'about-t2':'Le terroir','about-p2':"Les producteurs ont des prénoms. Les vins, bières et jus viennent de Pradons, Sécheras, Chirols — à quelques kilomètres d'ici.",'photos-label':'Nos plats','img-caption':'Menu renouvelé chaque jour','menu-section-label':'Menu du jour','menu-label-txt':'Mis à jour chaque matin','menu-title-txt':'Carte du jour','menu-cta-txt':'Voir sur Facebook','fb-btn':'Facebook','ig-btn':'Instagram','hours-label':'Horaires','day-lun':'Lundi','day-mar':'Mardi','day-mer':'Mercredi','day-jeu':'Jeudi','day-ven':'Vendredi','day-sam':'Samedi','day-dim':'Dimanche','closed-txt':'Fermé','today-txt':"Aujourd'hui",'addr-label':'Nous trouver','addr-street':'8 rue de la Prévoté','addr-city':'07200 Aubenas','btn-map-txt':'Ouvrir dans Google Maps','tagline2':'Alex & Isabelle — deux passionnés, une table, mille saveurs','footer-sub':'Cuisine Nomade · Aubenas','footer-copy':'© NOOK Restaurant · 8 rue de la Prévoté, 07200 Aubenas' },
+    en:{ 'hero-tagline':'World cuisine','rating-txt':'(46 reviews)','reserve-txt':'Book','menu-txt':'Menu','yaller-txt':'Directions','about-label':'The restaurant','about-t1':'The cuisine','about-p1':"A new country on the plate every day. Punjab, Mali, Vietnam, Lebanon... the menu never stops travelling.",'about-t2':'The terroir','about-p2':"The producers have names. Wines, beers and juices come from Pradons, Sécheras, Chirols — just a few kilometres away.",'photos-label':'Our dishes','img-caption':'Menu renewed every day','menu-section-label':"Today's menu",'menu-label-txt':'Updated every morning','menu-title-txt':"Today's menu",'menu-cta-txt':'View on Facebook','fb-btn':'Facebook','ig-btn':'Instagram','hours-label':'Opening hours','day-lun':'Monday','day-mar':'Tuesday','day-mer':'Wednesday','day-jeu':'Thursday','day-ven':'Friday','day-sam':'Saturday','day-dim':'Sunday','closed-txt':'Closed','today-txt':'Today','addr-label':'Find us','addr-street':'8 rue de la Prévoté','addr-city':'07200 Aubenas, France','btn-map-txt':'Open in Google Maps','tagline2':'Alex & Isabelle — two passionate souls, one table, a thousand flavours','footer-sub':'Nomadic Cuisine · Aubenas','footer-copy':'© NOOK Restaurant · 8 rue de la Prévoté, 07200 Aubenas' }
   };
   window._applyLang=function(l){
     const t=T[l];
@@ -968,6 +706,8 @@ function saveContact(){
     const mc=document.getElementById('menu-cta-link');
     if(mc) mc.innerHTML=t['menu-cta-txt']+' <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
     document.querySelectorAll('.today-badge').forEach(el=>{el.textContent=t['today-txt'];});
+    const navItems=document.querySelectorAll('.nav-item[data-i18n]');
+    navItems.forEach(el=>{const k=el.getAttribute('data-i18n');if(t[k])el.textContent=t[k];});
   };
   btn.addEventListener('click',()=>{
     lang=lang==='fr'?'en':'fr';
@@ -978,51 +718,10 @@ function saveContact(){
   });
 })();
 
-/* ══ SERVICE WORKER ══ */
+/* SERVICE WORKER */
 if('serviceWorker' in navigator&&location.hostname!=='www.claudeusercontent.com'){
   window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
 }
-
-/* ── PARALLAX HERO ── */
-(function(){
-  const img = document.querySelector('.hero-img');
-  if(!img) return;
-  let ticking = false;
-  window.addEventListener('scroll', () => {
-    if(!ticking) {
-      requestAnimationFrame(() => {
-        const scrollY = window.scrollY;
-        const heroH = document.querySelector('.hero').offsetHeight;
-        if(scrollY < heroH) {
-          img.style.transform = 'translateY(' + (scrollY * 0.35) + 'px)';
-        }
-        ticking = false;
-      });
-      ticking = true;
-    }
-  }, { passive: true });
-})();
-
-/* ── RIPPLE CTA ── */
-(function(){
-  document.querySelectorAll('.cta-item').forEach(btn => {
-    btn.addEventListener('click', function(e) {
-      const r = document.createElement('span');
-      r.className = 'ripple';
-      const rect = btn.getBoundingClientRect();
-      const size = Math.max(rect.width, rect.height);
-      r.style.width = r.style.height = size + 'px';
-      r.style.left = (e.clientX - rect.left - size/2) + 'px';
-      r.style.top  = (e.clientY - rect.top  - size/2) + 'px';
-      btn.appendChild(r);
-      setTimeout(() => r.remove(), 700);
-    });
-  });
-})();
-
-
-
-
 </script>
 </body>
 </html>
